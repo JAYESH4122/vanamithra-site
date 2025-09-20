@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import {
@@ -12,6 +12,7 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -112,6 +113,8 @@ export default function Home() {
   const addToCart = () => {
     setCartItems(cartItems + 1);
   };
+
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -420,6 +423,7 @@ export default function Home() {
                     key={product.id}
                     whileHover={{ y: -5 }}
                     className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300"
+                    onClick={() => router.push(`/${product.id}`)}
                   >
                     <div className="relative">
                       <div className="aspect-w-1 aspect-h-1 bg-gray-200">
@@ -442,25 +446,39 @@ export default function Home() {
                     <div className="p-4">
                       <div className="flex items-center mb-1">
                         {[...Array(5)].map((_, i) => (
-                          <FiStar 
-                            key={i} 
-                            size={14} 
-                            className={i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"} 
+                          <FiStar
+                            key={i}
+                            size={14}
+                            className={
+                              i < Math.floor(product.rating)
+                                ? "text-yellow-400 fill-current"
+                                : "text-gray-300"
+                            }
                           />
                         ))}
-                        <span className="text-xs text-gray-500 ml-1">({product.rating})</span>
+                        <span className="text-xs text-gray-500 ml-1">
+                          ({product.rating})
+                        </span>
                       </div>
-                      <h3 className="font-semibold text-gray-800 mb-2">{product.name}</h3>
+                      <h3 className="font-semibold text-gray-800 mb-2">
+                        {product.name}
+                      </h3>
                       <div className="flex items-center justify-between">
                         <div>
-                          <span className="text-lg font-bold text-indigo-600">${product.price}</span>
+                          <span className="text-lg font-bold text-indigo-600">
+                            ${product.price}
+                          </span>
                           {product.discount > 0 && (
                             <span className="ml-2 text-sm text-gray-500 line-through">
-                              ${(product.price / (1 - product.discount/100)).toFixed(2)}
+                              $
+                              {(
+                                product.price /
+                                (1 - product.discount / 100)
+                              ).toFixed(2)}
                             </span>
                           )}
                         </div>
-                        <button 
+                        <button
                           className="text-indigo-600 hover:text-indigo-800"
                           onClick={addToCart}
                         >
