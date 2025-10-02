@@ -25,7 +25,7 @@ export default function Home() {
       rating: 4.8,
       image: "/headphones.jpg",
       category: "Electronics",
-      discount: 15,
+      discount: 15, 
     },
   ]);
   const [isLoading, setIsLoading] = useState(true);
@@ -125,8 +125,6 @@ export default function Home() {
     { name: "Fashion", icon: "👕", count: 256 },
     { name: "Home & Kitchen", icon: "🏠", count: 187 },
     { name: "Beauty", icon: "💄", count: 92 },
-    { name: "Sports", icon: "⚽", count: 74 },
-    { name: "Books", icon: "📚", count: 143 },
   ];
 
   return (
@@ -146,22 +144,16 @@ export default function Home() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-indigo-600">StyleShop</h1>
+              <h1 className="text-base font-bold text-[#0A3D30] font-open-sans pr-6 sm:text-2xl">Vanamithra</h1>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex space-x-8 text-sm pl-54 lg:pl-0 lg:text-base">
               <a
                 href="#"
                 className="text-gray-700 hover:text-indigo-600 font-medium"
               >
                 Home
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-indigo-600 font-medium"
-              >
-                Shop
               </a>
               <a
                 href="#"
@@ -173,7 +165,7 @@ export default function Home() {
                 href="#"
                 className="text-gray-700 hover:text-indigo-600 font-medium"
               >
-                Deals
+                Products
               </a>
               <a
                 href="#"
@@ -199,21 +191,7 @@ export default function Home() {
 
             {/* Action Icons */}
             <div className="flex items-center space-x-5">
-              <button className="text-gray-700 hover:text-indigo-600">
-                <FiUser size={20} />
-              </button>
-              <button className="text-gray-700 hover:text-indigo-600 relative">
-                <FiHeart size={20} />
-                <span className="absolute -top-2 -right-2 bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  3
-                </span>
-              </button>
-              <button className="text-gray-700 hover:text-indigo-600 relative">
-                <FiShoppingCart size={20} />
-                <span className="absolute -top-2 -right-2 bg-indigo-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cartItems}
-                </span>
-              </button>
+
 
               {/* Mobile Menu Button */}
               <button className="md:hidden text-gray-700" onClick={toggleMenu}>
@@ -245,18 +223,12 @@ export default function Home() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white border-t"
           >
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-              <a
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4 text-sm">
+            <a
                 href="#"
                 className="text-gray-700 hover:text-indigo-600 font-medium"
               >
                 Home
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-indigo-600 font-medium"
-              >
-                Shop
               </a>
               <a
                 href="#"
@@ -268,7 +240,7 @@ export default function Home() {
                 href="#"
                 className="text-gray-700 hover:text-indigo-600 font-medium"
               >
-                Deals
+                Products
               </a>
               <a
                 href="#"
@@ -283,7 +255,7 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 md:py-24">
+        <section className="relative bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/2 mb-10 md:mb-0">
@@ -293,7 +265,7 @@ export default function Home() {
                   transition={{ duration: 0.5 }}
                   className="text-4xl md:text-5xl font-bold mb-4"
                 >
-                  Summer Sale Up To 50% Off
+                  Banner Title
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -301,8 +273,7 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="text-xl mb-8"
                 >
-                  Discover the latest trends and get amazing deals on our
-                  premium products.
+                  Discover the products and buy from Vanamithra.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -310,11 +281,11 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="flex space-x-4"
                 >
-                  <button className="bg-white text-indigo-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300">
+                  <button className="bg-white text-[#0C3B30] font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300 flex-1 md:flex-none">
                     Shop Now
                   </button>
-                  <button className="border-2 border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:bg-opacity-10 transition duration-300">
-                    Learn More
+                  <button className="border-2 border-white text-white font-semibold py-3 px-6 rounded-lg hover:bg-white hover:bg-opacity-10 transition duration-300 flex-1 md:flex-none">
+                    Checkout
                   </button>
                 </motion.div>
               </div>
@@ -323,25 +294,25 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="relative w-full max-w-md"
+                  className="relative w-full max-w-md"  
                 >
-                  <div className="bg-white bg-opacity-20 rounded-full p-10">
-                    <div className="bg-white rounded-lg shadow-2xl p-6 transform rotate-3">
-                      <div className="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
+                  <div className="bg-[#2DAF51] bg-opacity-20 rounded-full p-10">
+                    <div className="bg-[#2DAF51] rounded-lg shadow-2xl p-6 transform rotate-3">
+                      <div className="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-black">
                         <div className="flex items-center justify-center h-64">
-                          <span className="text-6xl">🎧</span>
+                          <span className="text-6xl">🛒</span>
                         </div>
                       </div>
                       <div className="mt-4 text-center">
-                        <h3 className="font-bold text-gray-800">
-                          Premium Headphones
+                        <h3 className="font-bold text-white">
+                          Vanamithra Product
                         </h3>
                         <div className="flex items-center justify-center mt-2">
-                          <span className="text-indigo-600 font-bold text-xl">
-                            $199.99
+                          <span className="text-black font-bold text-xl">
+                          ₹199.99
                           </span>
-                          <span className="ml-2 text-gray-500 line-through">
-                            $249.99
+                          <span className="ml-2 text-gray line-through">
+                          ₹249.99
                           </span>
                         </div>
                       </div>
@@ -366,7 +337,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2  lg:grid-cols-4 gap-6">
               {categories.map((category, index) => (
                 <motion.div
                   key={index}
@@ -668,7 +639,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="text-xl font-bold mb-4">StyleShop</h3>
+              <h3 className="text-xl font-bold mb-4">Vanamithra</h3>
               <p className="text-gray-400 mb-4">
                 Providing quality products and exceptional service since 2015.
               </p>
@@ -791,7 +762,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} StyleShop. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Vanamithra. All rights reserved.</p>
           </div>
         </div>
       </footer>
