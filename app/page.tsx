@@ -4,8 +4,6 @@ import Head from "next/head";
 import {
   FiSearch,
   FiShoppingCart,
-  FiHeart,
-  FiUser,
   FiMenu,
   FiX,
   FiStar,
@@ -332,9 +330,10 @@ export default function Home() {
                 Shop by Category
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Explore our wide range of categories to find exactly what you're
+                Explore our wide range of categories to find exactly what you&apos;re
                 looking for
               </p>
+
             </div>
 
             <div className="grid grid-cols-2  lg:grid-cols-4 gap-6">
@@ -529,7 +528,7 @@ export default function Home() {
                 What Our Customers Say
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
-                Don't just take our word for it - hear from some of our
+                Don&apos;t just take our word for it - hear from some of our
                 satisfied customers
               </p>
             </div>
@@ -579,7 +578,7 @@ export default function Home() {
                       />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-6">"{testimonial.comment}"</p>
+                  <p className="text-gray-600 mb-6">&quot{testimonial.comment}&quot</p>
                   <div className="flex items-center">
                     <div className="bg-indigo-100 rounded-full h-12 w-12 flex items-center justify-center mr-4">
                       <span className="text-indigo-600 font-semibold">
@@ -708,7 +707,7 @@ export default function Home() {
                 </li>
                 <li>
                   <a href="#" className="text-gray-400 hover:text-white">
-                    Today's Deals
+                    Today&apos;s Deals
                   </a>
                 </li>
                 <li>
