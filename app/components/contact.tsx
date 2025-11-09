@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 export const ContactSection = () => (
@@ -15,8 +17,9 @@ export const ContactSection = () => (
           Get in <span className="text-[#30B254]">Touch</span>
         </h2>
         <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-          Have questions about our organic products? We'd love to hear from you.
-          Send us a message and we'll respond as soon as possible.
+          {
+            "Have questions about our organic products? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+          }
         </p>
 
         {/* Decorative elements */}
@@ -35,10 +38,13 @@ export const ContactSection = () => (
           className="space-y-8"
         >
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-gray-800">Let's Connect</h3>
+            <h3 className="text-3xl font-bold text-gray-800">
+              {"Let's Connect"}
+            </h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Reach out to us for any inquiries about our organic products,
-              wholesale opportunities, or partnership discussions.
+              {
+                "              Reach out to us for any inquiries about our organic products, wholesale opportunities, or partnership discussions."
+              }
             </p>
           </div>
 
@@ -224,7 +230,7 @@ export const ContactSection = () => (
             </motion.button>
 
             <p className="text-center text-gray-500 text-sm">
-              We'll get back to you within 24 hours
+              {"    We'll get back to you within 24 hours"}
             </p>
           </form>
         </motion.div>

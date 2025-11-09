@@ -1,6 +1,9 @@
-import { motion } from "framer-motion"
+"use client";
 
-export const AboutSection = () => (<section className="py-20 bg-gradient-to-b from-gray-50/50 to-white">
+import { motion } from "framer-motion";
+
+export const AboutSection = () => (
+  <section className="py-20 bg-gradient-to-b from-gray-50/50 to-white">
     <div className="container mx-auto px-4 sm:px-6">
       {/* Section Header */}
       <motion.div
@@ -13,17 +16,17 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
           About <span className="text-[#30B254]">Vanamithra</span>
         </h2>
-        
+
         <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
           Your trusted partner in organic living and sustainable wellness
         </p>
-        
+
         {/* Decorative elements */}
         <div className="flex justify-center mt-8">
           <div className="w-24 h-1 bg-gradient-to-r from-[#30B254] to-[#96BD40] rounded-full"></div>
         </div>
       </motion.div>
-  
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         {/* Left Content */}
         <motion.div
@@ -39,35 +42,36 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
               Empowering Your Journey to Natural Wellness
             </h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              At Vanamithra, we believe in the power of nature to heal, nourish, and transform lives. 
-              Founded with a vision to make organic living accessible to everyone, we carefully curate 
-              products that are pure, sustainable, and effective.
+              At Vanamithra, we believe in the power of nature to heal, nourish,
+              and transform lives. Founded with a vision to make organic living
+              accessible to everyone, we carefully curate products that are
+              pure, sustainable, and effective.
             </p>
           </div>
-  
+
           {/* Features Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               {
                 icon: "🌿",
                 title: "100% Natural",
-                description: "Pure ingredients from nature"
+                description: "Pure ingredients from nature",
               },
               {
                 icon: "🌎",
                 title: "Eco-Friendly",
-                description: "Sustainable and ethical sourcing"
+                description: "Sustainable and ethical sourcing",
               },
               {
                 icon: "⭐",
                 title: "Premium Quality",
-                description: "Rigorous quality standards"
+                description: "Rigorous quality standards",
               },
               {
                 icon: "💚",
                 title: "Health First",
-                description: "Wellness-focused products"
-              }
+                description: "Wellness-focused products",
+              },
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -84,13 +88,11 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
                 <h4 className="font-bold text-gray-800 text-lg mb-2">
                   {feature.title}
                 </h4>
-                <p className="text-gray-600 text-sm">
-                  {feature.description}
-                </p>
+                <p className="text-gray-600 text-sm">{feature.description}</p>
               </motion.div>
             ))}
           </div>
-  
+
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -101,19 +103,39 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
           >
             <button className="bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white font-semibold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
               <span>Our Story</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
               </svg>
             </button>
             <button className="border-2 border-[#30B254] text-[#30B254] font-semibold py-4 px-8 rounded-xl hover:bg-[#30B254] hover:text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
               <span>Contact Us</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
               </svg>
             </button>
           </motion.div>
         </motion.div>
-  
+
         {/* Right Content - Image/Stats */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
@@ -128,43 +150,43 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
               <div className="text-center text-white p-8">
                 <div className="text-6xl mb-6">🌱</div>
                 <h3 className="text-2xl font-bold mb-4">Vanamithra</h3>
-                <p className="text-white/80">Nature's Promise, Delivered</p>
+                <p className="text-white/80">{"Nature's Promise, Delivered"}</p>
               </div>
             </div>
-            
+
             {/* Floating Elements */}
             <motion.div
-              animate={{ 
+              animate={{
                 y: [0, -10, 0],
-                rotate: [0, 5, 0]
+                rotate: [0, 5, 0],
               }}
-              transition={{ 
+              transition={{
                 duration: 4,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute -top-4 -left-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20"
             >
               <div className="text-2xl">💚</div>
             </motion.div>
-            
+
             <motion.div
-              animate={{ 
+              animate={{
                 y: [0, 10, 0],
-                rotate: [0, -5, 0]
+                rotate: [0, -5, 0],
               }}
-              transition={{ 
+              transition={{
                 duration: 3,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: 1
+                delay: 1,
               }}
               className="absolute -bottom-4 -right-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20"
             >
               <div className="text-2xl">⭐</div>
             </motion.div>
           </div>
-  
+
           {/* Stats Overlay */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -180,7 +202,7 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
           </motion.div>
         </motion.div>
       </div>
-  
+
       {/* Values Section */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -192,19 +214,22 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
         {[
           {
             title: "Our Mission",
-            description: "To make organic and sustainable living accessible to every household while supporting local farmers and communities.",
-            icon: "🎯"
+            description:
+              "To make organic and sustainable living accessible to every household while supporting local farmers and communities.",
+            icon: "🎯",
           },
           {
             title: "Our Vision",
-            description: "A world where everyone has access to pure, natural products that promote health and environmental sustainability.",
-            icon: "🔭"
+            description:
+              "A world where everyone has access to pure, natural products that promote health and environmental sustainability.",
+            icon: "🔭",
           },
           {
             title: "Our Values",
-            description: "Integrity, sustainability, quality, and community are the core principles that guide everything we do.",
-            icon: "💎"
-          }
+            description:
+              "Integrity, sustainability, quality, and community are the core principles that guide everything we do.",
+            icon: "💎",
+          },
         ].map((value, index) => (
           <motion.div
             key={index}
@@ -220,13 +245,12 @@ export const AboutSection = () => (<section className="py-20 bg-gradient-to-b fr
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
               {value.title}
             </h3>
-            <p className="text-gray-600 leading-relaxed">
-              {value.description}
-            </p>
+            <p className="text-gray-600 leading-relaxed">{value.description}</p>
           </motion.div>
         ))}
       </motion.div>
     </div>
-</section>)
-  
-  export default AboutSection
+  </section>
+);
+
+export default AboutSection;

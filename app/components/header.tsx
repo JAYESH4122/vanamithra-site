@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import { FiSearch, FiMenu, FiX, FiUser, FiHeart, FiShoppingCart } from 'react-icons/fi';
-import { motion, AnimatePresence } from 'framer-motion';
-import gsap from 'gsap';
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { FiSearch, FiMenu, FiX } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+import Image from "next/image";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,34 +25,37 @@ const Header = () => {
     if (!isMounted) return;
 
     const tl = gsap.timeline();
-    
+
     // Header entrance animation
-    tl.fromTo(headerRef.current, 
+    tl.fromTo(
+      headerRef.current,
       { y: -100, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
     );
-    
+
     // Logo animation
-    tl.fromTo(logoRef.current,
+    tl.fromTo(
+      logoRef.current,
       { scale: 0.8, rotation: -5 },
       { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.7)" },
       "-=0.4"
     );
 
     // Navigation items stagger animation
-    tl.fromTo(".nav-item",
+    tl.fromTo(
+      ".nav-item",
       { y: -20, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" },
       "-=0.3"
     );
 
     // Search bar animation
-    tl.fromTo(".search-bar",
+    tl.fromTo(
+      ".search-bar",
       { scaleX: 0, opacity: 0 },
       { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" },
       "-=0.2"
     );
-
   }, [isMounted]);
 
   const navItems = [
@@ -57,12 +63,12 @@ const Header = () => {
     { name: "Categories", href: "#" },
     { name: "Products", href: "#" },
     { name: "About", href: "#" },
-    { name: "Contact", href: "#" }
+    { name: "Contact", href: "#" },
   ];
 
   // Prevent hydration mismatch by rendering consistent content
   return (
-    <header 
+    <header
       ref={headerRef}
       className="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100 font-poppins"
       // Removed cz-shortcut-listen attribute that was causing hydration error
@@ -72,11 +78,11 @@ const Header = () => {
           {/* Logo with enhanced styling */}
           <div ref={logoRef} className="flex items-center group">
             <div className="relative">
-              <img 
-                src="/vanamithra-logo.png" 
-                alt="Vanamithra" 
-                width={160} 
-                height={40} 
+              <Image
+                src="/vanamithra-logo.png"
+                alt="Vanamithra"
+                width={160}
+                height={40}
                 className="h-10 sm:h-12 w-auto transition-all duration-300 group-hover:scale-105 drop-shadow-sm"
                 loading="eager" // Prevent lazy loading for logo
               />
@@ -84,14 +90,19 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation with enhanced responsive breakpoints */}
-          <nav ref={navRef} className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-            {navItems.map((item, index) => (
+          <nav
+            ref={navRef}
+            className="hidden lg:flex items-center space-x-1 xl:space-x-2"
+          >
+            {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 className="nav-item relative px-3 xl:px-4 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-300 group text-sm xl:text-base"
               >
-                <span className="relative z-10 whitespace-nowrap">{item.name}</span>
+                <span className="relative z-10 whitespace-nowrap">
+                  {item.name}
+                </span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-600 transition-all duration-300 group-hover:w-full"></div>
               </a>
             ))}
@@ -114,7 +125,7 @@ const Header = () => {
           {/* Action Icons with responsive sizing */}
           <div className="flex items-center space-x-3 sm:space-x-4">
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="lg:hidden p-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all duration-300"
               onClick={toggleMenu}
               aria-label="Toggle menu"

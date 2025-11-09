@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 export const TestimonialSection = () => (
@@ -15,8 +17,9 @@ export const TestimonialSection = () => (
           What Our <span className="text-[#30B254]">Customers</span> Say
         </h2>
         <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-          Don't just take our word for it - hear from thousands of satisfied
-          customers who trust Vanamithra for their organic lifestyle
+          {
+            "Don't just take our word for it - hear from thousands of satisfied customers who trust Vanamithra for their organic lifestyle"
+          }
         </p>
 
         {/* Decorative elements */}
@@ -188,4 +191,4 @@ export const TestimonialSection = () => (
     </div>
   </section>
 );
- export default TestimonialSection
+export default TestimonialSection;
