@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const Footer = () => (
   <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-white pt-16 pb-8">
     <div className="container mx-auto px-4 sm:px-6">
@@ -5,7 +7,7 @@ export const Footer = () => (
         {/* Brand Section */}
         <div className="text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start mb-4">
-            <img
+            <Image
               src="/vanamithra-logo.png"
               alt="Vanamithra"
               width={160}
@@ -14,8 +16,9 @@ export const Footer = () => (
             />
           </div>
           <p className="text-gray-400 mb-6 max-w-md">
-            Your trusted partner in organic living and sustainable wellness.
-            Nature's promise, delivered.
+            {
+              "            Your trusted partner in organic living and sustainable wellness. Nature's promise, delivered."
+            }
           </p>
           <div className="flex justify-center md:justify-start space-x-4">
             {[
