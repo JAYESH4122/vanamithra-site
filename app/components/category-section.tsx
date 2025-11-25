@@ -9,7 +9,7 @@ import { categories } from "@/data/products";
 export const CategorySection = () => {
   // Map categories with actual product counts
   const categoriesWithCounts = categories
-    .filter(cat => cat.id !== "all") // Exclude "All Products" category
+    .filter((cat) => cat.id !== "all") // Exclude "All Products" category
     .map((category) => {
       const productCount = getProductsByCategory(category.id).length;
       return {
@@ -85,7 +85,6 @@ export const CategorySection = () => {
             </h2>
           </motion.div>
 
-
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -93,9 +92,9 @@ export const CategorySection = () => {
             viewport={{ once: true }}
             className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
           >
-            Explore categories filled with organic, authentic, nature-crafted essentials.
+            Explore categories filled with organic, authentic, nature-crafted
+            essentials.
           </motion.p>
-
 
           <motion.div
             initial={{ scaleX: 0 }}
@@ -120,7 +119,6 @@ export const CategorySection = () => {
                 className="group cursor-pointer"
               >
                 <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center">
-
                   {/* Image */}
                   <div className="relative w-28 h-28 mb-5 rounded-xl overflow-hidden shadow-sm">
                     <Image
@@ -140,7 +138,6 @@ export const CategorySection = () => {
                   <p className="text-gray-500 text-sm">
                     {category.count} {category.count === 1 ? "item" : "items"}
                   </p>
-
                 </div>
               </motion.div>
             </Link>
@@ -155,8 +152,6 @@ export const CategorySection = () => {
             </button>
           </Link>
         </div>
-
-
       </div>
     </section>
   );

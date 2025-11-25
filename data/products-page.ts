@@ -6,7 +6,8 @@ export const productsPageData = {
       main: "Our ",
       highlight: "Products",
     },
-    subtitle: "Explore our collection of organic, natural products sourced directly from nature",
+    subtitle:
+      "Explore our collection of organic, natural products sourced directly from nature",
   },
   productsCountText: {
     showing: "Showing ",
@@ -39,7 +40,8 @@ export const categorySectionData = {
       main: "Browse by ",
       highlight: "Nature's Best",
     },
-    subtitle: "Explore categories filled with organic, authentic, nature-crafted essentials.",
+    subtitle:
+      "Explore categories filled with organic, authentic, nature-crafted essentials.",
   },
   ctaButton: "Explore All Categories",
 } as const;

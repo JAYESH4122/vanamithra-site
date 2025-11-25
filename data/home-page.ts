@@ -24,7 +24,8 @@ export const heroData = {
     discount: "20% OFF",
     emoji: "🍯",
   },
-  whatsappMessage: "Hi Vanamithra! 👋\n\nI'm interested in exploring your organic products. Can you help me find the perfect natural solution?",
+  whatsappMessage:
+    "Hi Vanamithra! 👋\n\nI'm interested in exploring your organic products. Can you help me find the perfect natural solution?",
 } as const;
 
 // About Section Data
@@ -43,7 +44,8 @@ export const aboutData = {
   subtitle: "Your trusted partner in natural wellness & organic living",
   mission: {
     heading: "Empowering Natural Wellness",
-    description: "Vanamithra believes in the healing power of nature. Our mission is to bring pure, sustainable, and authentic organic products directly to your home — supporting better health and a better planet.",
+    description:
+      "Vanamithra believes in the healing power of nature. Our mission is to bring pure, sustainable, and authentic organic products directly to your home — supporting better health and a better planet.",
   },
   features: [
     {
@@ -89,12 +91,14 @@ export const testimonialsData = {
     highlight: "Customers",
     suffix: " Say",
   },
-  subtitle: "Real experiences from people who trust Vanamithra for their natural lifestyle",
+  subtitle:
+    "Real experiences from people who trust Vanamithra for their natural lifestyle",
   testimonials: [
     {
       name: "Sarah Johnson",
       role: "Health Enthusiast",
-      comment: "The quality of organic products I've purchased from Vanamithra has been exceptional. Their commitment to sustainability and natural ingredients is truly impressive!",
+      comment:
+        "The quality of organic products I've purchased from Vanamithra has been exceptional. Their commitment to sustainability and natural ingredients is truly impressive!",
       rating: 5,
       avatar: "SJ",
       color: "from-blue-400 to-cyan-500",
@@ -102,7 +106,8 @@ export const testimonialsData = {
     {
       name: "Michael Chen",
       role: "Nutrition Expert",
-      comment: "As someone who values pure nutrition, I'm impressed with Vanamithra's product selection and authenticity. Everything is exactly as described - pure and natural.",
+      comment:
+        "As someone who values pure nutrition, I'm impressed with Vanamithra's product selection and authenticity. Everything is exactly as described - pure and natural.",
       rating: 5,
       avatar: "MC",
       color: "from-emerald-400 to-green-500",
@@ -110,7 +115,8 @@ export const testimonialsData = {
     {
       name: "Emma Rodriguez",
       role: "Wellness Coach",
-      comment: "I regularly recommend Vanamithra products to my clients. The quality and effectiveness of their natural solutions are consistently outstanding.",
+      comment:
+        "I regularly recommend Vanamithra products to my clients. The quality and effectiveness of their natural solutions are consistently outstanding.",
       rating: 4,
       avatar: "ER",
       color: "from-purple-400 to-pink-500",
@@ -141,7 +147,8 @@ export const contactData = {
     main: "Contact ",
     highlight: "Vanamithra",
   },
-  subtitle: "Get in touch with us - we're here to help with all your natural product needs",
+  subtitle:
+    "Get in touch with us - we're here to help with all your natural product needs",
   contactItems: [
     {
       id: "email",

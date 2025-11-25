@@ -148,9 +148,7 @@ export const AboutSection = () => (
                 height={60}
                 className="mb-6"
               />
-              <p className="text-white/80 text-lg">
-                {config.company.tagline}
-              </p>
+              <p className="text-white/80 text-lg">{config.company.tagline}</p>
             </div>
           </div>
         </motion.div>

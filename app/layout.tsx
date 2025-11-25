@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Open_Sans, Poppins, Alegreya_SC, Alkatra } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Open_Sans,
+  Poppins,
+  Alegreya_SC,
+  Alkatra,
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -9,14 +16,14 @@ const geistSans = Geist({
 
 const openSans = Open_Sans({
   subsets: ["latin"],
-  weight: ["400","500", "600", "700"],
-  variable: "--font-open-sans"
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-open-sans",
 });
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins',
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 const geistMono = Geist_Mono({

@@ -82,10 +82,11 @@ export const TestimonialSection = () => (
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
-                    className={`w-5 h-5 ${i < testimonial.rating
-                      ? "text-[#FFD700]"
-                      : "text-gray-300"
-                      }`}
+                    className={`w-5 h-5 ${
+                      i < testimonial.rating
+                        ? "text-[#FFD700]"
+                        : "text-gray-300"
+                    }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
