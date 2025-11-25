@@ -33,21 +33,30 @@ const Header = () => {
       const tl = gsap.timeline();
 
       // Logo animation - fade in and slide from top
-      tl.fromTo('.header-logo',
+      tl.fromTo(
+        ".header-logo",
         { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
       )
         // Navigation items - stagger animation
-        .fromTo('.nav-item',
+        .fromTo(
+          ".nav-item",
           { y: -15, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' },
-          '-=0.3'
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power3.out",
+          },
+          "-=0.3"
         )
         // Search bar - subtle entrance
-        .fromTo('.header-search',
+        .fromTo(
+          ".header-search",
           { scale: 0.95, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out' },
-          '-=0.2'
+          { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" },
+          "-=0.2"
         );
     }, headerRef);
 
@@ -77,7 +86,10 @@ const Header = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchDropdownRef.current && !searchDropdownRef.current.contains(event.target as Node)) {
+      if (
+        searchDropdownRef.current &&
+        !searchDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsSearchFocused(false);
       }
     };
@@ -111,14 +123,14 @@ const Header = () => {
   const showDropdown = isSearchFocused && searchQuery.trim() !== "";
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100"
+    >
       <div className="container mx-auto px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between">
-
           {/* Logo */}
-          <motion.div
-            className="header-logo flex items-center"
-          >
+          <motion.div className="header-logo flex items-center">
             <Image
               src="/vanamithra-logo.png"
               alt="Vanamithra"
@@ -131,7 +143,7 @@ const Header = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center space-x-6">
-            {navItems.map((item, i) => (
+            {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -144,7 +156,10 @@ const Header = () => {
           </nav>
 
           {/* Search (Desktop) */}
-          <div className="hidden lg:flex items-center max-w-sm w-full ml-6 relative" ref={searchDropdownRef}>
+          <div
+            className="hidden lg:flex items-center max-w-sm w-full ml-6 relative"
+            ref={searchDropdownRef}
+          >
             <div className="header-search relative w-full">
               <input
                 type="text"
@@ -177,18 +192,28 @@ const Header = () => {
                           className="flex items-center gap-3 p-3 hover:bg-emerald-50 transition-colors border-b border-gray-100 last:border-b-0"
                         >
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-gray-800 text-sm truncate">{product.name}</h4>
-                            <p className="text-xs text-gray-500 capitalize">{product.category}</p>
+                            <h4 className="font-semibold text-gray-800 text-sm truncate">
+                              {product.name}
+                            </h4>
+                            <p className="text-xs text-gray-500 capitalize">
+                              {product.category}
+                            </p>
                           </div>
-                          <div className="text-emerald-600 font-bold text-sm">₹{product.price}</div>
+                          <div className="text-emerald-600 font-bold text-sm">
+                            ₹{product.price}
+                          </div>
                         </Link>
                       ))}
                     </div>
                   ) : (
                     <div className="p-6 text-center">
                       <div className="text-4xl mb-2">🔍</div>
-                      <p className="text-gray-600 font-medium">No products found</p>
-                      <p className="text-gray-400 text-sm mt-1">Try searching with different keywords</p>
+                      <p className="text-gray-600 font-medium">
+                        No products found
+                      </p>
+                      <p className="text-gray-400 text-sm mt-1">
+                        Try searching with different keywords
+                      </p>
                     </div>
                   )}
                 </motion.div>
@@ -239,18 +264,28 @@ const Header = () => {
                         className="flex items-center gap-3 p-3 hover:bg-emerald-50 transition-colors border-b border-gray-100 last:border-b-0"
                       >
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-gray-800 text-sm truncate">{product.name}</h4>
-                          <p className="text-xs text-gray-500 capitalize">{product.category}</p>
+                          <h4 className="font-semibold text-gray-800 text-sm truncate">
+                            {product.name}
+                          </h4>
+                          <p className="text-xs text-gray-500 capitalize">
+                            {product.category}
+                          </p>
                         </div>
-                        <div className="text-emerald-600 font-bold text-sm">₹{product.price}</div>
+                        <div className="text-emerald-600 font-bold text-sm">
+                          ₹{product.price}
+                        </div>
                       </Link>
                     ))}
                   </div>
                 ) : (
                   <div className="p-6 text-center">
                     <div className="text-4xl mb-2">🔍</div>
-                    <p className="text-gray-600 font-medium">No products found</p>
-                    <p className="text-gray-400 text-sm mt-1">Try searching with different keywords</p>
+                    <p className="text-gray-600 font-medium">
+                      No products found
+                    </p>
+                    <p className="text-gray-400 text-sm mt-1">
+                      Try searching with different keywords
+                    </p>
                   </div>
                 )}
               </motion.div>

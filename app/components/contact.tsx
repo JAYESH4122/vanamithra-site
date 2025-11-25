@@ -109,7 +109,7 @@ export const ContactSection = () => (
             <h4 className="font-semibold text-gray-800 text-lg mb-4">Follow Us On Social Media</h4>
             <p className="text-gray-500 text-sm mb-4">Stay updated with our latest products and offers</p>
             <div className="flex gap-3">
-              {contactData.socialMedia.map((social, index) => {
+              {contactData.socialMedia.map((social) => {
                 // Map icon names to SVG components
                 const getSocialIcon = (iconName: string) => {
                   switch (iconName) {
@@ -162,7 +162,7 @@ export const ContactSection = () => (
         {/* CONTACT FORM PLACEHOLDER */}
         <div className="bg-gradient-to-br from-[#30B254]/5 to-[#96BD40]/10 p-8 rounded-2xl border border-[#30B254]/20">
           <h3 className="text-2xl font-bold text-gray-800 mb-2">Send us a Message</h3>
-          <p className="text-gray-600 mb-6">We'll get back to you within 24 hours</p>
+          <p className="text-gray-600 mb-6">We&apos;ll get back to you within 24 hours</p>
           <div className="space-y-4">
             <div className="h-12 bg-white rounded-lg border border-gray-200 flex items-center px-4 text-gray-400">
               Your Name

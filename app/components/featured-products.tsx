@@ -19,15 +19,6 @@ export const FeaturedProducts = () => {
 
   const router = useRouter();
 
-  const handleWhatsAppOrder = (product: Product) => {
-    const whatsappNumber = "919207025005";
-    const categoryName = getCategoryName(product.category);
-    const message = `Hi Vanamithra! 🛍️\n\nI'm interested in:\n*${product.name}*\nCategory: ${categoryName}\nPrice: ₹${product.price}\n\nCan you help me with this order?`;
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappUrl, "_blank");
-  };
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50/50 to-white">
       <div className="container mx-auto px-4 sm:px-6">
@@ -129,10 +120,11 @@ export const FeaturedProducts = () => {
                     {[...Array(5)].map((_, i) => (
                       <svg
                         key={i}
-                        className={`w-4 h-4 ${i < Math.floor(product.rating)
-                          ? "text-yellow-400"
-                          : "text-gray-300"
-                          }`}
+                        className={`w-4 h-4 ${
+                          i < Math.floor(product.rating)
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }`}
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
