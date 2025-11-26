@@ -1,96 +1,89 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
 import { heroData } from "@/data/home-page";
 import { createWhatsAppUrl } from "@/data/config";
 import Image from "next/image";
+import { motion, Variants } from "framer-motion";
 
 export const Hero = () => {
-  const heroRef = useRef(null);
-  const buttonsRef = useRef(null);
+  // Animation variants
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Main timeline
-      const tl = gsap.timeline();
+  const itemVariants: Variants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
-      // Text content animation
-      tl.fromTo(
-        ".hero-title",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-      )
-        .fromTo(
-          ".hero-subtitle",
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-          "-=0.4"
-        )
-        .fromTo(
-          ".hero-buttons",
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-          "-=0.3"
-        )
-        .fromTo(
-          ".product-card",
-          { scale: 0.8, opacity: 0, rotation: -5 },
-          {
-            scale: 1,
-            opacity: 1,
-            rotation: 0,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-          },
-          "-=0.2"
-        )
-        .fromTo(
-          ".discount-badge",
-          { scale: 0, rotation: -180 },
-          { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.7)" },
-          "-=0.3"
-        )
-        .fromTo(
-          ".product-image",
-          { opacity: 0 },
-          { opacity: 1, duration: 0.6, ease: "power2.out" },
-          "-=0.4"
-        );
+  const cardVariants: Variants = {
+    hidden: { scale: 0.8, opacity: 0, rotate: -5 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.8,
+        ease: "backOut",
+      },
+    },
+  };
 
-      // Subtle glow pulse animation for product image (no movement)
-      gsap.to(".product-image", {
-        boxShadow:
-          "0 0 20px rgba(191, 207, 187, 0.4), 0 0 40px rgba(191, 207, 187, 0.2)",
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+  const badgeVariants: Variants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.5,
+        ease: "backOut",
+      },
+    },
+  };
 
-      // Floating animation for decorative elements
-      gsap.to(".floating-element", {
-        y: -10,
-        rotation: 5,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: {
-          each: 0.5,
-          from: "random",
-        },
-      });
-    }, heroRef);
+  const floatingVariants: Variants = {
+    animate: {
+      y: [-10, 0, -10],
+      rotate: [5, 0, 5],
+      transition: {
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
 
-    return () => ctx.revert();
-  }, []);
+  const glowVariants: Variants = {
+    animate: {
+      boxShadow: [
+        "0 0 20px rgba(191, 207, 187, 0.4)",
+        "0 0 40px rgba(191, 207, 187, 0.2)",
+        "0 0 20px rgba(191, 207, 187, 0.4)",
+      ],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
 
   return (
-    <section
-      ref={heroRef}
-      className="relative bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-white py-16 md:py-24 overflow-hidden"
-    >
+    <section className="relative bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-white py-16 md:py-24 overflow-hidden">
       {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
@@ -100,24 +93,35 @@ export const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Text Content */}
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <h1 className="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-primary">
+          <motion.div
+            className="lg:w-1/2 text-center lg:text-left"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-primary"
+              variants={itemVariants}
+            >
               {heroData.title.main}
               <span className="text-yellow">{heroData.title.highlight}</span>
               {heroData.title.suffix}
-            </h1>
+            </motion.h1>
 
-            <p className="hero-subtitle text-xl sm:text-2xl mb-8 text-white/90 leading-relaxed font-primary">
+            <motion.p
+              className="text-xl sm:text-2xl mb-8 text-white/90 leading-relaxed font-primary"
+              variants={itemVariants}
+            >
               {heroData.subtitle.text}
               <span className="font-semibold text-yellow">
                 {heroData.subtitle.companyHighlight}
               </span>
               {heroData.subtitle.suffix}
-            </p>
+            </motion.p>
 
-            <div
-              ref={buttonsRef}
-              className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              variants={itemVariants}
             >
               <button
                 onClick={() => {
@@ -154,36 +158,65 @@ export const Hero = () => {
                   />
                 </svg>
               </button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Product Card */}
           <div className="lg:w-1/2 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md">
               {/* Floating decorative elements */}
-              <div className="floating-element absolute -top-4 -left-4 bg-[var(--color-surface)]/20 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-[var(--color-surface)]/30">
+              <motion.div
+                className="absolute -top-4 -left-4 bg-[var(--color-surface)]/20 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-[var(--color-surface)]/30"
+                variants={floatingVariants}
+                animate="animate"
+                initial={{ y: 0, rotate: 0 }}
+              >
                 <div className="text-xl">🌿</div>
-              </div>
+              </motion.div>
 
-              <div className="floating-element absolute -bottom-4 -right-4 bg-[var(--color-surface)]/20 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-[var(--color-surface)]/30">
+              <motion.div
+                className="absolute -bottom-4 -right-4 bg-[var(--color-surface)]/20 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-[var(--color-surface)]/30"
+                variants={floatingVariants}
+                animate="animate"
+                initial={{ y: 0, rotate: 0 }}
+                transition={{ delay: 0.5 }}
+              >
                 <div className="text-xl">⭐</div>
-              </div>
+              </motion.div>
 
               {/* Main product card */}
-              <div className="product-card relative">
+              <motion.div
+                className="relative"
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 <div className="relative bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-3xl p-6 shadow-2xl border border-surface/30">
                   {/* Discount badge */}
-                  <div className="discount-badge absolute -top-3 -right-3 bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-surface px-3 py-1 rounded-full font-bold text-sm shadow-lg">
+                  <motion.div
+                    className="absolute -top-3 -right-3 bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-surface px-3 py-1 rounded-full font-bold text-sm shadow-lg"
+                    variants={badgeVariants}
+                  >
                     {heroData.featuredProduct.discount}
-                  </div>
+                  </motion.div>
 
                   {/* Product image */}
                   <div className="bg-surface/10 rounded-2xl p-4 backdrop-blur-sm border border-color-surface/30 mb-4">
-                    <div className="product-image aspect-square rounded-xl bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
+                    <motion.div
+                      className="aspect-square rounded-xl bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center"
+                      variants={glowVariants}
+                      animate="animate"
+                    >
                       <div className="text-5xl sm:text-6xl">
-                       <Image src="/saffron-gel.jpg" alt="/" width={280} height={280} className="border rounded-2xl"/>
+                        <Image
+                          src="/saffron-gel.jpg"
+                          alt="/"
+                          width={280}
+                          height={280}
+                          className="border rounded-2xl"
+                        />
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Product info */}
@@ -224,7 +257,7 @@ export const Hero = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

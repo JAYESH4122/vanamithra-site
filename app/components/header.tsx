@@ -5,7 +5,6 @@ import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import gsap from "gsap";
 import { useDebounce } from "@/hooks/useDebounce";
 import { Product, products } from "@/data/products";
 
@@ -16,7 +15,6 @@ const Header = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-  const headerRef = useRef(null);
   const searchDropdownRef = useRef<HTMLDivElement>(null);
 
   const navItems = [
@@ -26,42 +24,6 @@ const Header = () => {
     { name: "About", href: "#" },
     { name: "Contact", href: "#" },
   ];
-
-  // GSAP animations on mount
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      // Logo animation - fade in and slide from top
-      tl.fromTo(
-        ".header-logo",
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
-      )
-        // Navigation items - stagger animation
-        .fromTo(
-          ".nav-item",
-          { y: -15, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.08,
-            ease: "power3.out",
-          },
-          "-=0.3"
-        )
-        // Search bar - subtle entrance
-        .fromTo(
-          ".header-search",
-          { scale: 0.95, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" },
-          "-=0.2"
-        );
-    }, headerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Search functionality with debounced query
   useEffect(() => {
@@ -123,14 +85,16 @@ const Header = () => {
   const showDropdown = isSearchFocused && searchQuery.trim() !== "";
 
   return (
-    <header
-      ref={headerRef}
-      className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100"
-    >
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100">
       <div className="container mx-auto px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div className="header-logo flex items-center">
+          <motion.div
+            className="header-logo flex items-center"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <Image
               src="/vanamithra-logo.png"
               alt="Vanamithra"
@@ -143,22 +107,32 @@ const Header = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center space-x-6">
-            {navItems.map((item) => (
-              <a
+            {navItems.map((item, index) => (
+              <motion.a
                 key={item.name}
                 href={item.href}
                 className="nav-item relative text-gray-700 font-medium hover:text-primary-dark transition-all text-sm group"
+                initial={{ y: -15, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.1 + index * 0.08,
+                  ease: "easeOut",
+                }}
               >
                 {item.name}
                 <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] transition-all group-hover:w-full"></span>
-              </a>
+              </motion.a>
             ))}
           </nav>
 
           {/* Search (Desktop) */}
-          <div
+          <motion.div
             className="hidden lg:flex items-center max-w-sm w-full ml-6 relative"
             ref={searchDropdownRef}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
           >
             <div className="header-search relative w-full">
               <input
@@ -219,7 +193,7 @@ const Header = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
 
           {/* Mobile Menu Button */}
           <button
