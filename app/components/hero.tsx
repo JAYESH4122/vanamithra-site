@@ -83,7 +83,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-white py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-r from-[var(--color-primary-dark)]  to-[var(--color-primary)] text-white py-16 md:py-24 overflow-hidden">
       {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
@@ -104,7 +104,7 @@ export const Hero = () => {
               variants={itemVariants}
             >
               {heroData.title.main}
-              <span className="text-yellow">{heroData.title.highlight}</span>
+              <span className="">{heroData.title.highlight}</span>
               {heroData.title.suffix}
             </motion.h1>
 
@@ -113,7 +113,7 @@ export const Hero = () => {
               variants={itemVariants}
             >
               {heroData.subtitle.text}
-              <span className="font-semibold text-yellow">
+              <span className="font-semibold">
                 {heroData.subtitle.companyHighlight}
               </span>
               {heroData.subtitle.suffix}
@@ -130,7 +130,7 @@ export const Hero = () => {
                   );
                   window.open(whatsappUrl, "_blank");
                 }}
-                className="bg-surface text-primary-dark font-semibold py-4 px-8 rounded-xl hover:bg-primary-light transition-all duration-300 shadow-lg flex items-center justify-center gap-2 hover:scale-105"
+                className="!bg-yellow text-black font-semibold py-4 px-8 rounded-xl hover:bg-primary-light transition-all duration-300 shadow-lg flex items-center justify-center gap-2 hover:scale-105"
               >
                 <svg
                   className="w-5 h-5"
