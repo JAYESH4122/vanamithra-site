@@ -13,10 +13,12 @@
   --font-primary: "Alegreya SC";
 
   /* Brand Palette */
-  --color-primary-dark: #0C3B30;
+  --color-primary-dark: #0C3B2E;
   --color-primary: #30B254;
   --color-primary-light: #6B9071;
   --color-surface: #ffffff;
+  --color-yellow: #ffba00;
+  --color-brown: #bb8a52
 }
 
 @media (prefers-color-scheme: dark) {

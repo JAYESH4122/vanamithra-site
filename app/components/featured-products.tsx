@@ -20,7 +20,7 @@ export const FeaturedProducts = () => {
   const router = useRouter();
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50/50 to-white">
+    <section className="py-16 bg-gradient-to-r from-primary-dark to-primary">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-12">
@@ -31,9 +31,9 @@ export const FeaturedProducts = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+              <h2 className="text-5xl md:text-6xl font-bold text-black mb-6 tracking-tight">
                 Featured{" "}
-                <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+                <span className="bg-black bg-clip-text text-transparent">
                   Products
                 </span>
               </h2>
@@ -43,7 +43,7 @@ export const FeaturedProducts = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-gray-600 text-lg md:text-xl max-w-2xl leading-relaxed"
+              className="text-white text-lg md:text-xl max-w-2xl leading-relaxed"
             >
               Our most popular products based on sales
             </motion.p>
@@ -99,10 +99,7 @@ export const FeaturedProducts = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -6, scale: 1.01 }}
-                className="bg-gradient-to-br from-surface/20 via-surface/10 to-surface/30 
-             border border-surface/50 
-             rounded-2xl shadow-md hover:shadow-lg 
-             transition-all duration-300 overflow-hidden cursor-pointer group"
+                className="bg-primary-light border-surface/50 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer group"
                 onClick={() => router.push(`/${product.id}`)}
               >
                 {/* Image */}
@@ -122,7 +119,7 @@ export const FeaturedProducts = () => {
                         className={`w-4 h-4 ${
                           i < Math.floor(product.rating)
                             ? "text-yellow-400"
-                            : "text-gray-300"
+                            : "text-white"
                         }`}
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -130,29 +127,29 @@ export const FeaturedProducts = () => {
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
-                    <span className="text-xs text-gray-500 ml-2">
+                    <span className="text-xs text-white ml-2">
                       ({product.rating})
                     </span>
                   </div>
 
                   {/* Name */}
-                  <h3 className="font-semibold text-gray-800 mb-2 text-lg group-hover:text-primary-dark transition-colors duration-300">
+                  <h3 className="font-semibold text-black mb-2 text-lg group-hover:text-primary-dark transition-colors duration-300">
                     {product.name}
                   </h3>
 
                   {/* Category */}
-                  <p className="text-sm text-gray-500 mb-4 capitalize">
+                  <p className="text-sm text-white mb-4 capitalize">
                     {getCategoryName(product.category)}
                   </p>
 
                   {/* Price */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold text-primary-dark">
+                    <span className="text-xl font-bold text-white">
                       ₹{product.price}
                     </span>
 
                     {product.originalPrice && (
-                      <span className="text-md text-gray-500 line-through">
+                      <span className="text-md text-black line-through">
                         ₹{product.originalPrice}
                       </span>
                     )}

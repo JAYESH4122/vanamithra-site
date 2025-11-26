@@ -102,13 +102,13 @@ export const Hero = () => {
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-primary">
               {heroData.title.main}
-              <span className="">{heroData.title.highlight}</span>
+              <span className="text-yellow">{heroData.title.highlight}</span>
               {heroData.title.suffix}
             </h1>
 
             <p className="hero-subtitle text-xl sm:text-2xl mb-8 text-white/90 leading-relaxed font-primary">
               {heroData.subtitle.text}
-              <span className="font-semibold text-primary-dark">
+              <span className="font-semibold text-yellow">
                 {heroData.subtitle.companyHighlight}
               </span>
               {heroData.subtitle.suffix}

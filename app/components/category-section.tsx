@@ -33,7 +33,7 @@ export const CategorySection = () => {
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-surface/30 to-white relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-r from-primary-dark to-primary relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -77,9 +77,9 @@ export const CategorySection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-bold text-black mb-6 tracking-tight">
               Browse by{" "}
-              <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+              <span className="bg-black bg-clip-text text-transparent">
                 Nature&apos;s Best
               </span>
             </h2>
@@ -90,7 +90,7 @@ export const CategorySection = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+            className="text-white text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
           >
             Explore categories filled with organic, authentic, nature-crafted
             essentials.
@@ -118,7 +118,7 @@ export const CategorySection = () => {
                 viewport={{ once: true }}
                 className="group cursor-pointer"
               >
-                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center">
+                <div className="bg-primary-light border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center">
                   {/* Image */}
                   <div className="relative w-28 h-28 mb-5 rounded-xl overflow-hidden shadow-sm">
                     <Image
@@ -130,12 +130,12 @@ export const CategorySection = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1 text-center group-hover:text-primary-dark transition-colors">
+                  <h3 className="text-lg font-semibold text-black mb-1 text-center group-hover:text-primary-dark transition-colors">
                     {category.name}
                   </h3>
 
                   {/* Count */}
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-white text-sm">
                     {category.count} {category.count === 1 ? "item" : "items"}
                   </p>
                 </div>
