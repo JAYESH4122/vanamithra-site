@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { testimonialsData } from "@/data/home-page";
 
 export const TestimonialSection = () => (
-  <section className="py-20 bg-gradient-to-b from-white to-gray-50/50">
+  <section className="py-20 bg-gradient-to-r from-primary-dark to-primary">
     <div className="container mx-auto px-4 sm:px-6">
       {/* Section Header */}
       <div className="text-center mb-16">
@@ -14,9 +14,9 @@ export const TestimonialSection = () => (
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
             {testimonialsData.title.main}{" "}
-            <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
               {testimonialsData.title.highlight}
             </span>{" "}
             {testimonialsData.title.suffix}
@@ -27,7 +27,7 @@ export const TestimonialSection = () => (
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+          className="text-white text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
         >
           {testimonialsData.subtitle}
         </motion.p>
@@ -40,7 +40,7 @@ export const TestimonialSection = () => (
           viewport={{ once: true }}
           className="flex justify-center mt-8"
         >
-          <div className="w-32 h-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-full shadow-lg"></div>
+          <div className="w-32 h-1 bg-white rounded-full shadow-lg"></div>
         </motion.div>
       </div>
 
@@ -55,8 +55,8 @@ export const TestimonialSection = () => (
             viewport={{ once: true }}
             whileHover={{ y: -10, scale: 1.03 }}
             className="group relative"
-          >
-            <div className="relative rounded-2xl bg-gradient-to-br from-white via-surface/10 to-surface/20 p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-surface/30 transition-all duration-500 overflow-hidden">
+        >
+            <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-300 p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-surface/30 transition-all duration-500 overflow-hidden">
               {/* Soft hover glow */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 bg-gradient-to-r from-primary via-primary-light to-primary transition-opacity duration-500"></div>
 

@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { heroData } from "@/data/home-page";
 import { createWhatsAppUrl } from "@/data/config";
+import Image from "next/image";
 
 export const Hero = () => {
   const heroRef = useRef(null);
@@ -180,7 +181,7 @@ export const Hero = () => {
                   <div className="bg-surface/10 rounded-2xl p-4 backdrop-blur-sm border border-color-surface/30 mb-4">
                     <div className="product-image aspect-square rounded-xl bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
                       <div className="text-5xl sm:text-6xl">
-                        {heroData.featuredProduct.emoji}
+                       <Image src="/saffron-gel.jpg" alt="/" width={280} height={280} className="border rounded-2xl"/>
                       </div>
                     </div>
                   </div>

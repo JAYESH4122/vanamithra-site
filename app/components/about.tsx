@@ -6,7 +6,7 @@ import { aboutData } from "@/data/home-page";
 import { config } from "@/data/config";
 
 export const AboutSection = () => (
-  <section className="py-20 bg-gradient-to-b from-white to-gray-50/50">
+  <section className="py-20 bg-gradient-to-r from-primary-dark to-primary">
     <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
       {/* Header */}
       <div className="text-center mb-16">
@@ -14,15 +14,15 @@ export const AboutSection = () => (
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+          className="text-5xl md:text-6xl font-bold text-white mb-4"
         >
           {aboutData.title.main}{" "}
-          <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
             {aboutData.title.highlight}
           </span>
         </motion.h2>
 
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-white text-lg max-w-2xl mx-auto">
           {aboutData.subtitle}
         </p>
 
@@ -40,10 +40,10 @@ export const AboutSection = () => (
         >
           {/* Mission */}
           <div className="space-y-4">
-            <h3 className="text-3xl font-bold text-gray-800">
+            <h3 className="text-3xl font-bold text-black">
               {aboutData.mission.heading}
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-white leading-relaxed">
               {aboutData.mission.description}
             </p>
           </div>
@@ -139,7 +139,7 @@ export const AboutSection = () => (
           transition={{ duration: 0.6 }}
           className="relative"
         >
-          <div className="rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-primary to-primary-light h-full flex items-center justify-center p-12">
+          <div className="rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-primary-dark to-primary h-full flex items-center justify-center p-12">
             <div className="text-center text-white flex items-center justify-center flex-col">
               <Image
                 alt=""
