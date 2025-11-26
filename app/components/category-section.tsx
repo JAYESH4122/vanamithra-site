@@ -23,17 +23,17 @@ export const CategorySection = () => {
 
   function getCategoryGradient(categoryId: string): string {
     const gradients: Record<string, string> = {
-      medicine: "from-emerald-400 to-teal-500",
-      healthcare: "from-teal-400 to-cyan-500",
-      beautycare: "from-pink-400 to-rose-500",
-      food: "from-orange-400 to-amber-500",
-      agriculture: "from-lime-400 to-green-500",
+      medicine: "from-primary to-primary-light",
+      healthcare: "from-primary to-primary-light",
+      beautycare: "from-primary to-primary-light",
+      food: "from-primary to-primary-light",
+      agriculture: "from-primary to-primary-light",
     };
-    return gradients[categoryId] || "from-gray-400 to-gray-500";
+    return gradients[categoryId] || "from-primary to-primary-light";
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-white via-surface/30 to-white relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -46,7 +46,7 @@ export const CategorySection = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-400 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
         />
         <motion.div
           animate={{
@@ -58,7 +58,7 @@ export const CategorySection = () => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-400 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-light rounded-full blur-3xl"
         />
       </div>
 
@@ -79,8 +79,8 @@ export const CategorySection = () => {
           >
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
               Browse by{" "}
-              <span className="bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] bg-clip-text text-transparent">
-                Nature’s Best
+              <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+                Nature&apos;s Best
               </span>
             </h2>
           </motion.div>
@@ -103,7 +103,7 @@ export const CategorySection = () => {
             viewport={{ once: true }}
             className="flex justify-center mt-8"
           >
-            <div className="w-32 h-1 bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] rounded-full shadow-lg"></div>
+            <div className="w-32 h-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-full shadow-lg"></div>
           </motion.div>
         </motion.div>
 
@@ -130,7 +130,7 @@ export const CategorySection = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1 text-center group-hover:text-[#30B254] transition-colors">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1 text-center group-hover:text-primary-dark transition-colors">
                     {category.name}
                   </h3>
 
@@ -147,7 +147,7 @@ export const CategorySection = () => {
         {/* Common CTA */}
         <div className="flex justify-center mt-12">
           <Link href="/products">
-            <button className="px-8 py-3 rounded-full bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all">
+            <button className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-primary-light text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all">
               Explore All Categories
             </button>
           </Link>

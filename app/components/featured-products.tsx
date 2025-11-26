@@ -33,7 +33,7 @@ export const FeaturedProducts = () => {
             >
               <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
                 Featured{" "}
-                <span className="bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
                   Products
                 </span>
               </h2>
@@ -54,7 +54,7 @@ export const FeaturedProducts = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 group"
             >
               View All Products
               <svg
@@ -74,7 +74,6 @@ export const FeaturedProducts = () => {
           </Link>
         </div>
 
-        {/* Products Grid */}
         {/* Products Grid */}
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
@@ -100,10 +99,10 @@ export const FeaturedProducts = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -6, scale: 1.01 }}
-                className="bg-gradient-to-br from-[#E8FDEB] via-[#D0F8D9] to-[#B8F2C8] 
-             border border-[#C4EFCF] 
+                className="bg-gradient-to-br from-surface/20 via-surface/10 to-surface/30 
+             border border-surface/50 
              rounded-2xl shadow-md hover:shadow-lg 
-             transition-all duration-300 overflow-hidden cursor-pointer"
+             transition-all duration-300 overflow-hidden cursor-pointer group"
                 onClick={() => router.push(`/${product.id}`)}
               >
                 {/* Image */}
@@ -137,7 +136,7 @@ export const FeaturedProducts = () => {
                   </div>
 
                   {/* Name */}
-                  <h3 className="font-semibold text-gray-800 mb-2 text-lg group-hover:text-[#30B254] transition-colors duration-300">
+                  <h3 className="font-semibold text-gray-800 mb-2 text-lg group-hover:text-primary-dark transition-colors duration-300">
                     {product.name}
                   </h3>
 
@@ -148,7 +147,7 @@ export const FeaturedProducts = () => {
 
                   {/* Price */}
                   <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold text-[#11803B]">
+                    <span className="text-xl font-bold text-primary-dark">
                       ₹{product.price}
                     </span>
 
@@ -173,7 +172,7 @@ export const FeaturedProducts = () => {
           className="mt-12 text-center lg:hidden"
         >
           <Link href="/products">
-            <button className="bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white font-semibold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
+            <button className="bg-gradient-to-r from-primary to-primary-light text-white font-semibold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
               View All Products
             </button>
           </Link>

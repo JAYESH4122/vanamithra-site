@@ -15,7 +15,7 @@ export const ContactSection = () => (
           className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
         >
           {contactData.title.main}{" "}
-          <span className="bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
             {contactData.title.highlight}
           </span>
         </motion.h2>
@@ -24,7 +24,7 @@ export const ContactSection = () => (
           {contactData.subtitle}
         </p>
 
-        <div className="w-24 h-1 bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] mx-auto mt-6 rounded-full" />
+        <div className="w-24 h-1 bg-gradient-to-r from-primary via-primary-light to-primary mx-auto mt-6 rounded-full" />
       </div>
 
       {/* GRID */}
@@ -113,7 +113,7 @@ export const ContactSection = () => (
                   <p className="text-gray-500 text-sm mb-2">
                     {item.description}
                   </p>
-                  <p className="text-[#30B254] font-medium text-base truncate">
+                  <p className="text-primary-dark font-medium text-base truncate">
                     {item.contact}
                   </p>
                 </div>
@@ -122,7 +122,7 @@ export const ContactSection = () => (
                 <motion.div
                   initial={{ opacity: 0, x: -5 }}
                   whileHover={{ opacity: 1, x: 0 }}
-                  className="text-[#30B254] opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  className="text-primary-dark opacity-0 group-hover:opacity-100 transition-all duration-300"
                 >
                   <svg
                     className="w-5 h-5"
@@ -218,7 +218,7 @@ export const ContactSection = () => (
         </div>
 
         {/* CONTACT FORM PLACEHOLDER */}
-        <div className="bg-gradient-to-br from-[#30B254]/5 to-[#96BD40]/10 p-8 rounded-2xl border border-[#30B254]/20">
+        <div className="bg-gradient-to-br from-primary/5 to-primary-light/10 p-8 rounded-2xl border border-primary/20">
           <h3 className="text-2xl font-bold text-gray-800 mb-2">
             Send us a Message
           </h3>
@@ -235,7 +235,7 @@ export const ContactSection = () => (
             <div className="h-24 bg-white rounded-lg border border-gray-200 flex items-start p-4 text-gray-400">
               Your Message...
             </div>
-            <button className="w-full h-12 bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300">
+            <button className="w-full h-12 bg-gradient-to-r from-primary to-primary-light text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300">
               Send Message
             </button>
           </div>

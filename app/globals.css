@@ -5,12 +5,18 @@
   --foreground: #171717;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
-  --font-primary: var(--font-poppins);
+  --font-primary: "Alegreya SC";
+
+  /* Brand Palette */
+  --color-primary-dark: #0C3B30;
+  --color-primary: #30B254;
+  --color-primary-light: #6B9071;
+  --color-surface: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,18 +27,18 @@
 }
 
 * {
-  font-family: var(--font-poppins), sans-serif !important;
+  font-family: var(--font-primary) !important;
 }
 
 html {
-  font-family: var(--font-poppins), sans-serif !important;
+  font-family: var(--font-primary) !important;
   scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-poppins), sans-serif !important;
+  font-family: var(--font-primary), sans-serif !important;
 }
 
 /* Smooth scrolling */

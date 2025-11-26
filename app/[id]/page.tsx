@@ -31,7 +31,7 @@ export default function ProductPage() {
           </p>
           <Link
             href="/products"
-            className="inline-block bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white py-3 px-8 rounded-xl font-semibold hover:shadow-lg transition-all"
+            className="inline-block bg-gradient-to-r from-primary to-primary-light text-white py-3 px-8 rounded-xl font-semibold hover:shadow-lg transition-all"
           >
             Browse All Products
           </Link>
@@ -76,7 +76,7 @@ export default function ProductPage() {
         <nav className="flex mb-8 text-sm text-gray-500">
           <ol className="flex items-center space-x-2">
             <li>
-              <Link href="/" className="hover:text-[#30B254] transition-colors">
+              <Link href="/" className="hover:text-primary transition-colors">
                 Home
               </Link>
             </li>
@@ -86,7 +86,7 @@ export default function ProductPage() {
             <li>
               <Link
                 href="/products"
-                className="hover:text-[#30B254] transition-colors"
+                className="hover:text-primary transition-colors"
               >
                 Products
               </Link>
@@ -153,7 +153,7 @@ export default function ProductPage() {
 
               {/* Price */}
               <div className="flex items-center mb-8">
-                <span className="text-4xl font-bold text-[#30B254]">
+                <span className="text-4xl font-bold text-primary-dark">
                   ${product.price}
                 </span>
                 {product.originalPrice && (
@@ -185,8 +185,8 @@ export default function ProductPage() {
                       onClick={() => setSelectedVariant(variant)}
                       className={`px-6 py-3 rounded-xl border-2 font-medium transition-all duration-300 ${
                         selectedVariant.value === variant.value
-                          ? "border-[#30B254] bg-[#30B254] text-white shadow-lg"
-                          : "border-gray-300 text-gray-700 hover:border-[#30B254] hover:text-[#30B254]"
+                          ? "border-primary bg-primary text-white shadow-lg"
+                          : "border-gray-300 text-gray-700 hover:border-primary hover:text-primary"
                       }`}
                     >
                       {variant.name}
@@ -229,7 +229,7 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={orderViaWhatsApp}
-                  className="flex-1 bg-gradient-to-r from-[#30B254] to-[#96BD40] hover:from-[#2DAF51] hover:to-[#85AC30] text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+                  className="flex-1 bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                 >
                   <svg
                     className="w-6 h-6"
@@ -245,7 +245,7 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={inquireViaWhatsApp}
-                  className="flex-1 border-2 border-[#30B254] text-[#30B254] hover:bg-[#30B254] hover:text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3"
+                  className="flex-1 border-2 border-primary text-primary hover:bg-primary hover:text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3"
                 >
                   <svg
                     className="w-6 h-6"
@@ -276,9 +276,9 @@ export default function ProductPage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex items-center p-3 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100"
+                      className="flex items-center p-3 rounded-lg bg-gradient-to-r from-surface/20 to-surface/30 border border-surface/50"
                     >
-                      <div className="w-8 h-8 bg-[#30B254] rounded-full flex items-center justify-center mr-3">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
                         <div className="w-2 h-2 bg-white rounded-full"></div>
                       </div>
                       <span className="text-gray-700 font-medium">

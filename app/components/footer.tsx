@@ -17,7 +17,7 @@ export const Footer = () => (
           </div>
           <p className="text-gray-400 mb-6 max-w-md">
             {
-              "            Your trusted partner in organic living and sustainable wellness. Nature's promise, delivered."
+              "Your trusted partner in organic living and sustainable wellness. Nature's promise, delivered."
             }
           </p>
           <div className="flex justify-center md:justify-start space-x-4">
@@ -41,7 +41,7 @@ export const Footer = () => (
               <a
                 key={social.name}
                 href={social.href}
-                className="text-gray-400 hover:text-[#30B254] transition-colors duration-300 p-2 rounded-lg hover:bg-white/5"
+                className="text-gray-400 hover:text-primary transition-colors duration-300 p-2 rounded-lg hover:bg-white/5"
                 aria-label={social.name}
               >
                 <svg
@@ -70,7 +70,7 @@ export const Footer = () => (
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className="text-gray-400 hover:text-[#30B254] transition-colors duration-300 text-sm"
+                  className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm"
                 >
                   {link.name}
                 </a>
@@ -87,7 +87,7 @@ export const Footer = () => (
           <div className="space-y-3 text-gray-400 text-sm">
             <div className="flex items-center justify-center md:justify-start space-x-3">
               <svg
-                className="w-4 h-4 text-[#30B254]"
+                className="w-4 h-4 text-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -109,7 +109,7 @@ export const Footer = () => (
             </div>
             <div className="flex items-center justify-center md:justify-start space-x-3">
               <svg
-                className="w-4 h-4 text-[#30B254]"
+                className="w-4 h-4 text-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -125,7 +125,7 @@ export const Footer = () => (
             </div>
             <div className="flex items-center justify-center md:justify-start space-x-3">
               <svg
-                className="w-4 h-4 text-[#30B254]"
+                className="w-4 h-4 text-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -152,19 +152,19 @@ export const Footer = () => (
           <div className="flex space-x-6 text-sm text-gray-400">
             <a
               href="#"
-              className="hover:text-[#30B254] transition-colors duration-300"
+              className="hover:text-primary transition-colors duration-300"
             >
               Privacy
             </a>
             <a
               href="#"
-              className="hover:text-[#30B254] transition-colors duration-300"
+              className="hover:text-primary transition-colors duration-300"
             >
               Terms
             </a>
             <a
               href="#"
-              className="hover:text-[#30B254] transition-colors duration-300"
+              className="hover:text-primary transition-colors duration-300"
             >
               Sitemap
             </a>

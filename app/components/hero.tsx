@@ -60,7 +60,7 @@ export const Hero = () => {
       // Subtle glow pulse animation for product image (no movement)
       gsap.to(".product-image", {
         boxShadow:
-          "0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2)",
+          "0 0 20px rgba(191, 207, 187, 0.4), 0 0 40px rgba(191, 207, 187, 0.2)",
         duration: 2,
         repeat: -1,
         yoyo: true,
@@ -88,12 +88,12 @@ export const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="relative bg-gradient-to-r from-[#0C3B30] via-[#30B254] to-[#96BD40] text-white py-16 md:py-24 overflow-hidden"
+      className="relative bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-white py-16 md:py-24 overflow-hidden"
     >
       {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-[#0C3B30]/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary-dark/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -102,13 +102,13 @@ export const Hero = () => {
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="hero-title text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-primary">
               {heroData.title.main}
-              <span className="text-[#FFD700]">{heroData.title.highlight}</span>
+              <span className="">{heroData.title.highlight}</span>
               {heroData.title.suffix}
             </h1>
 
             <p className="hero-subtitle text-xl sm:text-2xl mb-8 text-white/90 leading-relaxed font-primary">
               {heroData.subtitle.text}
-              <span className="font-semibold text-[#FFD700]">
+              <span className="font-semibold text-primary-dark">
                 {heroData.subtitle.companyHighlight}
               </span>
               {heroData.subtitle.suffix}
@@ -125,7 +125,7 @@ export const Hero = () => {
                   );
                   window.open(whatsappUrl, "_blank");
                 }}
-                className="bg-white text-[#0C3B30] font-semibold py-4 px-8 rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg flex items-center justify-center gap-2 hover:scale-105"
+                className="bg-surface text-primary-dark font-semibold py-4 px-8 rounded-xl hover:bg-primary-light transition-all duration-300 shadow-lg flex items-center justify-center gap-2 hover:scale-105"
               >
                 <svg
                   className="w-5 h-5"
@@ -137,7 +137,7 @@ export const Hero = () => {
                 <span className="font-primary">{heroData.buttons.primary}</span>
               </button>
 
-              <button className="border-2 border-white/80 text-white font-semibold py-4 px-8 rounded-xl hover:bg-white hover:bg-opacity-10 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2">
+              <button className="border-2 border-surface text-white font-semibold py-4 px-8 rounded-xl hover:bg-surface hover:bg-opacity-10 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2">
                 <span>{heroData.buttons.secondary}</span>
                 <svg
                   className="w-5 h-5"
@@ -160,24 +160,24 @@ export const Hero = () => {
           <div className="lg:w-1/2 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md">
               {/* Floating decorative elements */}
-              <div className="floating-element absolute -top-4 -left-4 bg-white/10 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-white/20">
+              <div className="floating-element absolute -top-4 -left-4 bg-[var(--color-surface)]/20 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-[var(--color-surface)]/30">
                 <div className="text-xl">🌿</div>
               </div>
 
-              <div className="floating-element absolute -bottom-4 -right-4 bg-white/10 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-white/20">
+              <div className="floating-element absolute -bottom-4 -right-4 bg-[var(--color-surface)]/20 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-[var(--color-surface)]/30">
                 <div className="text-xl">⭐</div>
               </div>
 
               {/* Main product card */}
               <div className="product-card relative">
-                <div className="relative bg-gradient-to-br from-[#2DAF51] to-[#96BD40] rounded-3xl p-6 shadow-2xl border border-white/20">
+                <div className="relative bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-3xl p-6 shadow-2xl border border-surface/30">
                   {/* Discount badge */}
-                  <div className="discount-badge absolute -top-3 -right-3 bg-red-500 text-white px-3 py-1 rounded-full font-bold text-sm shadow-lg">
+                  <div className="discount-badge absolute -top-3 -right-3 bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] text-surface px-3 py-1 rounded-full font-bold text-sm shadow-lg">
                     {heroData.featuredProduct.discount}
                   </div>
 
                   {/* Product image */}
-                  <div className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm border border-white/20 mb-4">
+                  <div className="bg-surface/10 rounded-2xl p-4 backdrop-blur-sm border border-color-surface/30 mb-4">
                     <div className="product-image aspect-square rounded-xl bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
                       <div className="text-5xl sm:text-6xl">
                         {heroData.featuredProduct.emoji}
@@ -195,10 +195,10 @@ export const Hero = () => {
                     </p>
 
                     <div className="flex items-center justify-center gap-3 mb-3">
-                      <span className="text-xl sm:text-2xl font-bold text-[#FFD700]">
+                      <span className="text-xl sm:text-2xl font-bold text-white">
                         {heroData.featuredProduct.price}
                       </span>
-                      <span className="text-sm text-white/60 line-through">
+                      <span className="text-sm text-white line-through">
                         {heroData.featuredProduct.originalPrice}
                       </span>
                     </div>
@@ -210,7 +210,7 @@ export const Hero = () => {
                         const whatsappUrl = createWhatsAppUrl(message);
                         window.open(whatsappUrl, "_blank");
                       }}
-                      className="w-full bg-white text-[#0C3B30] font-semibold py-3 px-6 rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg flex items-center justify-center gap-2 hover:scale-105"
+                      className="w-full !bg-white text-primary-dark font-semibold py-3 px-6 rounded-xl hover:bg-primary-light transition-all duration-300 shadow-lg flex items-center justify-center gap-2 hover:scale-105"
                     >
                       <svg
                         className="w-5 h-5"

@@ -7,7 +7,6 @@ export const TestimonialSection = () => (
   <section className="py-20 bg-gradient-to-b from-white to-gray-50/50">
     <div className="container mx-auto px-4 sm:px-6">
       {/* Section Header */}
-      {/* Section Header */}
       <div className="text-center mb-16">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -17,7 +16,7 @@ export const TestimonialSection = () => (
         >
           <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
             {testimonialsData.title.main}{" "}
-            <span className="bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
               {testimonialsData.title.highlight}
             </span>{" "}
             {testimonialsData.title.suffix}
@@ -41,7 +40,7 @@ export const TestimonialSection = () => (
           viewport={{ once: true }}
           className="flex justify-center mt-8"
         >
-          <div className="w-32 h-1 bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] rounded-full shadow-lg"></div>
+          <div className="w-32 h-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-full shadow-lg"></div>
         </motion.div>
       </div>
 
@@ -57,12 +56,12 @@ export const TestimonialSection = () => (
             whileHover={{ y: -10, scale: 1.03 }}
             className="group relative"
           >
-            <div className="relative rounded-2xl bg-gradient-to-br from-white via-[#F7FFF9] to-[#E8FDEB] p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-[#E2F5E6] transition-all duration-500 overflow-hidden">
+            <div className="relative rounded-2xl bg-gradient-to-br from-white via-surface/10 to-surface/20 p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-surface/30 transition-all duration-500 overflow-hidden">
               {/* Soft hover glow */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] transition-opacity duration-500"></div>
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 bg-gradient-to-r from-primary via-primary-light to-primary transition-opacity duration-500"></div>
 
               {/* Quote Icon */}
-              <div className="absolute top-6 right-6 opacity-10 text-[#30B254]">
+              <div className="absolute top-6 right-6 opacity-10 text-primary">
                 <svg
                   className="w-12 h-12"
                   fill="currentColor"
@@ -84,7 +83,7 @@ export const TestimonialSection = () => (
                     key={i}
                     className={`w-5 h-5 ${
                       i < testimonial.rating
-                        ? "text-[#FFD700]"
+                        ? "text-yellow-400"
                         : "text-gray-300"
                     }`}
                     fill="currentColor"
@@ -139,4 +138,5 @@ export const TestimonialSection = () => (
     </div>
   </section>
 );
+
 export default TestimonialSection;

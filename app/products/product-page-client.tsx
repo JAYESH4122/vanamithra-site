@@ -37,7 +37,7 @@ export default function ProductsPageClient() {
         >
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
             Our{" "}
-            <span className="bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
               Products
             </span>
           </h1>
@@ -66,8 +66,8 @@ export default function ProductsPageClient() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                   selectedCategory === category.id
-                    ? "bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-[#30B254] hover:text-[#30B254]"
+                    ? "bg-gradient-to-r from-primary to-primary-light text-white shadow-lg"
+                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary"
                 }`}
               >
                 {category.name}
@@ -85,7 +85,7 @@ export default function ProductsPageClient() {
         >
           <p className="text-gray-600">
             Showing{" "}
-            <span className="font-semibold text-[#30B254]">
+            <span className="font-semibold text-primary">
               {filteredProducts.length}
             </span>{" "}
             products
@@ -141,7 +141,7 @@ export default function ProductsPageClient() {
                 </p>
 
                 {/* Product Name */}
-                <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 group-hover:text-[#30B254] transition-colors">
+                <h3 className="font-bold text-gray-900 text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                   {product.name}
                 </h3>
 
@@ -168,7 +168,7 @@ export default function ProductsPageClient() {
                 {/* Price */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-[#30B254]">
+                    <span className="text-2xl font-bold text-primary-dark">
                       ₹{product.price}
                     </span>
                     {product.originalPrice && (
@@ -183,7 +183,7 @@ export default function ProductsPageClient() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full mt-4 bg-gradient-to-r from-[#30B254] to-[#96BD40] text-white py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-md"
+                  className="w-full mt-4 bg-gradient-to-r from-primary to-primary-light text-white py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-md"
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/${product.id}`);

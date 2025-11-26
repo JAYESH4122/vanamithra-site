@@ -17,7 +17,7 @@ export const AboutSection = () => (
           className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
         >
           {aboutData.title.main}{" "}
-          <span className="bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
             {aboutData.title.highlight}
           </span>
         </motion.h2>
@@ -26,7 +26,7 @@ export const AboutSection = () => (
           {aboutData.subtitle}
         </p>
 
-        <div className="w-24 h-1 bg-gradient-to-r from-[#30B254] via-[#96BD40] to-[#30B254] mx-auto mt-6 rounded-full" />
+        <div className="w-24 h-1 bg-gradient-to-r from-primary via-primary-light to-primary mx-auto mt-6 rounded-full" />
       </div>
 
       {/* Main Grid */}
@@ -139,7 +139,7 @@ export const AboutSection = () => (
           transition={{ duration: 0.6 }}
           className="relative"
         >
-          <div className="rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-[#30B254] to-[#96BD40] h-full flex items-center justify-center p-12">
+          <div className="rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-primary to-primary-light h-full flex items-center justify-center p-12">
             <div className="text-center text-white flex items-center justify-center flex-col">
               <Image
                 alt=""

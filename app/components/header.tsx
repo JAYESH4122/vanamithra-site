@@ -147,10 +147,10 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="nav-item relative text-gray-700 font-medium hover:text-emerald-600 transition-all text-sm"
+                className="nav-item relative text-gray-700 font-medium hover:text-primary-dark transition-all text-sm group"
               >
                 {item.name}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#30B254] to-[#96BD40] transition-all group-hover:w-full"></span>
+                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)] transition-all group-hover:w-full"></span>
               </a>
             ))}
           </nav>
@@ -167,7 +167,7 @@ const Header = () => {
                 value={searchQuery}
                 onChange={handleSearchInputChange}
                 onFocus={() => setIsSearchFocused(true)}
-                className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
               />
               <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
             </div>
@@ -189,7 +189,7 @@ const Header = () => {
                           key={product.id}
                           href={`/${product.id}`}
                           onClick={handleProductClick}
-                          className="flex items-center gap-3 p-3 hover:bg-emerald-50 transition-colors border-b border-gray-100 last:border-b-0"
+                          className="flex items-center gap-3 p-3 hover:bg-surface/30 transition-colors border-b border-gray-100 last:border-b-0"
                         >
                           <div className="flex-1 min-w-0">
                             <h4 className="font-semibold text-gray-800 text-sm truncate">
@@ -199,7 +199,7 @@ const Header = () => {
                               {product.category}
                             </p>
                           </div>
-                          <div className="text-emerald-600 font-bold text-sm">
+                          <div className="text-primary-dark font-bold text-sm">
                             ₹{product.price}
                           </div>
                         </Link>
@@ -239,7 +239,7 @@ const Header = () => {
               value={searchQuery}
               onChange={handleSearchInputChange}
               onFocus={() => setIsSearchFocused(true)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
           </div>
@@ -261,7 +261,7 @@ const Header = () => {
                         key={product.id}
                         href={`/${product.id}`}
                         onClick={handleProductClick}
-                        className="flex items-center gap-3 p-3 hover:bg-emerald-50 transition-colors border-b border-gray-100 last:border-b-0"
+                        className="flex items-center gap-3 p-3 hover:bg-surface/30 transition-colors border-b border-gray-100 last:border-b-0"
                       >
                         <div className="flex-1 min-w-0">
                           <h4 className="font-semibold text-gray-800 text-sm truncate">
@@ -271,7 +271,7 @@ const Header = () => {
                             {product.category}
                           </p>
                         </div>
-                        <div className="text-emerald-600 font-bold text-sm">
+                        <div className="text-primary-dark font-bold text-sm">
                           ₹{product.price}
                         </div>
                       </Link>
@@ -309,7 +309,7 @@ const Header = () => {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="py-3 px-4 rounded-lg text-gray-700 font-medium hover:bg-emerald-50 hover:text-emerald-600 transition"
+                  className="py-3 px-4 rounded-lg text-gray-700 font-medium hover:bg-surface hover:text-[var(--color-primary-dark)] transition"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.1 }}
