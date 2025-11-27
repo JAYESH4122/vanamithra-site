@@ -11,7 +11,7 @@ export const ContactSection = () => {
   const sendMessage = () => {
     if (!name.trim() || !email.trim() || !message.trim()) return;
 
-    const phone = "91XXXXXXXXXX"; // <-- YOUR WhatsApp number
+    const phone = "917909102100";
     const text = `New Contact Form Submission:
         Name: ${name}
         Email: ${email}
@@ -19,12 +19,14 @@ export const ContactSection = () => {
 
     const encoded = encodeURIComponent(text);
 
-    window.open(`https://wa.me/${phone}?text=${encoded}`, "_blank");
+    // FIX: use location.href instead of window.open()
+    window.location.href = `https://wa.me/${phone}?text=${encoded}`;
 
     setName("");
     setEmail("");
     setMessage("");
   };
+
   return (
     <section id="contact" className="py-8 md:py-16 primary-bg">
       <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
@@ -268,7 +270,7 @@ export const ContactSection = () => {
                   We&apos;ll get back to you within 24 hours
                 </p>
 
-                <div className="space-y-4">
+                <div className="space-y-4 flex flex-col">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -287,7 +289,7 @@ export const ContactSection = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Your Message..."
-                    className="h-24 bg-white rounded-lg border border-gray-200 p-4 text-gray-700 text-sm"
+                    className="h-20 bg-white rounded-lg border border-gray-200 p-4 text-gray-700 text-sm"
                   />
 
                   <button

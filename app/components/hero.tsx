@@ -81,7 +81,7 @@ export const Hero = () => {
                   const whatsappUrl = createWhatsAppUrl(
                     heroData.whatsappMessage
                   );
-                  window.open(whatsappUrl, "_blank");
+                  window.location.href = whatsappUrl;
                 }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}

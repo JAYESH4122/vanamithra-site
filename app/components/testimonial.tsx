@@ -13,7 +13,7 @@ export const TestimonialSection = () => {
     const phone = "917909102100"; // your WhatsApp number
     const message = encodeURIComponent(`New Review:\n\n${review}`);
 
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    window.location.href = `https://wa.me/${phone}?text=${message}`;
   };
 
   return (
