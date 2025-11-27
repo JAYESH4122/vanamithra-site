@@ -76,10 +76,10 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/50">
+    <div className="min-h-screen primary-bg">
       <main className="container mx-auto px-4 sm:px-6 py-8">
         {/* Breadcrumb */}
-        <nav className="flex mb-8 text-sm text-gray-500">
+        <nav className="flex mb-8 text-sm text-gray-400">
           <ol className="flex items-center space-x-2">
             <li>
               <Link href="/" className="hover:text-primary transition-colors">
@@ -92,7 +92,7 @@ export default function ProductPage() {
             <li>
               <Link
                 href="/products"
-                className="hover:text-primary transition-colors"
+                className="hover:text-primary transition-color"
               >
                 Products
               </Link>
@@ -100,7 +100,7 @@ export default function ProductPage() {
             <li>
               <FiChevronRight className="inline" />
             </li>
-            <li className="text-gray-800 font-medium">{product.category}</li>
+            <li className="text-white font-medium">{product.category}</li>
           </ol>
         </nav>
 
@@ -144,9 +144,6 @@ export default function ProductPage() {
                   </span>
                 </div>
                 <span className="mx-4 text-gray-300">|</span>
-                <span className="text-green-600 font-medium bg-green-50 px-3 py-1 rounded-full text-sm">
-                  In Stock
-                </span>
               </div>
 
               {/* Product Name */}
@@ -160,7 +157,7 @@ export default function ProductPage() {
               {/* Price */}
               <div className="flex items-center mb-8">
                 <span className="text-4xl font-bold text-primary-dark">
-                  ${product.price}
+                  ₹{product.price}
                 </span>
                 {product.originalPrice && (
                   <span className="ml-4 text-xl text-gray-500 line-through">
@@ -298,9 +295,8 @@ export default function ProductPage() {
               </div>
             </motion.div>
             {/* Related Products */}
-            {/* Related Products */}
             <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold text-black mb-4">
                 Related Products
               </h3>
 

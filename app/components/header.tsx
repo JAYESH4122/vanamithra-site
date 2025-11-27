@@ -20,11 +20,11 @@ const Header = () => {
   const mobileSearchInputRef = useRef<HTMLInputElement>(null);
 
   const navItems = [
-    { name: "Home", href: "#" },
-    { name: "Categories", href: "#" },
-    { name: "Products", href: "#" },
-    { name: "About", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Home", href: "/#home" },
+    { name: "Categories", href: "/#categories" },
+    { name: "Products", href: "/#products" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   // Search functionality with debounced query
@@ -226,7 +226,7 @@ const Header = () => {
             >
               <FiSearch size={20} />
             </button>
-            
+
             {/* Mobile Menu Button */}
             <button
               className="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition"

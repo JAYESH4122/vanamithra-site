@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Open_Sans,
-  Poppins,
-  Alegreya_SC,
-  Alkatra,
-} from "next/font/google";
+import { Geist, Open_Sans, Alegreya_SC } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,27 +13,10 @@ const openSans = Open_Sans({
   variable: "--font-open-sans",
 });
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const algreyaSc = Alegreya_SC({
   subsets: ["latin"],
   weight: ["400", "500", "700", "800", "900"],
   variable: "--font-algreya-sc",
-});
-
-const alkatra = Alkatra({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-alkatra",
 });
 
 export const metadata: Metadata = {
@@ -56,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${openSans.variable} ${poppins.variable} ${algreyaSc.variable} ${alkatra.variable} antialiased`}
+        className={`${geistSans.variable} ${openSans.variable}  ${algreyaSc.variable} antialiased`}
       >
         {children}
       </body>

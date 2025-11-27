@@ -6,7 +6,7 @@ import { aboutData } from "@/data/home-page";
 import { config } from "@/data/config";
 
 export const AboutSection = () => (
-  <section className="py-8 md:py-16 primary-bg">
+  <section id="about" className="py-8 md:py-16 primary-bg">
     <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
       {/* Header */}
       <div className="text-center mb-10 md:mb-16">

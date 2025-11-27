@@ -27,7 +27,7 @@ export default function ProductsPageClient() {
   const filteredProducts = getProductsByCategory(selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/50">
+    <div className="min-h-screen primary-bg">
       <main className="container mx-auto px-4 sm:px-6 py-12">
         {/* Page Header */}
         <motion.div
@@ -35,13 +35,13 @@ export default function ProductsPageClient() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
             Our{" "}
-            <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
               Products
             </span>
           </h1>
-          <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-white text-lg md:text-xl max-w-2xl mx-auto">
             Explore our collection of organic, natural products sourced directly
             from nature
           </p>
@@ -121,13 +121,6 @@ export default function ProductsPageClient() {
                       (1 - product.price / product.originalPrice) * 100
                     )}
                     % OFF
-                  </div>
-                )}
-
-                {/* Stock Badge */}
-                {product.inStock && (
-                  <div className="absolute top-3 left-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                    In Stock
                   </div>
                 )}
               </div>

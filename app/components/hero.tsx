@@ -2,8 +2,8 @@
 
 import { heroData } from "@/data/home-page";
 import { createWhatsAppUrl } from "@/data/config";
-import Image from "next/image";
 import { motion, Variants } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export const Hero = () => {
   // Animation variants
@@ -30,59 +30,13 @@ export const Hero = () => {
     },
   };
 
-  const cardVariants: Variants = {
-    hidden: { scale: 0.8, opacity: 0, rotate: -5 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.8,
-        ease: "backOut",
-      },
-    },
-  };
-
-  const badgeVariants: Variants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.5,
-        ease: "backOut",
-      },
-    },
-  };
-
-  const floatingVariants: Variants = {
-    animate: {
-      y: [-8, 0, -8],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const glowVariants: Variants = {
-    animate: {
-      boxShadow: [
-        "0 0 20px rgba(191, 207, 187, 0.4)",
-        "0 0 40px rgba(191, 207, 187, 0.2)",
-        "0 0 20px rgba(191, 207, 187, 0.4)",
-      ],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
+  const router = useRouter();
 
   return (
-    <section className="relative primary-bg text-white py-10 md:py-24 overflow-hidden">
+    <section
+      id="home"
+      className="relative primary-bg text-white py-10 md:py-24 overflow-hidden"
+    >
       {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
@@ -147,9 +101,15 @@ export const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  router.push("/products");
+                }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="border-2 border-yellow text-yellow font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform">
-                <span className="text-yellow">{heroData.buttons.secondary}</span>
+                className="border-2 border-yellow text-yellow font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
+              >
+                <span className="text-yellow">
+                  {heroData.buttons.secondary}
+                </span>
                 <svg
                   className="w-5 h-5"
                   fill="none"

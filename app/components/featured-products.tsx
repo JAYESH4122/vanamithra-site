@@ -27,7 +27,7 @@ export const FeaturedProducts = () => {
 
   if (!isMounted) {
     return (
-      <section className="py-8 md:py-16 primary-bg">
+      <section id="products" className="py-8 md:py-16 primary-bg">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar">
             {[...Array(4)].map((_, index) => (
@@ -173,7 +173,7 @@ export const FeaturedProducts = () => {
             viewport={{ once: true, margin: "-50px" }}
             variants={containerVariants}
           >
-            {featuredProducts.map((product, index) => (
+            {featuredProducts.map((product) => (
               <motion.div
                 key={product.id}
                 variants={cardVariants}

@@ -33,7 +33,7 @@ export const CategorySection = () => {
   }
 
   return (
-    <section className="py-8 md:py-16 primary-bg relative overflow-hidden">
+    <section id="categories" className="py-8 md:py-16 primary-bg relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
