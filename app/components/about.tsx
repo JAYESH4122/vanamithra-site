@@ -6,15 +6,15 @@ import { aboutData } from "@/data/home-page";
 import { config } from "@/data/config";
 
 export const AboutSection = () => (
-  <section className="py-20 bg-gradient-to-r from-primary-dark to-primary">
+  <section className="py-8 md:py-16 primary-bg">
     <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
       {/* Header */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-10 md:mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl md:text-6xl font-bold text-white mb-4"
+          className="text-3xl md:text-6xl font-bold text-white mb-4"
         >
           {aboutData.title.main}{" "}
           <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
@@ -22,7 +22,7 @@ export const AboutSection = () => (
           </span>
         </motion.h2>
 
-        <p className="text-white text-lg max-w-2xl mx-auto">
+        <p className="text-white text-base max-w-2xl mx-auto">
           {aboutData.subtitle}
         </p>
 

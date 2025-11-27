@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 import { testimonialsData } from "@/data/home-page";
 
 export const TestimonialSection = () => (
-  <section className="py-20 bg-gradient-to-r from-primary-dark to-primary">
+  <section className="py-8 md:py-16 primary-bg">
     <div className="container mx-auto px-4 sm:px-6">
       {/* Section Header */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-10 md:mb-16">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
             {testimonialsData.title.main}{" "}
             <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
               {testimonialsData.title.highlight}
@@ -27,7 +27,7 @@ export const TestimonialSection = () => (
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-white text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+          className="text-white text-base md:text-xl max-w-3xl mx-auto leading-relaxed"
         >
           {testimonialsData.subtitle}
         </motion.p>
@@ -55,8 +55,8 @@ export const TestimonialSection = () => (
             viewport={{ once: true }}
             whileHover={{ y: -10, scale: 1.03 }}
             className="group relative"
-        >
-            <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-300 p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-surface/30 transition-all duration-500 overflow-hidden">
+          >
+            <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-300 p-4 md:p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-surface/30 transition-all duration-500 overflow-hidden">
               {/* Soft hover glow */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 bg-gradient-to-r from-primary via-primary-light to-primary transition-opacity duration-500"></div>
 
@@ -102,7 +102,7 @@ export const TestimonialSection = () => (
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: index * 0.15 + 0.3 }}
-                className="text-gray-700 mb-8 leading-relaxed text-lg font-medium"
+                className="text-gray-700 mb-8 leading-relaxed text-sm md:text-lg font-medium"
               >
                 “{testimonial.comment}”
               </motion.p>
@@ -114,7 +114,7 @@ export const TestimonialSection = () => (
                   initial={{ scale: 0.8, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   transition={{ delay: index * 0.15 + 0.4 }}
-                  className={`h-14 w-14 rounded-2xl bg-gradient-to-r ${testimonial.color} flex items-center justify-center text-white font-bold text-lg shadow-md mr-4`}
+                  className={`h-10 w-10 rounded-2xl bg-gradient-to-r ${testimonial.color} flex items-center justify-center text-white font-bold text-base md:text-lg shadow-md mr-4`}
                 >
                   {testimonial.avatar}
                 </motion.div>
@@ -125,7 +125,7 @@ export const TestimonialSection = () => (
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.15 + 0.45 }}
                 >
-                  <h4 className="font-bold text-gray-900 text-lg">
+                  <h4 className="font-bold text-gray-900 text-base md:text-lg">
                     {testimonial.name}
                   </h4>
                   <p className="text-gray-500 text-sm">{testimonial.role}</p>

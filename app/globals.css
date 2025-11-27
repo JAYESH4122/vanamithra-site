@@ -18,13 +18,29 @@
   --color-primary-light: #25da5c;
   --color-surface: #ffffff;
   --color-yellow: #f1b24a;
-  --color-brown: #bb8a52
+  --color-brown: #bb8a52;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+  }
+}
+
+@layer components {
+  .primary-bg {
+    @apply bg-gradient-to-r from-primary-dark to-primary;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

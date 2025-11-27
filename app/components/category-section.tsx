@@ -33,7 +33,7 @@ export const CategorySection = () => {
   }
 
   return (
-    <section className="py-24 bg-gradient-to-r from-primary-dark to-primary relative overflow-hidden">
+    <section className="py-8 md:py-16 primary-bg relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -69,7 +69,7 @@ export const CategorySection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-16"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -77,7 +77,7 @@ export const CategorySection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
               Browse by{" "}
               <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
                 Nature&apos;s Best
@@ -90,7 +90,7 @@ export const CategorySection = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="text-white text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+            className="text-white text-base md:text-xl max-w-3xl mx-auto leading-relaxed"
           >
             Explore categories filled with organic, authentic, nature-crafted
             essentials.
