@@ -64,11 +64,10 @@ export default function ProductsPageClient() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                  selectedCategory === category.id
-                    ? "bg-gradient-to-r from-primary to-primary-light text-white shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary"
-                }`}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${selectedCategory === category.id
+                    ? "bg-yellow text-black shadow-lg"
+                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
+                  }`}
               >
                 {category.name}
               </motion.button>
@@ -183,7 +182,7 @@ export default function ProductsPageClient() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full mt-4 bg-gradient-to-r from-primary to-primary-light text-white py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 hover:shadow-md"
+                  className="w-full mt-4 bg-yellow text-black py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-yellow/90 hover:shadow-md"
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/${product.id}`);

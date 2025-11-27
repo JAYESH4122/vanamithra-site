@@ -38,27 +38,25 @@ export const CategorySection = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.03, 0.06, 0.03],
+            scale: [1, 1.15, 1],
           }}
           transition={{
-            duration: 8,
+            duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl will-change-transform"
         />
         <motion.div
           animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.04, 0.08, 0.04],
+            scale: [1.15, 1, 1.15],
           }}
           transition={{
-            duration: 10,
+            duration: 14,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-light rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl will-change-transform"
         />
       </div>
 
@@ -108,19 +106,19 @@ export const CategorySection = () => {
         </motion.div>
 
         {/* Category Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8 lg:gap-6">
           {categoriesWithCounts.map((category, index) => (
             <Link key={category.id} href={`/products?category=${category.id}`}>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-50px" }}
                 className="group cursor-pointer"
               >
-                <div className="bg-gradient-to-br from-white to-gray-300 border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center">
+                <div className="bg-gradient-to-br from-white to-gray-300 border border-gray-200 rounded-2xl p-3 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center">
                   {/* Image */}
-                  <div className="relative w-28 h-28 mb-5 rounded-xl overflow-hidden shadow-sm">
+                  <div className="relative w-16 h-16 sm:w-28 sm:h-28 mb-3 sm:mb-5 rounded-xl overflow-hidden shadow-sm">
                     <Image
                       src={category.image}
                       alt={category.name}
@@ -130,12 +128,12 @@ export const CategorySection = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-black mb-1 text-center group-hover:text-primary-dark transition-colors">
+                  <h3 className="text-sm sm:text-lg font-semibold text-black mb-1 text-center group-hover:text-primary-dark transition-colors">
                     {category.name}
                   </h3>
 
                   {/* Count */}
-                  <p className="text-primary-dark text-sm">
+                  <p className="text-primary-dark text-xs sm:text-sm">
                     {category.count} {category.count === 1 ? "item" : "items"}
                   </p>
                 </div>
@@ -147,7 +145,7 @@ export const CategorySection = () => {
         {/* Common CTA */}
         <div className="flex justify-center mt-12">
           <Link href="/products">
-            <button className="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-primary-light text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all">
+            <button className="px-8 py-3 rounded-full bg-yellow text-black font-semibold text-sm shadow-md hover:bg-yellow/90 hover:shadow-lg transition-all">
               Explore All Categories
             </button>
           </Link>

@@ -24,7 +24,15 @@ export const ContactSection = () => (
           {contactData.subtitle}
         </p>
 
-        <div className="w-24 h-1 bg-white mx-auto mt-6 rounded-full" />
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-8"
+        >
+          <div className="w-32 h-1 bg-white rounded-full shadow-lg"></div>
+        </motion.div>
       </div>
 
       {/* GRID */}
@@ -95,8 +103,9 @@ export const ContactSection = () => (
                 href={item.link}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="group flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-2 md:gap-4 bg-white p-3 md:p-6 rounded-2xl border border-gray-200 hover:shadow-lg hover:border-transparent transition-all duration-300"
+                transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="group flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-2 md:gap-4 bg-white p-3 md:p-6 rounded-2xl border border-gray-200 hover:shadow-lg hover:border-transparent transition-all duration-300 will-change-transform"
               >
                 {/* ICON */}
                 <div
@@ -206,9 +215,10 @@ export const ContactSection = () => (
                   <motion.a
                     key={social.name}
                     href={social.link}
-                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileHover={{ scale: 1.08, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${social.color} flex items-center justify-center text-white shadow-sm hover:shadow-md transition-all`}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${social.color} flex items-center justify-center text-white shadow-sm hover:shadow-md transition-shadow will-change-transform`}
                   >
                     {getSocialIcon(social.icon)}
                   </motion.a>
@@ -216,34 +226,34 @@ export const ContactSection = () => (
               })}
             </div>
           </div>
-        </div>
 
-        {/* RIGHT SIDE – CONTACT FORM */}
-        <div className="flex justify-center lg:justify-end">
-          <div className="w-full max-w-md bg-gradient-to-br from-white to-gray-200 p-6 rounded-2xl border border-primary/20 shadow-sm">
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              Send us a Message
-            </h3>
-            <p className="text-gray-600 mb-6">
-              We&apos;ll get back to you within 24 hours
-            </p>
+          {/* RIGHT SIDE – CONTACT FORM */}
+          <div className="flex justify-center">
+            <div className="w-full max-w-md bg-gradient-to-br from-white to-gray-200 p-6 rounded-2xl border border-primary/20 shadow-sm">
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                Send us a Message
+              </h3>
+              <p className="text-gray-600 mb-6">
+                We&apos;ll get back to you within 24 hours
+              </p>
 
-            <div className="space-y-4">
-              <div className="h-11 bg-white rounded-lg border border-gray-200 flex items-center px-4 text-gray-400 text-sm">
-                Your Name
+              <div className="space-y-4">
+                <div className="h-11 bg-white rounded-lg border border-gray-200 flex items-center px-4 text-gray-400 text-sm">
+                  Your Name
+                </div>
+
+                <div className="h-11 bg-white rounded-lg border border-gray-200 flex items-center px-4 text-gray-400 text-sm">
+                  Your Email
+                </div>
+
+                <div className="h-24 bg-white rounded-lg border border-gray-200 flex items-start p-4 text-gray-400 text-sm">
+                  Your Message...
+                </div>
+
+                <button className="w-full h-11 bg-yellow text-black font-semibold rounded-lg hover:bg-yellow/90 hover:shadow-lg transition-all">
+                  Send Message
+                </button>
               </div>
-
-              <div className="h-11 bg-white rounded-lg border border-gray-200 flex items-center px-4 text-gray-400 text-sm">
-                Your Email
-              </div>
-
-              <div className="h-24 bg-white rounded-lg border border-gray-200 flex items-start p-4 text-gray-400 text-sm">
-                Your Message...
-              </div>
-
-              <button className="w-full h-11 bg-gradient-to-r from-primary to-primary-light text-white font-semibold rounded-lg hover:shadow-lg transition-all">
-                Send Message
-              </button>
             </div>
           </div>
         </div>

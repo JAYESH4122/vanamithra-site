@@ -6,11 +6,17 @@ import { FiStar, FiChevronRight } from "react-icons/fi";
 import Link from "next/link";
 import { getProductById } from "@/lib/products-data";
 import { useParams } from "next/navigation";
+import { products } from "@/data/products";
 
 export default function ProductPage() {
   const params = useParams();
   const productId = params.id as string;
   const product = getProductById(productId);
+  // Fetch related products from same category
+  const relatedProducts = products
+    .filter((p) => p.category === product?.category && p.id !== product.id)
+    .slice(0, 4);
+
   const [selectedVariant, setSelectedVariant] = useState(
     product?.variants?.[0] ?? ({} as { name?: string; value?: string })
   );
@@ -31,7 +37,7 @@ export default function ProductPage() {
           </p>
           <Link
             href="/products"
-            className="inline-block bg-gradient-to-r from-primary to-primary-light text-white py-3 px-8 rounded-xl font-semibold hover:shadow-lg transition-all"
+            className="inline-block bg-yellow text-black py-3 px-8 rounded-xl font-semibold hover:bg-yellow/90 hover:shadow-lg transition-all"
           >
             Browse All Products
           </Link>
@@ -185,8 +191,8 @@ export default function ProductPage() {
                       onClick={() => setSelectedVariant(variant)}
                       className={`px-6 py-3 rounded-xl border-2 font-medium transition-all duration-300 ${
                         selectedVariant.value === variant.value
-                          ? "border-primary bg-primary text-white shadow-lg"
-                          : "border-gray-300 text-gray-700 hover:border-primary hover:text-primary"
+                          ? "bg-yellow border-yellow text-black shadow-lg"
+                          : "border-gray-300 text-gray-700 hover:border-yellow hover:bg-yellow/10"
                       }`}
                     >
                       {variant.name}
@@ -229,7 +235,7 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={orderViaWhatsApp}
-                  className="flex-1 bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+                  className="flex-1 bg-yellow hover:bg-yellow/90 text-black py-4 px-8 rounded-xl font-semibold text-base transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                 >
                   <svg
                     className="w-6 h-6"
@@ -245,7 +251,7 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={inquireViaWhatsApp}
-                  className="flex-1 border-2 border-primary text-primary hover:bg-primary hover:text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3"
+                  className="border-2 border-yellow text-base text-yellow font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
                 >
                   <svg
                     className="w-6 h-6"
@@ -265,23 +271,25 @@ export default function ProductPage() {
               </div>
 
               {/* Product Features */}
-              <div className="border-t border-gray-200 pt-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">
+              <div className="border-t border-gray-200 pt-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">
                   Product Features
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {product.features.map((feature, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center p-3 rounded-lg bg-gradient-to-r from-surface/20 to-surface/30 border border-surface/50"
+                      transition={{ delay: index * 0.08 }}
+                      className="flex items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200"
                     >
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3">
+                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                       </div>
-                      <span className="text-gray-700 font-medium">
+
+                      <span className="text-gray-700 text-sm font-medium">
                         {feature}
                       </span>
                     </motion.div>
@@ -289,6 +297,62 @@ export default function ProductPage() {
                 </div>
               </div>
             </motion.div>
+            {/* Related Products */}
+            {/* Related Products */}
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Related Products
+              </h3>
+
+              {relatedProducts.length === 0 ? (
+                <p className="text-gray-600 text-sm">
+                  No related products available.
+                </p>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {relatedProducts.map((item, index) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.08 }}
+                      whileHover={{ y: -4, scale: 1.02 }}
+                      className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden"
+                    >
+                      <Link href={`/${item.id}`} className="block">
+                        {/* Image */}
+                        <div className="aspect-square bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center">
+                          <span className="text-3xl">🌿</span>
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-3">
+                          <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1">
+                            {item.name}
+                          </h4>
+
+                          <p className="text-xs text-gray-500 mb-2 capitalize">
+                            {item.category}
+                          </p>
+
+                          <div className="flex items-center gap-2">
+                            <span className="text-base font-bold text-primary-dark">
+                              ₹{item.price}
+                            </span>
+
+                            {item.originalPrice && (
+                              <span className="text-xs line-through text-gray-400">
+                                ₹{item.originalPrice}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </main>

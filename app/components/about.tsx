@@ -21,12 +21,18 @@ export const AboutSection = () => (
             {aboutData.title.highlight}
           </span>
         </motion.h2>
-
         <p className="text-white text-base max-w-2xl mx-auto">
           {aboutData.subtitle}
         </p>
-
-        <div className="w-24 h-1 bg-gradient-to-r from-primary via-primary-light to-primary mx-auto mt-6 rounded-full" />
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-8"
+        >
+          <div className="w-32 h-1 bg-white rounded-full shadow-lg"></div>
+        </motion.div>{" "}
       </div>
 
       {/* Main Grid */}
@@ -40,16 +46,16 @@ export const AboutSection = () => (
         >
           {/* Mission */}
           <div className="space-y-4">
-            <h3 className="text-3xl font-bold text-black">
+            <h3 className="text-2xl font-bold text-black">
               {aboutData.mission.heading}
             </h3>
-            <p className="text-white leading-relaxed">
+            <p className="text-white text-sm leading-relaxed">
               {aboutData.mission.description}
             </p>
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6">
             {aboutData.features.map((feature, i) => {
               // Map icon names to SVG components
               const getIcon = (iconName: string) => {
@@ -57,7 +63,7 @@ export const AboutSection = () => (
                   case "shield":
                     return (
                       <svg
-                        className="w-7 h-7 text-white"
+                        className="w-5 h-5 sm:w-7 sm:h-7 text-white"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
@@ -69,7 +75,7 @@ export const AboutSection = () => (
                   case "globe":
                     return (
                       <svg
-                        className="w-7 h-7 text-white"
+                        className="w-5 h-5 sm:w-7 sm:h-7 text-white"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
@@ -82,7 +88,7 @@ export const AboutSection = () => (
                   case "star":
                     return (
                       <svg
-                        className="w-7 h-7 text-white"
+                        className="w-5 h-5 sm:w-7 sm:h-7 text-white"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
@@ -94,7 +100,7 @@ export const AboutSection = () => (
                   case "check-circle":
                     return (
                       <svg
-                        className="w-7 h-7 text-white"
+                        className="w-5 h-5 sm:w-7 sm:h-7 text-white"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
@@ -114,18 +120,25 @@ export const AboutSection = () => (
                   key={i}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="group bg-white p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-transparent transition-all duration-300"
+                  transition={{
+                    duration: 0.4,
+                    delay: i * 0.08,
+                    ease: "easeOut",
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="group bg-white p-3 sm:p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-transparent transition-all duration-300 will-change-transform"
                 >
                   <div
-                    className={`w-14 h-14 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300`}
                   >
                     {getIcon(feature.icon)}
                   </div>
-                  <h4 className="font-semibold text-gray-800 text-lg mb-2">
+                  <h4 className="font-semibold text-gray-800 text-sm sm:text-lg mb-2">
                     {feature.title}
                   </h4>
-                  <p className="text-gray-600 text-sm">{feature.desc}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm">
+                    {feature.desc}
+                  </p>
                 </motion.div>
               );
             })}

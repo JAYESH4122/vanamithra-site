@@ -27,7 +27,6 @@ export const products: Product[] = [
     id: "1",
     name: "Organic Turmeric Powder",
     price: 199.99,
-    originalPrice: 249.99,
     rating: 4.8,
     reviewCount: 124,
     description:
@@ -78,7 +77,6 @@ export const products: Product[] = [
     id: "3",
     name: "Sandal Powder",
     price: 149.99,
-    originalPrice: 179.99,
     rating: 4.6,
     reviewCount: 87,
     description:
@@ -104,7 +102,6 @@ export const products: Product[] = [
     id: "4",
     name: "Red Sandal Powder",
     price: 89.99,
-    originalPrice: 109.99,
     rating: 4.7,
     reviewCount: 65,
     description:
@@ -178,7 +175,6 @@ export const products: Product[] = [
     id: "7",
     name: "Pure Honey",
     price: 299.99,
-    originalPrice: 349.99,
     rating: 4.9,
     reviewCount: 156,
     description:
@@ -302,7 +298,6 @@ export const products: Product[] = [
     id: "12",
     name: "Coconut Oil",
     price: 169.99,
-    originalPrice: 199.99,
     rating: 4.8,
     reviewCount: 134,
     description:

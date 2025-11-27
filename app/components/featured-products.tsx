@@ -11,14 +11,74 @@ import Image from "next/image";
 export const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Get the first 4 products as featured products
-    setFeaturedProducts(products.slice(0, 4));
-    setIsLoading(false);
+    setIsMounted(true);
+    const timer = setTimeout(() => {
+      setFeaturedProducts(products.slice(0, 4));
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const router = useRouter();
+
+  if (!isMounted) {
+    return (
+      <section className="py-8 md:py-16 primary-bg">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar">
+            {[...Array(4)].map((_, index) => (
+              <div
+                key={index}
+                className="min-w-full flex-shrink-0 snap-center sm:min-w-0 bg-white rounded-2xl shadow-sm p-6 animate-pulse"
+              >
+                <div className="bg-gray-200 h-48 rounded-xl mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { stiffness: 100, damping: 15, duration: 0.6 },
+    },
+    hover: {
+      y: -8,
+      scale: 1.02,
+      transition: { stiffness: 400, damping: 25, duration: 0.3 },
+    },
+  };
+
+  const imageVariants = {
+    hover: {
+      scale: 1.05,
+      transition: { stiffness: 300, damping: 20, duration: 0.4 },
+    },
+  };
 
   return (
     <section className="py-8 md:py-16 primary-bg">
@@ -29,8 +89,13 @@ export const FeaturedProducts = () => {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
+              transition={{
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+                duration: 0.8,
+              }}
+              viewport={{ once: true, margin: "-50px" }}
             >
               <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
                 Featured{" "}
@@ -39,23 +104,27 @@ export const FeaturedProducts = () => {
                 </span>
               </h2>
             </motion.div>
+
             <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-50px" }}
               className="text-white text-base md:text-xl max-w-2xl leading-relaxed"
             >
               Our most popular products based on sales
             </motion.p>
           </div>
+
           <Link href="/products">
             <motion.button
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="hidden lg:flex items-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 group"
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden lg:flex items-center gap-2 bg-yellow text-black font-semibold py-3 px-6 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 group"
             >
               View All Products
               <svg
@@ -77,50 +146,61 @@ export const FeaturedProducts = () => {
 
         {/* Products Grid */}
         {isLoading ? (
-          <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar">
+          <motion.div
+            className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
             {[...Array(4)].map((_, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="min-w-full flex-shrink-0 snap-center sm:min-w-0 bg-white rounded-2xl shadow-sm p-6 animate-pulse"
+                variants={cardVariants}
+                className="min-w-full flex-shrink-0 snap-center sm:min-w-0 bg-white rounded-2xl shadow-sm p-6"
               >
-                <div className="bg-gray-200 h-48 rounded-xl mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                <div className="h-6 bg-gray-200 rounded w-1/2"></div>
-              </div>
+                <div className="bg-gray-200 h-48 rounded-xl mb-4 animate-pulse"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2 animate-pulse"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4 animate-pulse"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ) : (
-          <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar">
-            {featuredProducts.slice(0, 4).map((product, index) => (
+          <motion.div
+            className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={containerVariants}
+          >
+            {featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="min-w-full flex-shrink-0 snap-center sm:min-w-0 bg-gradient-to-br from-white to-gray-300 border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer group"
+                variants={cardVariants}
+                whileHover="hover"
+                viewport={{ once: true, margin: "-50px" }}
+                className="relative z-10 hover:z-20 min-w-full  flex-shrink-0 snap-center sm:min-w-0 bg-gradient-to-br from-white to-gray-50 border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden cursor-pointer group will-change-transform"
                 onClick={() => router.push(`/${product.id}`)}
               >
                 {/* Image Container */}
-                <div className="relative w-full h-48 p-6 bg-gradient-to-br from-gray-300 to-white">
-                  <div className="w-full h-full rounded-xl overflow-hidden bg-white flex items-center justify-center p-4 group-hover:scale-105 transition-transform duration-300">
+                <div className="relative w-full h-46 overflow-hidden">
+                  <motion.div
+                    className="w-full h-full rounded-xl overflow-hidden bg-white flex items-center justify-center p-4"
+                    variants={imageVariants}
+                  >
                     <Image
                       src="/saffron-gel.jpg"
                       alt={product.name}
-                      width={160}
+                      width={240}
                       height={160}
-                      className="object-contain drop-shadow-md"
+                      className="object-contain  drop-shadow-md transition-transform duration-300"
+                      priority
                     />
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset- bg-opacity-0 group-hover:bg-opacity-5 transition-all duration-300 rounded-2xl" />
+                  </motion.div>
                 </div>
 
                 {/* Info */}
-                <div className="p-6">
+                <div className="p-4 bg-gradient-to-b from-gray-100 to-white">
                   {/* Rating */}
                   <div className="flex items-center mb-3">
                     <div className="flex items-center">
@@ -144,12 +224,12 @@ export const FeaturedProducts = () => {
                   </div>
 
                   {/* Name */}
-                  <h3 className="font-bold text-gray-900 mb-2 text-lg leading-tight group-hover:text-primary-dark transition-colors duration-300 line-clamp-2">
+                  <h3 className="font-bold text-gray-900 mb-1 text-lg leading-tight group-hover:text-primary-dark transition-colors duration-300 line-clamp-2 ">
                     {product.name}
                   </h3>
 
                   {/* Category */}
-                  <p className="text-sm text-gray-500 mb-4 capitalize font-medium">
+                  <p className="text-sm text-gray-500 mb-2 capitalize font-medium">
                     {getCategoryName(product.category)}
                   </p>
 
@@ -167,8 +247,13 @@ export const FeaturedProducts = () => {
                     </div>
 
                     {/* Quick Action */}
-                    <div className="opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <motion.div
+                      className="opacity-0 group-hover:opacity-100"
+                      initial={{ x: 10 }}
+                      whileHover={{ x: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-md">
                         <svg
                           className="w-4 h-4 text-white"
                           fill="none"
@@ -183,26 +268,30 @@ export const FeaturedProducts = () => {
                           />
                         </svg>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
 
-        {/* Mobile View All Button */}
+        {/* Mobile View All */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          viewport={{ once: true, margin: "-50px" }}
           className="mt-12 text-center lg:hidden"
         >
           <Link href="/products">
-            <button className="bg-gradient-to-r from-primary to-primary-light text-white font-semibold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-yellow text-black font-semibold py-4 px-8 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
+            >
               View All Products
-            </button>
+            </motion.button>
           </Link>
         </motion.div>
       </div>

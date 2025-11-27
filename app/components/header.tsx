@@ -13,9 +13,11 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   const searchDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileSearchInputRef = useRef<HTMLInputElement>(null);
 
   const navItems = [
     { name: "Home", href: "#" },
@@ -60,17 +62,28 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Handle escape key to close dropdown
+  // Handle escape key to close dropdown and mobile search
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsSearchFocused(false);
+        if (showMobileSearch) {
+          setShowMobileSearch(false);
+          setSearchQuery("");
+        }
       }
     };
 
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+  }, [showMobileSearch]);
+
+  // Focus mobile search input when opened
+  useEffect(() => {
+    if (showMobileSearch && mobileSearchInputRef.current) {
+      mobileSearchInputRef.current.focus();
+    }
+  }, [showMobileSearch]);
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -80,6 +93,15 @@ const Header = () => {
   const handleProductClick = () => {
     setIsSearchFocused(false);
     setSearchQuery("");
+    setShowMobileSearch(false);
+  };
+
+  const handleMobileSearchToggle = () => {
+    setShowMobileSearch(!showMobileSearch);
+    if (!showMobileSearch) {
+      setIsSearchFocused(false);
+      setSearchQuery("");
+    }
   };
 
   const showDropdown = isSearchFocused && searchQuery.trim() !== "";
@@ -195,77 +217,100 @@ const Header = () => {
             </AnimatePresence>
           </motion.div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Search */}
-        <div className="mt-3 lg:hidden relative" ref={searchDropdownRef}>
-          <div className="header-search relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              onFocus={() => setIsSearchFocused(true)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
+          {/* Mobile Controls */}
+          <div className="flex lg:hidden items-center space-x-2">
+            {/* Mobile Search Toggle Button */}
+            <button
+              className="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition"
+              onClick={handleMobileSearchToggle}
+            >
+              <FiSearch size={20} />
+            </button>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+            </button>
           </div>
-
-          {/* Mobile Search Suggestions Dropdown */}
-          <AnimatePresence>
-            {showDropdown && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50"
-              >
-                {searchResults.length > 0 ? (
-                  <div className="max-h-96 overflow-y-auto">
-                    {searchResults.map((product) => (
-                      <Link
-                        key={product.id}
-                        href={`/${product.id}`}
-                        onClick={handleProductClick}
-                        className="flex items-center gap-3 p-3 hover:bg-surface/30 transition-colors border-b border-gray-100 last:border-b-0"
-                      >
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-gray-800 text-sm truncate">
-                            {product.name}
-                          </h4>
-                          <p className="text-xs text-gray-500 capitalize">
-                            {product.category}
-                          </p>
-                        </div>
-                        <div className="text-primary-dark font-bold text-sm">
-                          ₹{product.price}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="p-6 text-center">
-                    <div className="text-4xl mb-2">🔍</div>
-                    <p className="text-gray-600 font-medium">
-                      No products found
-                    </p>
-                    <p className="text-gray-400 text-sm mt-1">
-                      Try searching with different keywords
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
+
+        {/* Mobile Search Bar - Only shown when toggled */}
+        <AnimatePresence>
+          {showMobileSearch && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden mt-3 relative"
+              ref={searchDropdownRef}
+            >
+              <div className="header-search relative">
+                <input
+                  ref={mobileSearchInputRef}
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                  onFocus={() => setIsSearchFocused(true)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <FiSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
+              </div>
+
+              {/* Mobile Search Suggestions Dropdown */}
+              <AnimatePresence>
+                {showDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full mt-2 w-full bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50"
+                  >
+                    {searchResults.length > 0 ? (
+                      <div className="max-h-96 overflow-y-auto">
+                        {searchResults.map((product) => (
+                          <Link
+                            key={product.id}
+                            href={`/${product.id}`}
+                            onClick={handleProductClick}
+                            className="flex items-center gap-3 p-3 hover:bg-surface/30 transition-colors border-b border-gray-100 last:border-b-0"
+                          >
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-gray-800 text-sm truncate">
+                                {product.name}
+                              </h4>
+                              <p className="text-xs text-gray-500 capitalize">
+                                {product.category}
+                              </p>
+                            </div>
+                            <div className="text-primary-dark font-bold text-sm">
+                              ₹{product.price}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="p-6 text-center">
+                        <div className="text-4xl mb-2">🔍</div>
+                        <p className="text-gray-600 font-medium">
+                          No products found
+                        </p>
+                        <p className="text-gray-400 text-sm mt-1">
+                          Try searching with different keywords
+                        </p>
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Mobile Menu */}

@@ -51,33 +51,28 @@ export const TestimonialSection = () => (
             key={index}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-            viewport={{ once: true }}
-            whileHover={{ y: -10, scale: 1.03 }}
-            className="group relative"
+            transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-50px" }}
+            whileHover={{ y: -8 }}
+            className="group relative will-change-transform"
           >
-            <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-300 p-4 md:p-8 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_30px_-4px_rgba(0,0,0,0.12)] border border-surface/30 transition-all duration-500 overflow-hidden">
-              {/* Soft hover glow */}
+            <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-5 md:p-8 shadow-[0_6px_20px_-5px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_-4px_rgba(0,0,0,0.12)] border border-gray-200/50 transition-all duration-500 overflow-hidden">
+              {/* Soft hover sheen */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 bg-gradient-to-r from-primary via-primary-light to-primary transition-opacity duration-500"></div>
 
               {/* Quote Icon */}
               <div className="absolute top-6 right-6 opacity-10 text-primary">
                 <svg
-                  className="w-12 h-12"
+                  className="w-10 h-10 md:w-12 md:h-12"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
+                  <path d="M7 17c-1.1 0-2-.9-2-2v-3c0-3 2.3-5.7 6-7l.6 1.2C9.1 7.1 8 9 8 11h2v4c0 1.1-.9 2-2 2zm10 0c-1.1 0-2-.9-2-2v-3c0-3 2.3-5.7 6-7l.6 1.2C19.1 7.1 18 9 18 11h2v4c0 1.1-.9 2-2 2z"></path>
                 </svg>
               </div>
 
               {/* Rating */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 + 0.2 }}
-                className="flex items-center mb-6"
-              >
+              <div className="flex items-center mb-6">
                 {[...Array(5)].map((_, i) => (
                   <svg
                     key={i}
@@ -95,46 +90,85 @@ export const TestimonialSection = () => (
                 <span className="text-sm text-gray-500 ml-2 font-medium">
                   {testimonial.rating}.0
                 </span>
-              </motion.div>
+              </div>
 
               {/* Comment */}
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: index * 0.15 + 0.3 }}
-                className="text-gray-700 mb-8 leading-relaxed text-sm md:text-lg font-medium"
-              >
+              <p className="text-gray-700 mb-8 leading-relaxed text-sm md:text-lg font-medium">
                 “{testimonial.comment}”
-              </motion.p>
+              </p>
 
-              {/* Avatar + Info */}
+              {/* Avatar + Name + Role */}
               <div className="flex items-center">
                 {/* Avatar */}
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: index * 0.15 + 0.4 }}
+                <div
                   className={`h-10 w-10 rounded-2xl bg-gradient-to-r ${testimonial.color} flex items-center justify-center text-white font-bold text-base md:text-lg shadow-md mr-4`}
                 >
                   {testimonial.avatar}
-                </motion.div>
+                </div>
 
                 {/* Info */}
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.15 + 0.45 }}
-                >
+                <div>
                   <h4 className="font-bold text-gray-900 text-base md:text-lg">
                     {testimonial.name}
                   </h4>
                   <p className="text-gray-500 text-sm">{testimonial.role}</p>
-                </motion.div>
+                </div>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* Review Submission Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+        viewport={{ once: true }}
+        className="mt-10 md:mt-16"
+      >
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-4 md:p-6 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] border border-gray-200/60">
+            <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+              {/* Input Field */}
+              <input
+                type="text"
+                placeholder="Share your experience with us..."
+                className="flex-1 px-4 md:px-6 py-3 md:py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-yellow focus:outline-none transition-all duration-300 text-gray-700 placeholder-gray-400 text-sm md:text-base shadow-sm"
+              />
+
+              {/* Submit Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-yellow text-gray-900 font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden"
+              >
+                <span className="relative z-10">Submit</span>
+
+                {/* New clean send icon — small on mobile */}
+                <motion.svg
+                  className="w-4 h-4 md:w-5 md:h-5 relative z-10"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  initial={{ x: 0 }}
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <path d="M22 2L11 13"></path>
+                  <path d="M22 2L15 22l-4-9-9-4 20-7z"></path>
+                </motion.svg>
+
+                {/* Animated sheen effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 will-change-transform"></div>
+              </motion.button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   </section>
 );
