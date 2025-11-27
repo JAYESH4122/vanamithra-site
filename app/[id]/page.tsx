@@ -63,7 +63,7 @@ export default function ProductPage() {
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;
-     window.location.href = whatsappUrl;
+    window.location.href = whatsappUrl;
   };
 
   const inquireViaWhatsApp = () => {
@@ -72,7 +72,7 @@ export default function ProductPage() {
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;
-     window.location.href = whatsappUrl;
+    window.location.href = whatsappUrl;
   };
 
   return (
@@ -131,7 +131,7 @@ export default function ProductPage() {
                   {[...Array(5)].map((_, i) => (
                     <FiStar
                       key={i}
-                      size={18}
+                      size={12}
                       className={
                         i < Math.floor(product.rating)
                           ? "text-amber-400 fill-current"
@@ -139,7 +139,7 @@ export default function ProductPage() {
                       }
                     />
                   ))}
-                  <span className="ml-2 text-gray-600">
+                  <span className="ml-2 text-gray-600 text-sm md:text-base">
                     ({product.reviewCount} reviews)
                   </span>
                 </div>
@@ -147,16 +147,16 @@ export default function ProductPage() {
               </div>
 
               {/* Product Name */}
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
                 {product.name}
               </h1>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+              <p className="text-gray-600 text-sm md:text-lg leading-relaxed mb-6">
                 {product.description}
               </p>
 
               {/* Price */}
-              <div className="flex items-center mb-8">
-                <span className="text-4xl font-bold text-primary-dark">
+              <div className="flex items-center mb-4 md:mb-8">
+                <span className="text-3xl md:text-4xl font-bold text-primary-dark">
                   ₹{product.price}
                 </span>
                 {product.originalPrice && (
@@ -176,17 +176,17 @@ export default function ProductPage() {
 
               {/* Variant Selection */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-sm md:text-lg font-semibold text-gray-900 mb-4">
                   Select Package Size
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-1 md:gap-3">
                   {product.variants.map((variant) => (
                     <motion.button
                       key={variant.value}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedVariant(variant)}
-                      className={`px-6 py-3 rounded-xl border-2 font-medium transition-all duration-300 ${
+                      className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-lg rounded-xl border-2 font-medium transition-all duration-300 ${
                         selectedVariant.value === variant.value
                           ? "bg-yellow border-yellow text-black shadow-lg"
                           : "border-gray-300 text-gray-700 hover:border-yellow hover:bg-yellow/10"
@@ -208,18 +208,18 @@ export default function ProductPage() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleQuantityChange(-1)}
-                    className="w-12 h-12 flex items-center justify-center border-2 border-gray-300 rounded-l-xl text-gray-600 hover:bg-gray-50 transition-colors"
+                    className="w-9 h-9 md:w-12 md:h-12 flex items-center justify-center border-2 border-gray-300 rounded-l-xl text-gray-600 hover:bg-gray-50 transition-colors"
                   >
                     -
                   </motion.button>
-                  <div className="w-16 h-12 flex items-center justify-center border-t-2 border-b-2 border-gray-300 text-lg font-semibold text-gray-900">
+                  <div className="w-9 h-9 md:w-12 md:h-12 flex items-center justify-center border-t-2 border-b-2 border-gray-300 text-lg font-semibold text-gray-900">
                     {quantity}
                   </div>
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleQuantityChange(1)}
-                    className="w-12 h-12 flex items-center justify-center border-2 border-gray-300 rounded-r-xl text-gray-600 hover:bg-gray-50 transition-colors"
+                    className="w-9 h-9 md:w-12 md:h-12 flex items-center justify-center border-2 border-gray-300 rounded-r-xl text-gray-600 hover:bg-gray-50 transition-colors"
                   >
                     +
                   </motion.button>
@@ -232,10 +232,10 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={orderViaWhatsApp}
-                  className="flex-1 bg-yellow hover:bg-yellow/90 text-black py-4 px-8 rounded-xl font-semibold text-base transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+                  className="flex-1 bg-yellow hover:bg-yellow/90 text-black py-2 px-4 md:py-4 md:px-8 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="md:w-6 md:h-6 w-4 h-4"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -248,10 +248,10 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={inquireViaWhatsApp}
-                  className="border-2 border-yellow text-base text-yellow font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
+                  className="border-2 border-yellow text-sm md:text-base text-yellow font-semibold py-2 px-4 md:py-4 md:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="md:w-6 md:h-6 w-4 h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -273,7 +273,7 @@ export default function ProductPage() {
                   Product Features
                 </h3>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-2 gap-3">
                   {product.features.map((feature, index) => (
                     <motion.div
                       key={index}
@@ -282,11 +282,11 @@ export default function ProductPage() {
                       transition={{ delay: index * 0.08 }}
                       className="flex items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200"
                     >
-                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mr-3">
+                      <div className="w-6 h-6 bg-primary rounded-full md:flex items-center justify-center mr-3 hidden ">
                         <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                       </div>
 
-                      <span className="text-gray-700 text-sm font-medium">
+                      <span className="text-gray-700 text-[12px] md:text-sm font-medium">
                         {feature}
                       </span>
                     </motion.div>

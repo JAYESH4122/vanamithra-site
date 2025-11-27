@@ -12,8 +12,6 @@ export const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
@@ -27,38 +25,6 @@ export const FeaturedProducts = () => {
 
   const router = useRouter();
   const scrollRef = useRef<HTMLDivElement | null>(null);
-
-  const updateScrollButtons = () => {
-    if (!scrollRef.current) return;
-    
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
-  };
-
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-
-    const cardWidth = scrollRef.current.firstElementChild?.clientWidth || 300;
-    const scrollAmount = cardWidth + 24; // gap of 24px
-
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-
-    // Update button states after scroll
-    setTimeout(updateScrollButtons, 300);
-  };
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.addEventListener("scroll", updateScrollButtons);
-      return () => {
-        scrollRef.current?.removeEventListener("scroll", updateScrollButtons);
-      };
-    }
-  }, []);
 
   if (!isMounted) {
     return (
@@ -205,7 +171,7 @@ export const FeaturedProducts = () => {
             <div className="relative">
               <motion.div
                 ref={scrollRef}
-                className="flex overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar sm:grid sm:grid-cols-2 lg:grid-cols-4"
+                className="flex overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar pb-4"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
@@ -217,7 +183,7 @@ export const FeaturedProducts = () => {
                     variants={cardVariants}
                     whileHover="hover"
                     viewport={{ once: true, margin: "-50px" }}
-                    className="relative z-10 hover:z-20 min-w-full flex-shrink-0 snap-center sm:min-w-0 bg-gradient-to-br from-white to-gray-50 border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden cursor-pointer group will-change-transform"
+                    className="relative z-10 hover:z-20 min-w-[85%] sm:min-w-0 flex-shrink-0 snap-center bg-gradient-to-br from-white to-gray-50 border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden cursor-pointer group will-change-transform"
                     onClick={() => router.push(`/${product.id}`)}
                   >
                     {/* Image Container */}
@@ -312,65 +278,6 @@ export const FeaturedProducts = () => {
                   </motion.div>
                 ))}
               </motion.div>
-
-              {/* Enhanced Arrow Buttons */}
-              <div className="flex justify-center items-center gap-4 mt-6 lg:hidden">
-                <motion.button
-                  onClick={() => scroll("left")}
-                  disabled={!canScrollLeft}
-                  className={`p-3 rounded-2xl shadow-2xl transition-all duration-300 ${
-                    canScrollLeft
-                      ? "bg-gray-900 hover:bg-gray-800 active:scale-95 cursor-pointer"
-                      : "bg-gray-400 cursor-not-allowed"
-                  }`}
-                  whileHover={canScrollLeft ? { scale: 1.1 } : {}}
-                  whileTap={canScrollLeft ? { scale: 0.9 } : {}}
-                >
-                  <svg
-                    className={`w-6 h-6 ${
-                      canScrollLeft ? "text-white" : "text-gray-200"
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={3}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </motion.button>
-
-                <motion.button
-                  onClick={() => scroll("right")}
-                  disabled={!canScrollRight}
-                  className={`p-3 rounded-2xl shadow-2xl transition-all duration-300 ${
-                    canScrollRight
-                      ? "bg-gray-900 hover:bg-gray-800 active:scale-95 cursor-pointer"
-                      : "bg-gray-400 cursor-not-allowed"
-                  }`}
-                  whileHover={canScrollRight ? { scale: 1.1 } : {}}
-                  whileTap={canScrollRight ? { scale: 0.9 } : {}}
-                >
-                  <svg
-                    className={`w-6 h-6 ${
-                      canScrollRight ? "text-white" : "text-gray-200"
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={3}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </motion.button>
-              </div>
             </div>
           </>
         )}
