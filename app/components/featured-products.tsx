@@ -1,12 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { getCategoryName } from "@/lib/products-data";
 import { Product, products } from "@/data/products";
 import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -25,6 +29,107 @@ export const FeaturedProducts = () => {
 
   const router = useRouter();
   const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(() => {
+    if (!isLoading && featuredProducts.length > 0) {
+      // Header animation
+      gsap.fromTo(
+        ".featured-header",
+        { scale: 0.9, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".featured-header",
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+
+      // Subtitle animation
+      gsap.fromTo(
+        ".featured-subtitle",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 0.3,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".featured-subtitle",
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+
+      // Button animation
+      gsap.fromTo(
+        ".featured-button",
+        { opacity: 0, x: 20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          delay: 0.4,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".featured-button",
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+
+      // Product cards stagger animation
+      const cards = gsap.utils.toArray<HTMLElement>(".featured-card");
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 30, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            delay: i * 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          }
+        );
+      });
+
+      // Mobile button animation
+      gsap.fromTo(
+        ".featured-mobile-button",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 0.5,
+          scrollTrigger: {
+            trigger: ".featured-mobile-button",
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+    }
+  }, [isLoading, featuredProducts]);
 
   if (!isMounted) {
     return (
@@ -48,85 +153,28 @@ export const FeaturedProducts = () => {
     );
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { stiffness: 100, damping: 15, duration: 0.6 },
-    },
-    hover: {
-      y: -8,
-      scale: 1.02,
-      transition: { stiffness: 400, damping: 25, duration: 0.3 },
-    },
-  };
-
-  const imageVariants = {
-    hover: {
-      scale: 1.05,
-      transition: { stiffness: 300, damping: 20, duration: 0.4 },
-    },
-  };
-
   return (
     <section className="py-8 md:py-16 primary-bg">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-12">
           <div className="text-center lg:text-left mb-6 lg:mb-0">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
-                duration: 0.8,
-              }}
-              viewport={{ once: true, margin: "-50px" }}
-            >
+            <div className="featured-header opacity-0">
               <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
                 Featured{" "}
                 <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
                   Products
                 </span>
               </h2>
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="text-white text-base md:text-xl max-w-2xl leading-relaxed"
-            >
+            <p className="featured-subtitle text-white text-base md:text-xl max-w-2xl leading-relaxed opacity-0">
               Our most popular products based on sales
-            </motion.p>
+            </p>
           </div>
 
           <Link href="/products">
-            <motion.button
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="hidden lg:flex items-center gap-2 bg-yellow text-black font-semibold py-3 px-6 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 group"
-            >
+            <button className="featured-button hidden lg:flex items-center gap-2 bg-yellow text-black font-semibold py-3 px-6 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 group opacity-0">
               View All Products
               <svg
                 className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
@@ -141,66 +189,50 @@ export const FeaturedProducts = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </motion.button>
+            </button>
           </Link>
         </div>
 
         {/* Products Grid */}
         {isLoading ? (
-          <motion.div
-            className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar"
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-          >
+          <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 no-scrollbar">
             {[...Array(4)].map((_, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={cardVariants}
                 className="min-w-full flex-shrink-0 snap-center sm:min-w-0 bg-white rounded-2xl shadow-sm p-6"
               >
                 <div className="bg-gray-200 h-48 rounded-xl mb-4 animate-pulse"></div>
                 <div className="h-4 bg-gray-200 rounded mb-2 animate-pulse"></div>
                 <div className="h-4 bg-gray-200 rounded w-3/4 mb-4 animate-pulse"></div>
                 <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         ) : (
           <>
             <div className="relative">
-              <motion.div
+              <div
                 ref={scrollRef}
                 className="flex overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar pb-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={containerVariants}
               >
                 {featuredProducts.map((product) => (
-                  <motion.div
+                  <div
                     key={product.id}
-                    variants={cardVariants}
-                    whileHover="hover"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="relative z-10 hover:z-20 min-w-[85%] sm:min-w-0 flex-shrink-0 snap-center bg-gradient-to-br from-white to-gray-50 border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden cursor-pointer group will-change-transform"
+                    className="featured-card relative z-10 hover:z-20 min-w-[85%] sm:min-w-0 flex-shrink-0 snap-center bg-gradient-to-br from-white to-gray-50 border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden cursor-pointer group will-change-transform opacity-0"
                     onClick={() => router.push(`/${product.id}`)}
                   >
                     {/* Image Container */}
                     <div className="relative w-full h-46 overflow-hidden">
-                      <motion.div
-                        className="w-full h-full rounded-xl overflow-hidden bg-white flex items-center justify-center p-4"
-                        variants={imageVariants}
-                      >
+                      <div className="w-full h-full rounded-xl overflow-hidden bg-white flex items-center justify-center p-4">
                         <Image
                           src="/saffron-gel.jpg"
                           alt={product.name}
                           width={240}
                           height={160}
-                          className="object-contain drop-shadow-md transition-transform duration-300"
+                          className="object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
                           priority
                         />
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* Info */}
@@ -211,11 +243,10 @@ export const FeaturedProducts = () => {
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
-                              className={`w-4 h-4 ${
-                                i < Math.floor(product.rating)
+                              className={`w-4 h-4 ${i < Math.floor(product.rating)
                                   ? "text-yellow-400 fill-current"
                                   : "text-gray-300 fill-current"
-                              }`}
+                                }`}
                               viewBox="0 0 20 20"
                             >
                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -251,12 +282,7 @@ export const FeaturedProducts = () => {
                         </div>
 
                         {/* Quick Action */}
-                        <motion.div
-                          className="opacity-0 group-hover:opacity-100"
-                          initial={{ x: 10 }}
-                          whileHover={{ x: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-md">
                             <svg
                               className="w-4 h-4 text-white"
@@ -272,34 +298,24 @@ export const FeaturedProducts = () => {
                               />
                             </svg>
                           </div>
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </>
         )}
 
         {/* Mobile View All */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true, margin: "-50px" }}
-          className="mt-12 text-center lg:hidden"
-        >
+        <div className="featured-mobile-button mt-12 text-center lg:hidden opacity-0">
           <Link href="/products">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-yellow text-black font-semibold py-4 px-8 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 w-full sm:w-auto"
-            >
+            <button className="bg-yellow text-black font-semibold py-4 px-8 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 w-full sm:w-auto">
               View All Products
-            </motion.button>
+            </button>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

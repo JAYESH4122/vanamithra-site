@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
 import { FiStar, FiChevronRight } from "react-icons/fi";
 import Link from "next/link";
 import { getProductById } from "@/lib/products-data";
 import { useParams } from "next/navigation";
 import { products } from "@/data/products";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function ProductPage() {
   const params = useParams();
@@ -37,6 +38,126 @@ export default function ProductPage() {
   const totalOriginalPrice = selectedVariant.originalPrice
     ? selectedVariant.originalPrice * quantity
     : 0;
+
+  const orderButtonRef = useRef<HTMLButtonElement>(null);
+  const inquireButtonRef = useRef<HTMLButtonElement>(null);
+  const minusButtonRef = useRef<HTMLButtonElement>(null);
+  const plusButtonRef = useRef<HTMLButtonElement>(null);
+
+  useGSAP(() => {
+    if (!product) return;
+
+    // Product image animation
+    gsap.fromTo(
+      ".product-image",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+    );
+
+    // Product details animation
+    gsap.fromTo(
+      ".product-details",
+      { opacity: 0, x: 20 },
+      { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }
+    );
+
+    // Feature cards stagger animation
+    const features = gsap.utils.toArray<HTMLElement>(".product-feature");
+    features.forEach((feature, i) => {
+      gsap.fromTo(
+        feature,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.4,
+          delay: i * 0.08,
+          ease: "power2.out",
+        }
+      );
+    });
+
+    // Related products stagger animation
+    const relatedCards = gsap.utils.toArray<HTMLElement>(".related-product");
+    relatedCards.forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          delay: i * 0.08,
+          ease: "power2.out",
+        }
+      );
+    });
+  }, [product]);
+
+  // Button hover animations
+  const handleOrderButtonEnter = () => {
+    gsap.to(orderButtonRef.current, {
+      scale: 1.02,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleOrderButtonLeave = () => {
+    gsap.to(orderButtonRef.current, {
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleInquireButtonEnter = () => {
+    gsap.to(inquireButtonRef.current, {
+      scale: 1.02,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleInquireButtonLeave = () => {
+    gsap.to(inquireButtonRef.current, {
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMinusButtonEnter = () => {
+    gsap.to(minusButtonRef.current, {
+      scale: 1.1,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMinusButtonLeave = () => {
+    gsap.to(minusButtonRef.current, {
+      scale: 1,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  };
+
+  const handlePlusButtonEnter = () => {
+    gsap.to(plusButtonRef.current, {
+      scale: 1.1,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  };
+
+  const handlePlusButtonLeave = () => {
+    gsap.to(plusButtonRef.current, {
+      scale: 1,
+      duration: 0.2,
+      ease: "power2.out",
+    });
+  };
 
   // Fallback if product not found
   if (!product) {
@@ -70,13 +191,11 @@ export default function ProductPage() {
 
   const orderViaWhatsApp = () => {
     const whatsappNumber = "919207025005";
-    const message = `Hi Vanamithra! 🌿\n\nI'd like to order:\n*${
-      product.name
-    }*\nVariant: ${
-      selectedVariant.name
-    }\nQuantity: ${quantity}\nTotal: ₹${totalPrice.toFixed(
-      2
-    )}\n\nPlease confirm availability and proceed with order.`;
+    const message = `Hi Vanamithra! 🌿\n\nI'd like to order:\n*${product.name
+      }*\nVariant: ${selectedVariant.name
+      }\nQuantity: ${quantity}\nTotal: ₹${totalPrice.toFixed(
+        2
+      )}\n\nPlease confirm availability and proceed with order.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;
@@ -124,24 +243,16 @@ export default function ProductPage() {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Product Image */}
           <div className="lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="relative bg-white rounded-2xl shadow-sm overflow-hidden aspect-square border border-gray-100"
-            >
+            <div className="product-image relative bg-white rounded-2xl shadow-sm overflow-hidden aspect-square border border-gray-100 opacity-0">
               <div className="flex items-center justify-center h-full bg-gradient-to-br from-amber-50 to-orange-50">
                 <span className="text-8xl">🌿</span>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Product Details */}
           <div className="lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100"
-            >
+            <div className="product-details bg-white rounded-2xl shadow-sm p-8 border border-gray-100 opacity-0">
               {/* Rating & Stock */}
               <div className="flex items-center mb-4">
                 <div className="flex items-center">
@@ -178,22 +289,19 @@ export default function ProductPage() {
                 </h3>
                 <div className="flex flex-wrap gap-1 md:gap-3">
                   {product.variants.map((variant) => (
-                    <motion.button
+                    <button
                       key={variant.value}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
                       onClick={() => handleVariantSelect(variant)}
-                      className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-lg rounded-xl border-2 flex flex-col flex-1 md:flex-none font-medium transition-all duration-300 ${
-                        selectedVariant.value === variant.value
+                      className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-lg rounded-xl border-2 flex flex-col flex-1 md:flex-none font-medium transition-all duration-300 ${selectedVariant.value === variant.value
                           ? "bg-yellow border-yellow text-black shadow-lg"
                           : "border-gray-300 text-gray-700 hover:border-yellow hover:bg-yellow/10"
-                      }`}
+                        }`}
                     >
                       {variant.name}
                       <div className="text-xs mt-1 font-normal">
                         ₹{variant.price}
                       </div>
-                    </motion.button>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -204,25 +312,27 @@ export default function ProductPage() {
                   Quantity
                 </h3>
                 <div className="flex items-center mb-4">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                  <button
+                    ref={minusButtonRef}
                     onClick={() => handleQuantityChange(-1)}
+                    onMouseEnter={handleMinusButtonEnter}
+                    onMouseLeave={handleMinusButtonLeave}
                     className="w-9 h-9 md:w-12 md:h-12 flex items-center justify-center border-2 border-gray-300 rounded-l-xl text-gray-600 hover:bg-gray-50 transition-colors"
                   >
                     -
-                  </motion.button>
+                  </button>
                   <div className="w-9 h-9 md:w-12 md:h-12 flex items-center justify-center border-t-2 border-b-2 border-gray-300 text-lg font-semibold text-gray-900">
                     {quantity}
                   </div>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                  <button
+                    ref={plusButtonRef}
                     onClick={() => handleQuantityChange(1)}
+                    onMouseEnter={handlePlusButtonEnter}
+                    onMouseLeave={handlePlusButtonLeave}
                     className="w-9 h-9 md:w-12 md:h-12 flex items-center justify-center border-2 border-gray-300 rounded-r-xl text-gray-600 hover:bg-gray-50 transition-colors"
                   >
                     +
-                  </motion.button>
+                  </button>
                 </div>
 
                 {/* Total Price Display */}
@@ -247,10 +357,11 @@ export default function ProductPage() {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
+                  ref={orderButtonRef}
                   onClick={orderViaWhatsApp}
+                  onMouseEnter={handleOrderButtonEnter}
+                  onMouseLeave={handleOrderButtonLeave}
                   className="flex-1 bg-yellow hover:bg-yellow/90 text-black py-2 px-4 md:py-4 md:px-8 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                 >
                   <svg
@@ -261,12 +372,13 @@ export default function ProductPage() {
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                   </svg>
                   Order via WhatsApp
-                </motion.button>
+                </button>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
+                  ref={inquireButtonRef}
                   onClick={inquireViaWhatsApp}
+                  onMouseEnter={handleInquireButtonEnter}
+                  onMouseLeave={handleInquireButtonLeave}
                   className="border-2 border-yellow text-sm md:text-base text-yellow font-semibold py-1.5 px-4 md:py-4 md:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
                 >
                   <svg
@@ -283,7 +395,7 @@ export default function ProductPage() {
                     />
                   </svg>
                   More Info
-                </motion.button>
+                </button>
               </div>
 
               {/* Product Features */}
@@ -294,12 +406,9 @@ export default function ProductPage() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-2 gap-3">
                   {product.features.map((feature, index) => (
-                    <motion.div
+                    <div
                       key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.08 }}
-                      className="flex items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200"
+                      className="product-feature flex items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200 opacity-0"
                     >
                       <div className="w-6 h-6 bg-primary rounded-full md:flex items-center justify-center mr-3 hidden ">
                         <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
@@ -308,11 +417,11 @@ export default function ProductPage() {
                       <span className="text-gray-700 text-[12px] md:text-sm font-medium">
                         {feature}
                       </span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
             {/* Related Products */}
             <div className="mt-8">
               <h3 className="text-xl font-bold text-black mb-4">
@@ -325,14 +434,10 @@ export default function ProductPage() {
                 </p>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {relatedProducts.map((item, index) => (
-                    <motion.div
+                  {relatedProducts.map((item) => (
+                    <div
                       key={item.id}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.08 }}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                      className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden"
+                      className="related-product bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden opacity-0"
                     >
                       <Link href={`/${item.id}`} className="block">
                         {/* Image */}
@@ -363,7 +468,7 @@ export default function ProductPage() {
                           </div>
                         </div>
                       </Link>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               )}

@@ -1,11 +1,111 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { testimonialsData } from "@/data/home-page";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const TestimonialSection = () => {
   const [review, setReview] = useState("");
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+
+  useGSAP(() => {
+    // Title animation
+    gsap.fromTo(
+      ".testimonial-title",
+      { scale: 0.9, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.6,
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: ".testimonial-title",
+          start: "top 85%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+
+    // Subtitle animation
+    gsap.fromTo(
+      ".testimonial-subtitle",
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.6,
+        delay: 0.4,
+        scrollTrigger: {
+          trigger: ".testimonial-subtitle",
+          start: "top 85%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+
+    // Divider animation
+    gsap.fromTo(
+      ".testimonial-divider",
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 0.8,
+        delay: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".testimonial-divider",
+          start: "top 85%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+
+    // Testimonial cards stagger animation
+    const cards = gsap.utils.toArray<HTMLElement>(".testimonial-card");
+    cards.forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: i * 0.12,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+    });
+
+    // Review form animation
+    gsap.fromTo(
+      ".review-form",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        delay: 0.3,
+        scrollTrigger: {
+          trigger: ".review-form",
+          start: "top 85%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      }
+    );
+  }, []);
 
   const submitReview = () => {
     if (!review.trim()) return;
@@ -16,17 +116,29 @@ export const TestimonialSection = () => {
     window.location.href = `https://wa.me/${phone}?text=${message}`;
   };
 
+  // Button hover animations
+  const handleButtonEnter = () => {
+    gsap.to(submitButtonRef.current, {
+      scale: 1.05,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleButtonLeave = () => {
+    gsap.to(submitButtonRef.current, {
+      scale: 1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
   return (
     <section className="py-8 md:py-16 primary-bg">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div className="testimonial-title opacity-0">
             <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
               {testimonialsData.title.main}{" "}
               <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
@@ -34,44 +146,23 @@ export const TestimonialSection = () => {
               </span>{" "}
               {testimonialsData.title.suffix}
             </h2>
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-white text-base md:text-xl max-w-3xl mx-auto leading-relaxed"
-          >
+          </div>
+          <p className="testimonial-subtitle text-white text-base md:text-xl max-w-3xl mx-auto leading-relaxed opacity-0">
             {testimonialsData.subtitle}
-          </motion.p>
+          </p>
 
           {/* Decorative elements */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="flex justify-center mt-8"
-          >
-            <div className="w-32 h-1 bg-white rounded-full shadow-lg"></div>
-          </motion.div>
+          <div className="flex justify-center mt-8">
+            <div className="testimonial-divider w-32 h-1 bg-white rounded-full shadow-lg"></div>
+          </div>
         </div>
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {testimonialsData.testimonials.map((testimonial, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.12,
-                ease: "easeOut",
-              }}
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ y: -8 }}
-              className="group relative will-change-transform"
+              className="testimonial-card group relative will-change-transform opacity-0"
             >
               <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-5 md:p-8 shadow-[0_6px_20px_-5px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_-4px_rgba(0,0,0,0.12)] border border-gray-200/50 transition-all duration-500 overflow-hidden">
                 {/* Soft hover sheen */}
@@ -93,11 +184,10 @@ export const TestimonialSection = () => {
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
-                      className={`w-5 h-5 ${
-                        i < testimonial.rating
-                          ? "text-yellow-400"
-                          : "text-gray-300"
-                      }`}
+                      className={`w-5 h-5 ${i < testimonial.rating
+                        ? "text-yellow-400"
+                        : "text-gray-300"
+                        }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -111,7 +201,7 @@ export const TestimonialSection = () => {
 
                 {/* Comment */}
                 <p className="text-gray-700 mb-8 leading-relaxed text-sm md:text-lg font-medium">
-                  “{testimonial.comment}”
+                  &quot;{testimonial.comment}&quot;
                 </p>
 
                 {/* Avatar + Name + Role */}
@@ -132,18 +222,12 @@ export const TestimonialSection = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Review Submission Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-10 md:mt-16"
-        >
+        <div className="review-form mt-10 md:mt-16 opacity-0">
           <div className="max-w-3xl mx-auto px-4">
             <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-4 md:p-6 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] border border-gray-200/60">
               <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
@@ -159,16 +243,17 @@ export const TestimonialSection = () => {
                 />
 
                 {/* Submit Button */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <button
+                  ref={submitButtonRef}
                   onClick={submitReview}
+                  onMouseEnter={handleButtonEnter}
+                  onMouseLeave={handleButtonLeave}
                   className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-yellow text-gray-900 font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden"
                 >
                   <span className="relative z-10">Submit</span>
 
                   {/* New clean send icon — small on mobile */}
-                  <motion.svg
+                  <svg
                     className="w-4 h-4 md:w-5 md:h-5 relative z-10"
                     fill="none"
                     stroke="currentColor"
@@ -176,21 +261,18 @@ export const TestimonialSection = () => {
                     strokeLinejoin="round"
                     strokeWidth="2"
                     viewBox="0 0 24 24"
-                    initial={{ x: 0 }}
-                    whileHover={{ x: 3 }}
-                    transition={{ duration: 0.3 }}
                   >
                     <path d="M22 2L11 13"></path>
                     <path d="M22 2L15 22l-4-9-9-4 20-7z"></path>
-                  </motion.svg>
+                  </svg>
 
                   {/* Animated sheen effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 will-change-transform"></div>
-                </motion.button>
+                </button>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

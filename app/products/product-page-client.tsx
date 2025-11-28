@@ -1,22 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiStar } from "react-icons/fi";
 import { getProductsByCategory } from "@/lib/products-data";
 import { categories } from "@/data/products";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 export default function ProductsPageClient() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const previousProductsRef = useRef<string[]>([]);
 
   // Read category from URL query parameter on mount
   useEffect(() => {
     const categoryParam = searchParams.get("category");
     if (categoryParam) {
-      // Verify that the category exists in our categories list
       const categoryExists = categories.some((cat) => cat.id === categoryParam);
       if (categoryExists) {
         setSelectedCategory(categoryParam);
@@ -26,15 +30,209 @@ export default function ProductsPageClient() {
 
   const filteredProducts = getProductsByCategory(selectedCategory);
 
+  useGSAP(() => {
+    // Master timeline for initial page load
+    const tl = gsap.timeline();
+
+    // Page header animation
+    tl.fromTo(
+      ".products-header",
+      { 
+        opacity: 0, 
+        y: 30 
+      },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: "power2.out" 
+      }
+    );
+
+    // Category filter animation
+    tl.fromTo(
+      ".category-filter",
+      { 
+        opacity: 0, 
+        y: 20 
+      },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.6, 
+        ease: "power2.out" 
+      },
+      "-=0.4"
+    );
+
+    // Category buttons stagger with better timing
+    tl.fromTo(
+      ".category-button",
+      { 
+        opacity: 0, 
+        scale: 0.8,
+        y: 10
+      },
+      { 
+        opacity: 1, 
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: {
+          amount: 0.6,
+          from: "center",
+          ease: "back.out(1.2)"
+        },
+        ease: "power2.out"
+      },
+      "-=0.2"
+    );
+
+    // Products count animation
+    tl.fromTo(
+      ".products-count",
+      { 
+        opacity: 0 
+      },
+      { 
+        opacity: 1, 
+        duration: 0.5, 
+        ease: "power2.out" 
+      },
+      "-=0.3"
+    );
+
+    // Initial products grid animation
+    if (filteredProducts.length > 0) {
+      tl.fromTo(
+        ".product-card",
+        { 
+          opacity: 0, 
+          y: 40,
+          scale: 0.95
+        },
+        { 
+          opacity: 1, 
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: {
+            amount: 0.8,
+            from: "start",
+            grid: "auto",
+          },
+          ease: "back.out(1.1)"
+        },
+        "-=0.2"
+      );
+    }
+
+  }, { scope: containerRef });
+
+  // Animate products when category changes
+  useEffect(() => {
+    const currentProductIds = filteredProducts.map(p => p.id).join(',');
+    const previousProductIds = previousProductsRef.current.join(',');
+    
+    // Only animate if products actually changed
+    if (currentProductIds !== previousProductIds) {
+      const cards = gsap.utils.toArray<HTMLElement>(".product-card");
+      
+      // Fade out old products smoothly
+      if (previousProductsRef.current.length > 0) {
+        gsap.to(".product-card", {
+          opacity: 0,
+          y: 20,
+          scale: 0.95,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            // Then animate in new products
+            gsap.fromTo(
+              cards,
+              { 
+                opacity: 0, 
+                y: 30,
+                scale: 0.95
+              },
+              { 
+                opacity: 1, 
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                stagger: {
+                  amount: 0.6,
+                  from: "start",
+                  grid: "auto",
+                },
+                ease: "back.out(1.1)"
+              }
+            );
+          }
+        });
+      } else {
+        // Initial animation
+        gsap.fromTo(
+          cards,
+          { 
+            opacity: 0, 
+            y: 30,
+            scale: 0.95
+          },
+          { 
+            opacity: 1, 
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            stagger: {
+              amount: 0.6,
+              from: "start",
+              grid: "auto",
+            },
+            ease: "back.out(1.1)"
+          }
+        );
+      }
+
+      previousProductsRef.current = filteredProducts.map(p => p.id);
+    }
+  }, [filteredProducts]);
+
+  const handleCategoryChange = (categoryId: string) => {
+    // Animate category button change
+    const activeButton = document.querySelector('.category-button.bg-yellow');
+    const newButton = document.querySelector(`[data-category="${categoryId}"]`);
+    
+    if (activeButton && newButton) {
+      gsap.to(activeButton, {
+        scale: 0.95,
+        duration: 0.2,
+        ease: "power2.inOut"
+      });
+      
+      gsap.to(newButton, {
+        scale: 1.05,
+        duration: 0.2,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setSelectedCategory(categoryId);
+          gsap.to(newButton, {
+            scale: 1,
+            duration: 0.1,
+            ease: "power2.out"
+          });
+        }
+      });
+    } else {
+      setSelectedCategory(categoryId);
+    }
+  };
+
   return (
-    <div className="min-h-screen primary-bg">
+    <div ref={containerRef} className="min-h-screen primary-bg">
       <main className="container mx-auto px-7 sm:px-6 py-12">
         {/* Page Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
+        <div className="products-header text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
             Our{" "}
             <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
@@ -45,44 +243,29 @@ export default function ProductsPageClient() {
             Explore our collection of organic, natural products sourced directly
             from nature
           </p>
-        </motion.div>
+        </div>
 
         {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-12"
-        >
+        <div className="category-filter mb-12">
           <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category, index) => (
-              <motion.button
+            {categories.map((category) => (
+              <button
                 key={category.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                  selectedCategory === category.id
-                    ? "bg-yellow text-black shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
-                }`}
+                data-category={category.id}
+                onClick={() => handleCategoryChange(category.id)}
+                className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${selectedCategory === category.id
+                  ? "bg-yellow text-black shadow-lg"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
+                  }`}
               >
                 {category.name}
-              </motion.button>
+              </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Products Count */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-center mb-8"
-        >
+        <div className="products-count text-center mb-8">
           <p className="text-black">
             Showing{" "}
             <span className="font-semibold text-black">
@@ -90,24 +273,15 @@ export default function ProductsPageClient() {
             </span>{" "}
             products
           </p>
-        </motion.div>
+        </div>
 
         {/* Products Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
-        >
-          {filteredProducts.map((product, index) => (
-            <motion.div
+        <div className="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+          {filteredProducts.map((product) => (
+            <div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              whileHover={{ y: -8, scale: 1.02 }}
               onClick={() => router.push(`/${product.id}`)}
-              className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100 group"
+              className="product-card bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100 group"
             >
               {/* Product Image */}
               <div className="relative w-full h-56 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden">
@@ -121,8 +295,8 @@ export default function ProductsPageClient() {
                     {Math.round(
                       (1 -
                         product.variants[0].price /
-                          product.variants[0].originalPrice) *
-                        100
+                        product.variants[0].originalPrice) *
+                      100
                     )}
                     % OFF
                   </div>
@@ -176,9 +350,7 @@ export default function ProductsPageClient() {
                 </div>
 
                 {/* View Details Button */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
                   className="w-full mt-4 bg-yellow text-black py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-yellow/90 hover:shadow-md"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -186,25 +358,21 @@ export default function ProductsPageClient() {
                   }}
                 >
                   View Details
-                </motion.button>
+                </button>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Empty State */}
         {filteredProducts.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-20"
-          >
+          <div className="text-center py-20">
             <div className="text-6xl mb-4">🔍</div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
               No products found
             </h3>
             <p className="text-gray-600">Try selecting a different category</p>
-          </motion.div>
+          </div>
         )}
       </main>
     </div>
