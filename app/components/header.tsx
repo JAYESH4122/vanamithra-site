@@ -196,7 +196,7 @@ const Header = () => {
                             </p>
                           </div>
                           <div className="text-primary-dark font-bold text-sm">
-                            ₹{product.price}
+                            ₹{product.variants[0].price}
                           </div>
                         </Link>
                       ))}
@@ -289,7 +289,7 @@ const Header = () => {
                               </p>
                             </div>
                             <div className="text-primary-dark font-bold text-sm">
-                              ₹{product.price}
+                              ₹{product.variants[0].price}
                             </div>
                           </Link>
                         ))}

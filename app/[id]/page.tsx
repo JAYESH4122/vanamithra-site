@@ -18,10 +18,25 @@ export default function ProductPage() {
     .slice(0, 4);
 
   const [selectedVariant, setSelectedVariant] = useState(
-    product?.variants?.[0] ?? ({} as { name?: string; value?: string })
+    product?.variants?.[0] ?? { name: "", value: "", price: 0 }
   );
 
+  const handleVariantSelect = (variant: {
+    name: string;
+    value: string;
+    price: number;
+    originalPrice?: number;
+  }) => {
+    setSelectedVariant(variant);
+  };
   const [quantity, setQuantity] = useState(1);
+
+  const totalPrice = selectedVariant.price
+    ? selectedVariant.price * quantity
+    : 0;
+  const totalOriginalPrice = selectedVariant.originalPrice
+    ? selectedVariant.originalPrice * quantity
+    : 0;
 
   // Fallback if product not found
   if (!product) {
@@ -57,9 +72,11 @@ export default function ProductPage() {
     const whatsappNumber = "919207025005";
     const message = `Hi Vanamithra! 🌿\n\nI'd like to order:\n*${
       product.name
-    }*\nVariant: ${selectedVariant.name}\nQuantity: ${quantity}\nTotal: $${(
-      product.price * quantity
-    ).toFixed(2)}\n\nPlease confirm availability and proceed with order.`;
+    }*\nVariant: ${
+      selectedVariant.name
+    }\nQuantity: ${quantity}\nTotal: ₹${totalPrice.toFixed(
+      2
+    )}\n\nPlease confirm availability and proceed with order.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;
@@ -154,27 +171,7 @@ export default function ProductPage() {
                 {product.description}
               </p>
 
-              {/* Price */}
-              <div className="flex items-center mb-4 md:mb-8">
-                <span className="text-3xl md:text-4xl font-bold text-primary-dark">
-                  ₹{product.price}
-                </span>
-                {product.originalPrice && (
-                  <span className="ml-4 text-xl text-gray-500 line-through">
-                    ${product.originalPrice}
-                  </span>
-                )}
-                {product.originalPrice && (
-                  <span className="ml-4 bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
-                    {Math.round(
-                      (1 - product.price / product.originalPrice) * 100
-                    )}
-                    % OFF
-                  </span>
-                )}
-              </div>
-
-              {/* Variant Selection */}
+              {/* Variant Selection - Updated */}
               <div className="mb-8">
                 <h3 className="text-sm md:text-lg font-semibold text-gray-900 mb-4">
                   Select Package Size
@@ -185,25 +182,28 @@ export default function ProductPage() {
                       key={variant.value}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedVariant(variant)}
-                      className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-lg rounded-xl border-2 font-medium transition-all duration-300 ${
+                      onClick={() => handleVariantSelect(variant)}
+                      className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-lg rounded-xl border-2 flex flex-col flex-1 md:flex-none font-medium transition-all duration-300 ${
                         selectedVariant.value === variant.value
                           ? "bg-yellow border-yellow text-black shadow-lg"
                           : "border-gray-300 text-gray-700 hover:border-yellow hover:bg-yellow/10"
                       }`}
                     >
                       {variant.name}
+                      <div className="text-xs mt-1 font-normal">
+                        ₹{variant.price}
+                      </div>
                     </motion.button>
                   ))}
                 </div>
               </div>
 
-              {/* Quantity Selector */}
+              {/* Quantity Selector with Dynamic Pricing */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                   Quantity
                 </h3>
-                <div className="flex items-center">
+                <div className="flex items-center mb-4">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -223,6 +223,25 @@ export default function ProductPage() {
                   >
                     +
                   </motion.button>
+                </div>
+
+                {/* Total Price Display */}
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg font-semibold text-gray-900">
+                      Total:
+                    </span>
+                    <div className="text-right">
+                      <span className="text-2xl font-bold text-primary-dark">
+                        ₹{totalPrice.toFixed(2)}
+                      </span>
+                      {totalOriginalPrice > 0 && (
+                        <span className="ml-2 text-lg text-gray-500 line-through">
+                          ₹{totalOriginalPrice.toFixed(2)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -248,7 +267,7 @@ export default function ProductPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={inquireViaWhatsApp}
-                  className="border-2 border-yellow text-sm md:text-base text-yellow font-semibold py-2 px-4 md:py-4 md:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
+                  className="border-2 border-yellow text-sm md:text-base text-yellow font-semibold py-1.5 px-4 md:py-4 md:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
                 >
                   <svg
                     className="md:w-6 md:h-6 w-4 h-4"
@@ -333,12 +352,12 @@ export default function ProductPage() {
 
                           <div className="flex items-center gap-2">
                             <span className="text-base font-bold text-primary-dark">
-                              ₹{item.price}
+                              ₹{item.variants[0].price}
                             </span>
 
-                            {item.originalPrice && (
+                            {item.variants[0].originalPrice && (
                               <span className="text-xs line-through text-gray-400">
-                                ₹{item.originalPrice}
+                                ₹{item.variants[0].originalPrice}
                               </span>
                             )}
                           </div>

@@ -28,7 +28,7 @@ export default function ProductsPageClient() {
 
   return (
     <div className="min-h-screen primary-bg">
-      <main className="container mx-auto px-4 sm:px-6 py-12">
+      <main className="container mx-auto px-7 sm:px-6 py-12">
         {/* Page Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,10 +64,11 @@ export default function ProductsPageClient() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${selectedCategory === category.id
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                  selectedCategory === category.id
                     ? "bg-yellow text-black shadow-lg"
                     : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
-                  }`}
+                }`}
               >
                 {category.name}
               </motion.button>
@@ -82,9 +83,9 @@ export default function ProductsPageClient() {
           transition={{ delay: 0.2 }}
           className="text-center mb-8"
         >
-          <p className="text-gray-600">
+          <p className="text-black">
             Showing{" "}
-            <span className="font-semibold text-primary">
+            <span className="font-semibold text-black">
               {filteredProducts.length}
             </span>{" "}
             products
@@ -115,10 +116,13 @@ export default function ProductsPageClient() {
                 </div>
 
                 {/* Discount Badge */}
-                {product.originalPrice && (
+                {product.variants[0].originalPrice && (
                   <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
                     {Math.round(
-                      (1 - product.price / product.originalPrice) * 100
+                      (1 -
+                        product.variants[0].price /
+                          product.variants[0].originalPrice) *
+                        100
                     )}
                     % OFF
                   </div>
@@ -126,7 +130,7 @@ export default function ProductsPageClient() {
               </div>
 
               {/* Product Info */}
-              <div className="p-5">
+              <div className="p-4 md:p-5">
                 {/* Category */}
                 <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">
                   {categories.find((cat) => cat.id === product.category)?.name}
@@ -161,11 +165,11 @@ export default function ProductsPageClient() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-primary-dark">
-                      ₹{product.price}
+                      ₹{product.variants[0].price}
                     </span>
-                    {product.originalPrice && (
+                    {product.variants[0].originalPrice && (
                       <span className="text-sm text-gray-500 line-through">
-                        ₹{product.originalPrice}
+                        ₹{product.variants[0].originalPrice}
                       </span>
                     )}
                   </div>

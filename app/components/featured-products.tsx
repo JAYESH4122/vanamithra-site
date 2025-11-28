@@ -241,11 +241,11 @@ export const FeaturedProducts = () => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <span className="text-xl font-bold text-gray-900">
-                            ₹{product.price}
+                            ₹{product.variants[0].price}
                           </span>
-                          {product.originalPrice && (
+                          {product.variants[0].originalPrice && (
                             <span className="text-sm text-gray-500 line-through">
-                              ₹{product.originalPrice}
+                              ₹{product.variants[0].originalPrice}
                             </span>
                           )}
                         </div>
