@@ -72,7 +72,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative primary-bg text-white py-10 md:py-24 overflow-hidden"
+      className="scroll-mt-28 relative primary-bg text-white py-10 md:py-24 overflow-hidden"
     >
       {/* Simplified background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -83,10 +83,7 @@ export const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Text Content */}
-          <div
-            ref={containerRef}
-            className="lg:w-1/2 text-center lg:text-left"
-          >
+          <div ref={containerRef} className="lg:w-1/2 text-center lg:text-left">
             <h1 className="hero-item text-3xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight font-primary opacity-0">
               {heroData.title.main}
               <span className="">{heroData.title.highlight}</span>

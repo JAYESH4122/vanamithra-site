@@ -104,7 +104,7 @@ export const AboutSection = () => {
   }, []);
 
   return (
-    <section id="about" className="py-8 md:py-16 primary-bg">
+    <section id="about" className="scroll-mt-28 py-8 md:py-16 primary-bg">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-10 md:mb-16">

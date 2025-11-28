@@ -257,7 +257,11 @@ export const ContactSection = () => {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="py-8 md:py-16 primary-bg">
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="scroll-mt-28 py-8 md:py-16 primary-bg"
+    >
       <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
         {/* HEADER */}
         <div className="text-center mb-10 md:mb-16">

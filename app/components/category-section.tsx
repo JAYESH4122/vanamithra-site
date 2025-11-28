@@ -149,7 +149,10 @@ export const CategorySection = () => {
   }, []);
 
   return (
-    <section id="categories" className="py-8 md:py-16 primary-bg relative overflow-hidden">
+    <section
+      id="categories"
+      className="scroll-mt-28 py-8 md:py-16 primary-bg relative overflow-hidden"
+    >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="category-bg-1 absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl will-change-transform" />
