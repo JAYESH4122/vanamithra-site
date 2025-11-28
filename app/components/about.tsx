@@ -11,7 +11,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const AboutSection = () => {
   useGSAP(() => {
-    // Master timeline for coordinated animations
+    // Check if mobile device for performance optimization
+    const isMobile = window.innerWidth < 768;
+
+    // Simplified timeline for better mobile performance
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#about",
@@ -19,6 +22,7 @@ export const AboutSection = () => {
         end: "bottom 20%",
         toggleActions: "play none none none",
         once: true,
+        markers: false, // Remove in production
       },
     });
 
@@ -49,10 +53,10 @@ export const AboutSection = () => {
         duration: 0.8,
         ease: "power2.out",
       },
-      "-=0.3" // Overlap slightly with previous animation
+      "-=0.3"
     );
 
-    // Content container animations
+    // Content animations - simplified for mobile
     const contentTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".about-left",
@@ -63,7 +67,7 @@ export const AboutSection = () => {
       },
     });
 
-    // Left and right content together
+    // Left and right content
     contentTl.fromTo(
       [".about-left", ".about-right"],
       {
@@ -79,28 +83,48 @@ export const AboutSection = () => {
       }
     );
 
-    // Feature cards with better stagger
-    contentTl.fromTo(
-      ".about-feature",
-      {
-        opacity: 0,
-        y: 20,
-        scale: 0.95,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.5,
-        stagger: {
-          amount: 0.4,
-          from: "start",
-          grid: "auto",
+    // Optimized feature cards animation for mobile
+    if (isMobile) {
+      // Simpler animation for mobile - no stagger, no complex transforms
+      contentTl.fromTo(
+        ".about-feature",
+        {
+          opacity: 0,
+          y: 10,
         },
-        ease: "back.out(1.2)",
-      },
-      "+=0.2" // Start after content appears
-    );
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1, // Minimal stagger
+          ease: "power2.out",
+        },
+        "+=0.1"
+      );
+    } else {
+      // Full animation for desktop
+      contentTl.fromTo(
+        ".about-feature",
+        {
+          opacity: 0,
+          y: 20,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          stagger: {
+            amount: 0.4,
+            from: "start",
+            grid: "auto",
+          },
+          ease: "back.out(1.2)",
+        },
+        "+=0.2"
+      );
+    }
   }, []);
 
   return (
@@ -123,12 +147,12 @@ export const AboutSection = () => {
         </div>
 
         {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-14 items-center">
           {/* LEFT CONTENT */}
-          <div className="about-left space-y-8">
+          <div className="about-left space-y-6 md:space-y-8">
             {/* Mission */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-black">
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="text-xl md:text-2xl font-bold text-black">
                 {aboutData.mission.heading}
               </h3>
               <p className="text-white text-sm leading-relaxed">
@@ -136,10 +160,9 @@ export const AboutSection = () => {
               </p>
             </div>
 
-            {/* Features */}
+            {/* Features - Optimized for mobile */}
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
               {aboutData.features.map((feature, i) => {
-                // Map icon names to SVG components
                 const getIcon = (iconName: string) => {
                   switch (iconName) {
                     case "shield":
@@ -200,7 +223,7 @@ export const AboutSection = () => {
                 return (
                   <div
                     key={i}
-                    className="about-feature group bg-white p-3 sm:p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-transparent transition-all duration-300 will-change-auto"
+                    className="about-feature group bg-white p-2 md:p-4 sm:p-6 rounded-xl md:rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-transparent transition-all duration-300 will-change-transform"
                   >
                     <div
                       className={`w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300`}
@@ -210,7 +233,7 @@ export const AboutSection = () => {
                     <h4 className="font-semibold text-gray-800 text-sm sm:text-lg mb-2">
                       {feature.title}
                     </h4>
-                    <p className="text-gray-600 text-xs sm:text-sm">
+                    <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                       {feature.desc}
                     </p>
                   </div>
@@ -221,16 +244,17 @@ export const AboutSection = () => {
 
           {/* RIGHT IMAGE BOX */}
           <div className="about-right relative">
-            <div className="rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-primary-dark to-primary h-full flex items-center justify-center p-12">
+            <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-br from-primary-dark to-primary h-full flex items-center justify-center p-8 md:p-12">
               <div className="text-center text-white flex items-center justify-center flex-col">
                 <Image
-                  alt=""
+                  alt="Vanamithra Logo"
                   src="/vanamithra-logo.png"
-                  width={140}
-                  height={60}
-                  className="mb-6"
+                  width={120}
+                  height={50}
+                  className="mb-4 md:mb-6"
+                  priority={false}
                 />
-                <p className="text-white/80 text-lg">
+                <p className="text-white/80 text-base md:text-lg">
                   {config.company.tagline}
                 </p>
               </div>

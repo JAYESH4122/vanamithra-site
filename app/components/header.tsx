@@ -8,6 +8,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { Product, products } from "@/data/products";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { autoHeight } from "@/utils/home";
 
 gsap.registerPlugin(useGSAP);
 
@@ -55,53 +56,27 @@ const Header = () => {
   );
 
   // Mobile menu animation with item animations
-  useEffect(() => {
-    if (!mobileMenuRef.current) return;
+useEffect(() => {
+  if (!mobileMenuRef.current) return;
+  const menu = mobileMenuRef.current;
 
-    if (isMenuOpen) {
-      // Show menu container
-      gsap.to(mobileMenuRef.current, {
-        height: "auto",
+  autoHeight(menu, isMenuOpen);
+
+  if (isMenuOpen) {
+    gsap.fromTo(
+      menu.querySelectorAll(".mobile-nav-item"),
+      { x: -20, opacity: 0 },
+      {
+        x: 0,
         opacity: 1,
-        duration: 0.3,
+        duration: 0.25,
         ease: "power2.out",
-        onComplete: () => {
-          // Animate menu items after container is visible
-          gsap.fromTo(
-            ".mobile-nav-item",
-            {
-              x: -20,
-              opacity: 0,
-            },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.3,
-              stagger: 0.08,
-              ease: "power2.out",
-            }
-          );
-        },
-      });
-    } else {
-      // Hide menu items first, then container
-      gsap.to(".mobile-nav-item", {
-        x: -20,
-        opacity: 0,
-        duration: 0.2,
-        stagger: 0.05,
-        ease: "power2.in",
-        onComplete: () => {
-          gsap.to(mobileMenuRef.current, {
-            height: 0,
-            opacity: 0,
-            duration: 0.2,
-            ease: "power2.in",
-          });
-        },
-      });
-    }
-  }, [isMenuOpen]);
+        stagger: 0.06
+      }
+    );
+  }
+}, [isMenuOpen]);
+
 
   // Mobile search animation
   useEffect(() => {
