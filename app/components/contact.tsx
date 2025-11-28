@@ -273,7 +273,7 @@ export const ContactSection = () => {
           </p>
 
           <div className="flex justify-center mt-8">
-            <div className="contact-divider w-32 h-1 bg-white rounded-full shadow-lg transform scale-x-0"></div>
+            <div className="contact-divider w-32 h-1 bg-white rounded-full shadow-lg"></div>
           </div>
         </div>
 
@@ -330,7 +330,7 @@ export const ContactSection = () => {
 
           <div className="space-y-6">
             {/* SOCIAL MEDIA */}
-            <div className="social-section bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-200 mt-8">
+            <div className="social-section bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-200">
               <h4 className="font-semibold text-gray-800 text-lg mb-4">
                 Follow Us On Social Media
               </h4>
@@ -343,11 +343,9 @@ export const ContactSection = () => {
                   <a
                     key={social.name}
                     href={social.link}
-                    className="social-icon w-12 h-12 rounded-xl bg-gradient-to-br hover:scale-105 active:scale-95 transition-transform duration-200 shadow-sm hover:shadow-md"
+                    className="social-icon w-12 h-12 rounded-xl  flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform duration-200 shadow-sm hover:shadow-md"
                     style={{
-                      background: social.color.includes("gradient")
-                        ? social.color
-                        : `linear-gradient(135deg, ${social.color}, ${social.color})`,
+                      background: social.color,
                     }}
                   >
                     <div
