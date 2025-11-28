@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { categoryData } from "@/data/home-page";
 import { getProductsByCategory } from "@/lib/products-data";
 import { categories } from "@/data/products";
 import gsap from "gsap";
@@ -164,16 +165,15 @@ export const CategorySection = () => {
         <div className="category-header-wrapper text-center mb-10 md:mb-16 opacity-0">
           <div className="category-title opacity-0">
             <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-              Browse by{" "}
+              {categoryData.header.title.prefix}
               <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
-                Nature&apos;s Best
+                {categoryData.header.title.highlight}
               </span>
             </h2>
           </div>
 
           <p className="category-subtitle text-white text-base md:text-xl max-w-3xl mx-auto leading-relaxed opacity-0">
-            Explore categories filled with organic, authentic, nature-crafted
-            essentials.
+            {categoryData.header.subtitle}
           </p>
 
           <div className="flex justify-center mt-8">
@@ -214,9 +214,9 @@ export const CategorySection = () => {
 
         {/* Common CTA */}
         <div className="flex justify-center mt-12">
-          <Link href="/products">
+          <Link href={categoryData.cta.link}>
             <button className="px-8 py-3 rounded-full bg-yellow text-black font-semibold text-sm shadow-md hover:bg-yellow/90 hover:shadow-lg transition-all">
-              Explore All Categories
+              {categoryData.cta.text}
             </button>
           </Link>
         </div>

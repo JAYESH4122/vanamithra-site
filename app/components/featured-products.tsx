@@ -1,5 +1,6 @@
 "use client";
 
+import { featuredProductsData } from "@/data/home-page";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -161,21 +162,21 @@ export const FeaturedProducts = () => {
           <div className="text-center lg:text-left mb-6 lg:mb-0">
             <div className="featured-header opacity-0">
               <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-                Featured{" "}
+                {featuredProductsData.header.title.prefix}
                 <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
-                  Products
+                  {featuredProductsData.header.title.highlight}
                 </span>
               </h2>
             </div>
 
             <p className="featured-subtitle text-white text-base md:text-xl max-w-2xl leading-relaxed opacity-0">
-              Our most popular products based on sales
+              {featuredProductsData.header.subtitle}
             </p>
           </div>
 
-          <Link href="/products">
+          <Link href={featuredProductsData.cta.link}>
             <button className="featured-button hidden lg:flex items-center gap-2 bg-yellow text-black font-semibold py-3 px-6 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 group opacity-0">
-              View All Products
+              {featuredProductsData.cta.text}
               <svg
                 className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                 fill="none"
@@ -243,11 +244,10 @@ export const FeaturedProducts = () => {
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
-                              className={`w-4 h-4 ${
-                                i < Math.floor(product.rating)
+                              className={`w-4 h-4 ${i < Math.floor(product.rating)
                                   ? "text-yellow-400 fill-current"
                                   : "text-gray-300 fill-current"
-                              }`}
+                                }`}
                               viewBox="0 0 20 20"
                             >
                               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -311,9 +311,9 @@ export const FeaturedProducts = () => {
 
         {/* Mobile View All */}
         <div className="featured-mobile-button mt-12 text-center lg:hidden opacity-0">
-          <Link href="/products">
+          <Link href={featuredProductsData.cta.link}>
             <button className="bg-yellow text-black font-semibold py-4 px-8 rounded-xl hover:bg-yellow/90 hover:shadow-lg transition-all duration-300 w-full sm:w-auto">
-              View All Products
+              {featuredProductsData.cta.text}
             </button>
           </Link>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { contactData } from "@/data/home-page";
+import { contactData, contactFormData } from "@/data/home-page";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -18,7 +18,7 @@ export const ContactSection = () => {
     if (!name.trim() || !email.trim() || !message.trim()) return;
 
     const phone = "917909102100";
-    const text = `New Contact Form Submission:
+    const text = `${contactFormData.whatsappMessage}
         Name: ${name}
         Email: ${email}
         Message: ${message}`;
@@ -366,32 +366,30 @@ export const ContactSection = () => {
             <div className="flex justify-center">
               <div className="contact-form w-full max-w-md bg-gradient-to-br from-white to-gray-200 p-6 rounded-2xl border border-primary/20 shadow-sm">
                 <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                  Send us a Message
+                  {contactFormData.title}
                 </h3>
 
-                <p className="text-gray-600 mb-6">
-                  We&apos;ll get back to you within 24 hours
-                </p>
+                <p className="text-gray-600 mb-6">{contactFormData.subtitle}</p>
 
                 <div className="space-y-4 flex flex-col">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your Name"
+                    placeholder={contactFormData.placeholders.name}
                     className="h-11 bg-white rounded-lg border border-gray-200 px-4 text-gray-700 text-sm focus:outline-none focus:border-yellow transition-colors"
                   />
 
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your Email"
+                    placeholder={contactFormData.placeholders.email}
                     className="h-11 bg-white rounded-lg border border-gray-200 px-4 text-gray-700 text-sm focus:outline-none focus:border-yellow transition-colors"
                   />
 
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Your Message..."
+                    placeholder={contactFormData.placeholders.message}
                     className="h-20 bg-white rounded-lg border border-gray-200 p-4 text-gray-700 text-sm focus:outline-none focus:border-yellow transition-colors resize-none"
                   />
 
@@ -399,7 +397,7 @@ export const ContactSection = () => {
                     onClick={sendMessage}
                     className="w-full h-11 bg-yellow text-black font-semibold rounded-lg hover:bg-yellow/90 hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-yellow focus:ring-offset-2"
                   >
-                    Send Message
+                    {contactFormData.buttonText}
                   </button>
                 </div>
               </div>

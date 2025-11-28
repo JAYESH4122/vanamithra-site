@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDebounce } from "@/hooks/useDebounce";
 import { Product, products } from "@/data/products";
+import { headerData } from "@/data/home-page";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { autoHeight } from "@/utils/home";
@@ -25,13 +26,7 @@ const Header = () => {
   const mobileSearchRef = useRef<HTMLDivElement>(null);
   const searchDropdownRef = useRef<HTMLDivElement>(null);
 
-  const navItems = [
-    { name: "Home", href: "/#home" },
-    { name: "Categories", href: "/#categories" },
-    { name: "Products", href: "/#products" },
-    { name: "About", href: "/#about" },
-    { name: "Contact", href: "/#contact" },
-  ];
+  const navItems = headerData.navItems;
 
   // Main header animations
   useGSAP(
@@ -56,26 +51,26 @@ const Header = () => {
   );
 
   // Mobile menu animation with item animations
-useEffect(() => {
-  if (!mobileMenuRef.current) return;
-  const menu = mobileMenuRef.current;
+  useEffect(() => {
+    if (!mobileMenuRef.current) return;
+    const menu = mobileMenuRef.current;
 
-  autoHeight(menu, isMenuOpen);
+    autoHeight(menu, isMenuOpen);
 
-  if (isMenuOpen) {
-    gsap.fromTo(
-      menu.querySelectorAll(".mobile-nav-item"),
-      { x: -20, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.25,
-        ease: "power2.out",
-        stagger: 0.06
-      }
-    );
-  }
-}, [isMenuOpen]);
+    if (isMenuOpen) {
+      gsap.fromTo(
+        menu.querySelectorAll(".mobile-nav-item"),
+        { x: -20, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.25,
+          ease: "power2.out",
+          stagger: 0.06
+        }
+      );
+    }
+  }, [isMenuOpen]);
 
 
   // Mobile search animation
@@ -276,7 +271,7 @@ useEffect(() => {
             <div className="header-element relative w-full">
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder={headerData.search.placeholder}
                 value={searchQuery}
                 onChange={handleSearchInputChange}
                 onFocus={() => setIsSearchFocused(true)}
@@ -316,10 +311,14 @@ useEffect(() => {
                 </div>
               ) : (
                 <div className="p-6 text-center">
-                  <div className="text-4xl mb-2">🔍</div>
-                  <p className="text-gray-600 font-medium">No products found</p>
+                  <div className="text-4xl mb-2">
+                    {headerData.search.noResults.title}
+                  </div>
+                  <p className="text-gray-600 font-medium">
+                    {headerData.search.noResults.message}
+                  </p>
                   <p className="text-gray-400 text-sm mt-1">
-                    Try searching with different keywords
+                    {headerData.search.noResults.subMessage}
                   </p>
                 </div>
               )}
@@ -353,7 +352,7 @@ useEffect(() => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={headerData.search.placeholder}
               value={searchQuery}
               onChange={handleSearchInputChange}
               onFocus={() => setIsSearchFocused(true)}
@@ -390,10 +389,14 @@ useEffect(() => {
                 </div>
               ) : (
                 <div className="p-6 text-center">
-                  <div className="text-4xl mb-2">🔍</div>
-                  <p className="text-gray-600 font-medium">No products found</p>
+                  <div className="text-4xl mb-2">
+                    {headerData.search.noResults.title}
+                  </div>
+                  <p className="text-gray-600 font-medium">
+                    {headerData.search.noResults.message}
+                  </p>
                   <p className="text-gray-400 text-sm mt-1">
-                    Try searching with different keywords
+                    {headerData.search.noResults.subMessage}
                   </p>
                 </div>
               )}

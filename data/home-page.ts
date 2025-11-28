@@ -214,3 +214,105 @@ export const contactData = {
     },
   ] as SocialMedia[],
 } as const;
+
+// Category Section Data
+export const categoryData = {
+  header: {
+    title: {
+      prefix: "Browse by ",
+      highlight: "Nature's Best",
+    },
+    subtitle:
+      "Explore categories filled with organic, authentic, nature-crafted essentials.",
+  },
+  cta: {
+    text: "Explore All Categories",
+    link: "/products",
+  },
+} as const;
+
+// Featured Products Section Data
+export const featuredProductsData = {
+  header: {
+    title: {
+      prefix: "Featured ",
+      highlight: "Products",
+    },
+    subtitle: "Our most popular products based on sales",
+  },
+  cta: {
+    text: "View All Products",
+    link: "/products",
+  },
+} as const;
+
+// Header Data
+export const headerData = {
+  navItems: [
+    { name: "Home", href: "/#home" },
+    { name: "Categories", href: "/#categories" },
+    { name: "Products", href: "/#products" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
+  ],
+  search: {
+    placeholder: "Search products...",
+    noResults: {
+      title: "🔍",
+      message: "No products found",
+      subMessage: "Try searching with different keywords",
+    },
+  },
+} as const;
+
+// Footer Data
+export const footerData = {
+  brand: {
+    description:
+      "Your trusted partner in organic living and sustainable wellness.",
+  },
+  quickLinks: {
+    title: "Quick Links",
+    links: [
+      { name: "Home", href: "/#home" },
+      { name: "Shop", href: "/products" },
+      { name: "About", href: "/#about" },
+      { name: "Contact", href: "/#contact" },
+    ],
+  },
+  contact: {
+    title: "Contact",
+    info: [
+      "Thalapuzha, Wayanad, India",
+      "+91 7909102100",
+      "vanamithranatural@gmail.com",
+    ],
+  },
+  copyright: `© ${new Date().getFullYear()} Vanamithra. All rights reserved.`,
+} as const;
+
+// Common Data
+export const commonData = {
+  companyName: "Vanamithra",
+  tagline: "Nature's Goodness, Delivered Pure",
+} as const;
+
+// Testimonial Form Data
+export const reviewFormData = {
+  placeholder: "Share your experience with us...",
+  buttonText: "Submit",
+  whatsappMessage: "New Review:\n\n",
+} as const;
+
+// Contact Form Data
+export const contactFormData = {
+  title: "Send us a Message",
+  subtitle: "We'll get back to you within 24 hours",
+  placeholders: {
+    name: "Your Name",
+    email: "Your Email",
+    message: "Your Message...",
+  },
+  buttonText: "Send Message",
+  whatsappMessage: "New Contact Form Submission:\n",
+} as const;

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { footerData } from "@/data/home-page";
 
 export const Footer = () => (
   <footer className="scroll-mt-28 bg-gray-900 text-white py-8">
@@ -16,7 +17,7 @@ export const Footer = () => (
             />
           </div>
           <p className="text-gray-300 text-sm mb-4 max-w-md">
-            Your trusted partner in organic living and sustainable wellness.
+            {footerData.brand.description}
           </p>
           <div className="flex justify-center md:justify-start space-x-4">
             {[
@@ -56,15 +57,15 @@ export const Footer = () => (
 
         {/* Quick Links */}
         <div className="text-center md:text-left">
-          <h3 className="font-medium mb-4">Quick Links</h3>
+          <h3 className="font-medium mb-4">{footerData.quickLinks.title}</h3>
           <ul className="space-y-2">
-            {["Home", "Shop", "About", "Contact"].map((link) => (
-              <li key={link}>
+            {footerData.quickLinks.links.map((link) => (
+              <li key={link.name}>
                 <a
-                  href="#"
+                  href={link.href}
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
-                  {link}
+                  {link.name}
                 </a>
               </li>
             ))}
@@ -73,20 +74,18 @@ export const Footer = () => (
 
         {/* Contact Info */}
         <div className="text-center md:text-left">
-          <h3 className="font-medium mb-4">Contact</h3>
+          <h3 className="font-medium mb-4">{footerData.contact.title}</h3>
           <div className="space-y-2 text-gray-300 text-sm">
-            <div>Thalapuzha, Wayanad, India</div>
-            <div>+91 7909102100</div>
-            <div>vanamithranatural@gmail.com</div>
+            {footerData.contact.info.map((info, index) => (
+              <div key={index}>{info}</div>
+            ))}
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-700 pt-6 text-center">
-        <p className="text-gray-400 text-sm">
-          © {new Date().getFullYear()} Vanamithra. All rights reserved.
-        </p>
+        <p className="text-gray-400 text-sm">{footerData.copyright}</p>
       </div>
     </div>
   </footer>

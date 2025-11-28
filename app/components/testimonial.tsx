@@ -1,6 +1,6 @@
 "use client";
 
-import { testimonialsData } from "@/data/home-page";
+import { testimonialsData, reviewFormData } from "@/data/home-page";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -111,7 +111,9 @@ export const TestimonialSection = () => {
     if (!review.trim()) return;
 
     const phone = "917909102100"; // your WhatsApp number
-    const message = encodeURIComponent(`New Review:\n\n${review}`);
+    const message = encodeURIComponent(
+      `${reviewFormData.whatsappMessage}${review}`
+    );
 
     window.location.href = `https://wa.me/${phone}?text=${message}`;
   };
@@ -164,12 +166,12 @@ export const TestimonialSection = () => {
               key={index}
               className="testimonial-card group relative will-change-transform opacity-0"
             >
-              <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-5 md:p-8 shadow-[0_6px_20px_-5px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_-4px_rgba(0,0,0,0.12)] border border-gray-200/50 transition-all duration-500 overflow-hidden">
+              <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-3 md:p-8 shadow-[0_6px_20px_-5px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_-4px_rgba(0,0,0,0.12)] border border-gray-200/50 transition-all duration-500 overflow-hidden">
                 {/* Soft hover sheen */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 bg-gradient-to-r from-primary via-primary-light to-primary transition-opacity duration-500"></div>
 
                 {/* Quote Icon */}
-                <div className="absolute top-6 right-6 opacity-10 text-primary">
+                <div className="absolute top-2 md:top-6 right-6 opacity-10 text-primary">
                   <svg
                     className="w-10 h-10 md:w-12 md:h-12"
                     fill="currentColor"
@@ -180,15 +182,14 @@ export const TestimonialSection = () => {
                 </div>
 
                 {/* Rating */}
-                <div className="flex items-center mb-6">
+                <div className="flex items-center mb-3 md:mb-6">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
-                      className={`w-5 h-5 ${
-                        i < testimonial.rating
+                      className={`w-4 h-4 md:w-5 md:h-5 ${i < testimonial.rating
                           ? "text-yellow-400"
                           : "text-gray-300"
-                      }`}
+                        }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -201,7 +202,7 @@ export const TestimonialSection = () => {
                 </div>
 
                 {/* Comment */}
-                <p className="text-gray-700 mb-8 leading-relaxed text-sm md:text-lg font-medium">
+                <p className="text-gray-700 mb-4 md:mb-8 leading-relaxed text-xs md:text-lg font-medium">
                   &quot;{testimonial.comment}&quot;
                 </p>
 
@@ -216,10 +217,10 @@ export const TestimonialSection = () => {
 
                   {/* Info */}
                   <div>
-                    <h4 className="font-bold text-gray-900 text-base md:text-lg">
+                    <h4 className="font-bold text-gray-900 text-sm md:text-lg">
                       {testimonial.name}
                     </h4>
-                    <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                    <p className="text-gray-500 text-xs">{testimonial.role}</p>
                   </div>
                 </div>
               </div>
@@ -239,7 +240,7 @@ export const TestimonialSection = () => {
                   onChange={(e) => {
                     setReview(e.target.value);
                   }}
-                  placeholder="Share your experience with us..."
+                  placeholder={reviewFormData.placeholder}
                   className="flex-1 px-4 md:px-6 py-3 md:py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-yellow focus:outline-none transition-all duration-300 text-gray-700 placeholder-gray-400 text-sm md:text-base shadow-sm"
                 />
 
@@ -251,7 +252,9 @@ export const TestimonialSection = () => {
                   onMouseLeave={handleButtonLeave}
                   className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-yellow text-gray-900 font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden"
                 >
-                  <span className="relative z-10">Submit</span>
+                  <span className="relative z-10">
+                    {reviewFormData.buttonText}
+                  </span>
 
                   {/* New clean send icon — small on mobile */}
                   <svg

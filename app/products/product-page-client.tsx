@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FiStar } from "react-icons/fi";
 import { getProductsByCategory } from "@/lib/products-data";
 import { categories } from "@/data/products";
+import { productsPageData } from "@/data/products-page";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -30,114 +31,116 @@ export default function ProductsPageClient() {
 
   const filteredProducts = getProductsByCategory(selectedCategory);
 
-  useGSAP(() => {
-    // Master timeline for initial page load
-    const tl = gsap.timeline();
+  useGSAP(
+    () => {
+      // Master timeline for initial page load
+      const tl = gsap.timeline();
 
-    // Page header animation
-    tl.fromTo(
-      ".products-header",
-      { 
-        opacity: 0, 
-        y: 30 
-      },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        ease: "power2.out" 
-      }
-    );
-
-    // Category filter animation
-    tl.fromTo(
-      ".category-filter",
-      { 
-        opacity: 0, 
-        y: 20 
-      },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out" 
-      },
-      "-=0.4"
-    );
-
-    // Category buttons stagger with better timing
-    tl.fromTo(
-      ".category-button",
-      { 
-        opacity: 0, 
-        scale: 0.8,
-        y: 10
-      },
-      { 
-        opacity: 1, 
-        scale: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: {
-          amount: 0.6,
-          from: "center",
-          ease: "back.out(1.2)"
-        },
-        ease: "power2.out"
-      },
-      "-=0.2"
-    );
-
-    // Products count animation
-    tl.fromTo(
-      ".products-count",
-      { 
-        opacity: 0 
-      },
-      { 
-        opacity: 1, 
-        duration: 0.5, 
-        ease: "power2.out" 
-      },
-      "-=0.3"
-    );
-
-    // Initial products grid animation
-    if (filteredProducts.length > 0) {
+      // Page header animation
       tl.fromTo(
-        ".product-card",
-        { 
-          opacity: 0, 
-          y: 40,
-          scale: 0.95
+        ".products-header",
+        {
+          opacity: 0,
+          y: 30,
         },
-        { 
-          opacity: 1, 
+        {
+          opacity: 1,
           y: 0,
-          scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      );
+
+      // Category filter animation
+      tl.fromTo(
+        ".category-filter",
+        {
+          opacity: 0,
+          y: 20,
+        },
+        {
+          opacity: 1,
+          y: 0,
           duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      );
+
+      // Category buttons stagger with better timing
+      tl.fromTo(
+        ".category-button",
+        {
+          opacity: 0,
+          scale: 0.8,
+          y: 10,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.5,
           stagger: {
-            amount: 0.8,
-            from: "start",
-            grid: "auto",
+            amount: 0.6,
+            from: "center",
+            ease: "back.out(1.2)",
           },
-          ease: "back.out(1.1)"
+          ease: "power2.out",
         },
         "-=0.2"
       );
-    }
 
-  }, { scope: containerRef });
+      // Products count animation
+      tl.fromTo(
+        ".products-count",
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      );
+
+      // Initial products grid animation
+      if (filteredProducts.length > 0) {
+        tl.fromTo(
+          ".product-card",
+          {
+            opacity: 0,
+            y: 40,
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            stagger: {
+              amount: 0.8,
+              from: "start",
+              grid: "auto",
+            },
+            ease: "back.out(1.1)",
+          },
+          "-=0.2"
+        );
+      }
+    },
+    { scope: containerRef }
+  );
 
   // Animate products when category changes
   useEffect(() => {
-    const currentProductIds = filteredProducts.map(p => p.id).join(',');
-    const previousProductIds = previousProductsRef.current.join(',');
-    
+    const currentProductIds = filteredProducts.map((p) => p.id).join(",");
+    const previousProductIds = previousProductsRef.current.join(",");
+
     // Only animate if products actually changed
     if (currentProductIds !== previousProductIds) {
       const cards = gsap.utils.toArray<HTMLElement>(".product-card");
-      
+
       // Fade out old products smoothly
       if (previousProductsRef.current.length > 0) {
         gsap.to(".product-card", {
@@ -150,13 +153,13 @@ export default function ProductsPageClient() {
             // Then animate in new products
             gsap.fromTo(
               cards,
-              { 
-                opacity: 0, 
+              {
+                opacity: 0,
                 y: 30,
-                scale: 0.95
+                scale: 0.95,
               },
-              { 
-                opacity: 1, 
+              {
+                opacity: 1,
                 y: 0,
                 scale: 1,
                 duration: 0.6,
@@ -165,22 +168,22 @@ export default function ProductsPageClient() {
                   from: "start",
                   grid: "auto",
                 },
-                ease: "back.out(1.1)"
+                ease: "back.out(1.1)",
               }
             );
-          }
+          },
         });
       } else {
         // Initial animation
         gsap.fromTo(
           cards,
-          { 
-            opacity: 0, 
+          {
+            opacity: 0,
             y: 30,
-            scale: 0.95
+            scale: 0.95,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             scale: 1,
             duration: 0.6,
@@ -189,27 +192,27 @@ export default function ProductsPageClient() {
               from: "start",
               grid: "auto",
             },
-            ease: "back.out(1.1)"
+            ease: "back.out(1.1)",
           }
         );
       }
 
-      previousProductsRef.current = filteredProducts.map(p => p.id);
+      previousProductsRef.current = filteredProducts.map((p) => p.id);
     }
   }, [filteredProducts]);
 
   const handleCategoryChange = (categoryId: string) => {
     // Animate category button change
-    const activeButton = document.querySelector('.category-button.bg-yellow');
+    const activeButton = document.querySelector(".category-button.bg-yellow");
     const newButton = document.querySelector(`[data-category="${categoryId}"]`);
-    
+
     if (activeButton && newButton) {
       gsap.to(activeButton, {
         scale: 0.95,
         duration: 0.2,
-        ease: "power2.inOut"
+        ease: "power2.inOut",
       });
-      
+
       gsap.to(newButton, {
         scale: 1.05,
         duration: 0.2,
@@ -219,9 +222,9 @@ export default function ProductsPageClient() {
           gsap.to(newButton, {
             scale: 1,
             duration: 0.1,
-            ease: "power2.out"
+            ease: "power2.out",
           });
-        }
+        },
       });
     } else {
       setSelectedCategory(categoryId);
@@ -234,14 +237,13 @@ export default function ProductsPageClient() {
         {/* Page Header */}
         <div className="products-header text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            Our{" "}
+            {productsPageData.header.title.main}{" "}
             <span className="bg-gradient-to-r from-black to-[#0C3B2E] bg-clip-text text-transparent">
-              Products
+              {productsPageData.header.title.highlight}
             </span>
           </h1>
           <p className="text-white text-lg md:text-xl max-w-2xl mx-auto">
-            Explore our collection of organic, natural products sourced directly
-            from nature
+            {productsPageData.header.subtitle}
           </p>
         </div>
 
@@ -254,8 +256,8 @@ export default function ProductsPageClient() {
                 data-category={category.id}
                 onClick={() => handleCategoryChange(category.id)}
                 className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${selectedCategory === category.id
-                  ? "bg-yellow text-black shadow-lg"
-                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
+                    ? "bg-yellow text-black shadow-lg"
+                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
                   }`}
               >
                 {category.name}
@@ -267,11 +269,11 @@ export default function ProductsPageClient() {
         {/* Products Count */}
         <div className="products-count text-center mb-8">
           <p className="text-black">
-            Showing{" "}
+            {productsPageData.productsCount.prefix}{" "}
             <span className="font-semibold text-black">
               {filteredProducts.length}
             </span>{" "}
-            products
+            {productsPageData.productsCount.suffix}
           </p>
         </div>
 
@@ -298,7 +300,7 @@ export default function ProductsPageClient() {
                         product.variants[0].originalPrice) *
                       100
                     )}
-                    % OFF
+                    {productsPageData.productCard.off}
                   </div>
                 )}
               </div>
@@ -357,7 +359,7 @@ export default function ProductsPageClient() {
                     router.push(`/${product.id}`);
                   }}
                 >
-                  View Details
+                  {productsPageData.productCard.viewDetails}
                 </button>
               </div>
             </div>
@@ -369,9 +371,11 @@ export default function ProductsPageClient() {
           <div className="text-center py-20">
             <div className="text-6xl mb-4">🔍</div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              No products found
+              {productsPageData.emptyState.title}
             </h3>
-            <p className="text-gray-600">Try selecting a different category</p>
+            <p className="text-gray-600">
+              {productsPageData.emptyState.message}
+            </p>
           </div>
         )}
       </main>
