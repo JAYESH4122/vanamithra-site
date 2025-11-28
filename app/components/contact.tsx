@@ -3,6 +3,11 @@
 import { motion } from "framer-motion";
 import { contactData } from "@/data/home-page";
 import { useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const ContactSection = () => {
   const [name, setName] = useState("");
@@ -26,6 +31,34 @@ export const ContactSection = () => {
     setEmail("");
     setMessage("");
   };
+
+  useGSAP(() => {
+    const contactItems = gsap.utils.toArray<HTMLElement>(".contact-item");
+
+    contactItems.forEach((item, i) => {
+      gsap.fromTo(
+        item,
+        {
+          opacity: 0,
+          x: -50,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          delay: i * 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            end: "bottom 20%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+    });
+  }, []);
 
   return (
     <section id="contact" className="py-8 md:py-16 primary-bg">
@@ -62,9 +95,8 @@ export const ContactSection = () => {
         {/* GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* LEFT SIDE – CONTACT DETAILS */}
-          {/* LEFT SIDE – CONTACT DETAILS */}
           <div className="grid grid-cols-2 gap-3 md:flex md:flex-col md:gap-6">
-            {contactData.contactItems.map((item, i) => {
+            {contactData.contactItems.map((item) => {
               const getIcon = (iconName: string) => {
                 switch (iconName) {
                   case "email":
@@ -122,60 +154,52 @@ export const ContactSection = () => {
               };
 
               return (
-                <motion.a
+                <div
                   key={item.id}
-                  href={item.link}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: i * 0.08,
-                    ease: "easeOut",
-                  }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  className="group flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-2 md:gap-4 bg-white p-3 md:p-6 rounded-2xl border border-gray-200 hover:shadow-lg hover:border-transparent transition-all duration-300 will-change-transform"
+                  className="contact-item opacity-0 translate-x-[-20px]"
                 >
-                  {/* ICON */}
-                  <div
-                    className={`md:w-14 md:h-14 w-10 h-10 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white group-hover:scale-110 transition-transform shrink-0`}
+                  <a
+                    href={item.link}
+                    className="group flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-2 md:gap-4 bg-white p-3 md:p-6 rounded-2xl border border-gray-200 hover:shadow-lg hover:border-transparent transition-all duration-300"
                   >
-                    {getIcon(item.icon)}
-                  </div>
-
-                  {/* CONTENT */}
-                  <div className="flex-1 min-w-0 w-full">
-                    <h4 className="font-semibold text-gray-800 text-xs md:text-sm mb-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-500 text-[10px] md:text-sm mb-1 md:mb-2 leading-tight">
-                      {item.description}
-                    </p>
-                    <p className="text-primary-dark font-medium text-xs md:text-base truncate">
-                      {item.contact}
-                    </p>
-                  </div>
-
-                  {/* HOVER ARROW */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -5 }}
-                    whileHover={{ opacity: 1, x: 0 }}
-                    className="hidden md:block text-primary-dark opacity-0 group-hover:opacity-100 transition-all"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    {/* ICON */}
+                    <div
+                      className={`md:w-14 md:h-14 w-10 h-10 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shrink-0`}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
-                    </svg>
-                  </motion.div>
-                </motion.a>
+                      {getIcon(item.icon)}
+                    </div>
+
+                    {/* CONTENT */}
+                    <div className="flex-1 min-w-0 w-full">
+                      <h4 className="font-semibold text-gray-800 text-xs md:text-sm mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-gray-500 text-[10px] md:text-sm mb-1 md:mb-2 leading-tight">
+                        {item.description}
+                      </p>
+                      <p className="text-primary-dark font-medium text-xs md:text-base truncate">
+                        {item.contact}
+                      </p>
+                    </div>
+
+                    {/* HOVER ARROW */}
+                    <div className="hidden md:block text-primary-dark opacity-0 group-hover:opacity-100 transition-all duration-200 translate-x-[-5px] group-hover:translate-x-0">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                </div>
               );
             })}
           </div>
