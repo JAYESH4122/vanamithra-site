@@ -51,41 +51,33 @@ export default function ProductsPageClient() {
         }
       );
 
-      // Category filter animation
+      // Category filter fade + slide
       tl.fromTo(
         ".category-filter",
-        {
-          opacity: 0,
-          y: 20,
-        },
+        { opacity: 0, y: 20 },
         {
           opacity: 1,
           y: 0,
           duration: 0.6,
           ease: "power2.out",
         },
-        "-=0.4"
+        "-=0.3"
       );
 
-      // Category buttons stagger with better timing
+      // Category buttons stagger — left ➜ right
       tl.fromTo(
         ".category-button",
-        {
-          opacity: 0,
-          scale: 0.8,
-          y: 10,
-        },
+        { opacity: 0, scale: 0.9, y: 12 },
         {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.5,
+          duration: 0.45,
+          ease: "power3.out",
           stagger: {
-            amount: 0.6,
-            from: "center",
-            ease: "back.out(1.2)",
+            each: 0.08, // smoother than amount
+            from: "start", // left ➜ right
           },
-          ease: "power2.out",
         },
         "-=0.2"
       );
@@ -249,20 +241,39 @@ export default function ProductsPageClient() {
 
         {/* Category Filter */}
         <div className="category-filter mb-12">
+          {/* Row 1 — All Products (Mobile only) */}
+          <div className="flex justify-center mb-4">
+            <button
+              data-category="all"
+              onClick={() => handleCategoryChange("all")}
+              className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${
+                selectedCategory === "all"
+                  ? "bg-yellow text-black shadow-lg"
+                  : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
+              }`}
+            >
+              {categories[0].name}
+            </button>
+          </div>
+
+          {/* Row 2 — All Categories (but hide "All" on mobile) */}
           <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                data-category={category.id}
-                onClick={() => handleCategoryChange(category.id)}
-                className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${selectedCategory === category.id
-                    ? "bg-yellow text-black shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
+            {categories
+              .filter((category) => category.id !== "all") // remove "All" from row 2
+              .map((category) => (
+                <button
+                  key={category.id}
+                  data-category={category.id}
+                  onClick={() => handleCategoryChange(category.id)}
+                  className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${
+                    selectedCategory === category.id
+                      ? "bg-yellow text-black shadow-lg"
+                      : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
                   }`}
-              >
-                {category.name}
-              </button>
-            ))}
+                >
+                  {category.name}
+                </button>
+              ))}
           </div>
         </div>
 
@@ -297,8 +308,8 @@ export default function ProductsPageClient() {
                     {Math.round(
                       (1 -
                         product.variants[0].price /
-                        product.variants[0].originalPrice) *
-                      100
+                          product.variants[0].originalPrice) *
+                        100
                     )}
                     {productsPageData.productCard.off}
                   </div>

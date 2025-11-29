@@ -189,28 +189,16 @@ export const contactData = {
   ] as ContactItem[],
   socialMedia: [
     {
-      name: "Facebook",
-      color: "from-[#1877F2] to-[#3B82F6]",
-      icon: "facebook",
-      link: "#",
-    },
-    {
       name: "Instagram",
       color: "from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
       icon: "instagram",
-      link: "#",
-    },
-    {
-      name: "Twitter",
-      color: "from-[#1DA1F2] to-[#0E8BD4]",
-      icon: "twitter",
-      link: "#",
+      link: "https://www.instagram.com/vanamithra_?igsh=amhtMG9oODF1MjR3",
     },
     {
       name: "WhatsApp",
       color: "from-[#25D366] to-[#128C7E]",
       icon: "whatsapp",
-      link: "#",
+      link: "https://wa.me/917909102100",
     },
   ] as SocialMedia[],
 } as const;
@@ -254,6 +242,7 @@ export const headerData = {
     { name: "Products", href: "/#products" },
     { name: "About", href: "/#about" },
     { name: "Contact", href: "/#contact" },
+    { name: "Gallery", href: "/gallery" },
   ],
   search: {
     placeholder: "Search products...",
@@ -315,4 +304,26 @@ export const contactFormData = {
   },
   buttonText: "Send Message",
   whatsappMessage: "New Contact Form Submission:\n",
+} as const;
+
+// Gallery Section Data
+export const galleryData = {
+  title: {
+    main: "Our ",
+    highlight: "Gallery",
+    suffix: " ",
+  },
+  subtitle:
+    "A glimpse into our world of organic farming, sustainable practices, and happy customers.",
+  images: [
+    "/agriculture.png",
+    "/beauty.png",
+    "/food.png",
+    "/healthcare.png",
+    "/medicine.png",
+    "/agriculture.png",
+    "/beauty.png",
+    "/food.png",
+    "/healthcare.png",
+  ],
 } as const;

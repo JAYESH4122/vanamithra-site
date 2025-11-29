@@ -10,6 +10,7 @@ import { headerData } from "@/data/home-page";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { autoHeight } from "@/utils/home";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(useGSAP);
 
@@ -27,6 +28,7 @@ const Header = () => {
   const searchDropdownRef = useRef<HTMLDivElement>(null);
 
   const navItems = headerData.navItems;
+  const router = useRouter();
 
   // Main header animations
   useGSAP(
@@ -66,12 +68,11 @@ const Header = () => {
           opacity: 1,
           duration: 0.25,
           ease: "power2.out",
-          stagger: 0.06
+          stagger: 0.06,
         }
       );
     }
   }, [isMenuOpen]);
-
 
   // Mobile search animation
   useEffect(() => {
@@ -257,7 +258,16 @@ const Header = () => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href.replace("/#", ""))}
+                onClick={() => {
+                  if (item.href.startsWith("/#")) {
+                    // Scroll behavior
+                    const id = item.href.replace("/#", "");
+                    scrollToSection(id);
+                  } else {
+                    // Route navigation
+                    router.push(item.href);
+                  }
+                }}
                 className="header-element relative text-gray-700 font-medium hover:text-primary-dark transition-all text-sm group"
               >
                 {item.name}
