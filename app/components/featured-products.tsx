@@ -226,10 +226,10 @@ export const FeaturedProducts = () => {
                     <div className="relative w-full h-46 overflow-hidden">
                       <div className="w-full h-full rounded-xl overflow-hidden bg-white flex items-center justify-center p-4">
                         <Image
-                          src="/saffron-gel.jpg"
+                          src={product.image}
                           alt={product.name}
-                          width={240}
-                          height={160}
+                          width={220}
+                          height={180}
                           className="object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
                           priority
                         />

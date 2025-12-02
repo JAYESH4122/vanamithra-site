@@ -9,6 +9,7 @@ import { products } from "@/data/products";
 import { productDetailPageData } from "@/data/product-detail-page";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 export default function ProductPage() {
   const params = useParams();
@@ -251,7 +252,7 @@ export default function ProductPage() {
           <div className="lg:w-1/2">
             <div className="product-image relative bg-white rounded-2xl shadow-sm overflow-hidden aspect-square border border-gray-100 opacity-0">
               <div className="flex items-center justify-center h-full bg-gradient-to-br from-amber-50 to-orange-50">
-                <span className="text-8xl">🌿</span>
+                <Image src={product.image} alt="" width={762} height={462} />
               </div>
             </div>
           </div>
@@ -448,7 +449,7 @@ export default function ProductPage() {
                       <Link href={`/${item.id}`} className="block">
                         {/* Image */}
                         <div className="aspect-square bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center">
-                          <span className="text-3xl">🌿</span>
+                          <Image src={item.image} alt="" width={300} height={200} />
                         </div>
 
                         {/* Content */}

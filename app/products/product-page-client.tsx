@@ -8,6 +8,7 @@ import { categories } from "@/data/products";
 import { productsPageData } from "@/data/products-page";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 gsap.registerPlugin(useGSAP);
 
@@ -299,7 +300,7 @@ export default function ProductsPageClient() {
               {/* Product Image */}
               <div className="relative w-full h-56 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden">
                 <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
-                  🌿
+                <Image src={product.image} alt="" width={300} height={200} />
                 </div>
 
                 {/* Discount Badge */}
