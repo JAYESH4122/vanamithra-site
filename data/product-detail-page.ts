@@ -34,6 +34,6 @@ export const productDetailPageData = {
   whatsapp: {
     orderMessage: "Hi Vanamithra! 🌿\n\nI'd like to order:\n*{productName}*\nVariant: {variantName}\nQuantity: {quantity}\nTotal: ₹{totalPrice}\n\nPlease confirm availability and proceed with order.",
     inquireMessage: "Hello Vanamithra! 🌿\n\nI'm interested in:\n*{productName}*\n\nCould you share more details about this product?",
-    number: "919207025005",
+    number: "917909102100",
   },
 };

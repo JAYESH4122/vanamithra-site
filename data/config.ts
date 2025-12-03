@@ -2,7 +2,7 @@
 
 export const config = {
   // WhatsApp Business Number
-  whatsappNumber: "919207025005",
+  whatsappNumber: "917909102100",
 
   // Company Information
   company: {
