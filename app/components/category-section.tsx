@@ -182,7 +182,7 @@ export const CategorySection = () => {
         </div>
 
         {/* Category Cards Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-6">
           {categoriesWithCounts.map((category) => (
             <Link key={category.id} href={`/products?category=${category.id}`}>
               <div className="category-card group cursor-pointer opacity-0">
@@ -215,7 +215,7 @@ export const CategorySection = () => {
         {/* Common CTA */}
         <div className="flex justify-center mt-12">
           <Link href={categoryData.cta.link}>
-            <button className="px-8 py-3 rounded-full bg-yellow text-black font-semibold text-sm shadow-md hover:bg-yellow/90 hover:shadow-lg transition-all">
+            <button className="px-8 py-3 rounded-full bg-yellow text-white font-semibold text-sm shadow-md hover:shadow-2xl hover:-translate-y-1 hover:scale-105 transition-all duration-300 active:scale-95">
               {categoryData.cta.text}
             </button>
           </Link>

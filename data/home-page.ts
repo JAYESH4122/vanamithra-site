@@ -3,9 +3,9 @@
 // Hero Section Data
 export const heroData = {
   title: {
-    main: "Nature's ",
-    highlight: "Goodness",
-    suffix: ", Delivered Pure",
+    main: "Combaining ",
+    highlight: "Nature",
+    suffix: "and Science",
   },
   subtitle: {
     text: "Pure, organic, and sustainable solutions from ",
@@ -45,7 +45,7 @@ export const aboutData = {
   mission: {
     heading: "Empowering Natural Wellness",
     description:
-      "Vanamithra believes in the healing power of nature. Our mission is to bring pure, sustainable, and authentic organic products directly to your home — supporting better health and a better planet.",
+      "Vanamithra Natural Care blends Ayurveda with modern technology to create innovative beauty products, foods, beverages, spices, and single-herb remedies. For years, we have focused on research, production, and marketing of natural, eco-friendly products known for their purity, effectiveness, and world-class packaging. Our organic farming practices support and uplift tribal communities. We are committed to delivering trustworthy products and services that ensure customer satisfaction. By building a strong first impression, we strive to remain the preferred choice for consumers.",
   },
   features: [
     {
@@ -277,7 +277,7 @@ export const footerData = {
       "vanamithranatural@gmail.com",
     ],
   },
-  copyright: `© ${new Date().getFullYear()} Vanamithra. All rights reserved.`,
+  copyright: `© 2019 Vanamithra. All rights reserved.`,
 } as const;
 
 // Common Data

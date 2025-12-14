@@ -179,7 +179,7 @@ export default function ProductPage() {
           </p>
           <Link
             href="/products"
-            className="inline-block bg-yellow text-black py-3 px-8 rounded-xl font-semibold hover:bg-yellow/90 hover:shadow-lg transition-all"
+            className="inline-block bg-yellow text-black py-3 px-8 rounded-xl font-semibold  hover:shadow-lg transition-all"
           >
             {productDetailPageData.notFound.buttonText}
           </Link>
@@ -300,8 +300,8 @@ export default function ProductPage() {
                       key={variant.value}
                       onClick={() => handleVariantSelect(variant)}
                       className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-lg rounded-xl border-2 flex flex-col flex-1 md:flex-none font-medium transition-all duration-300 ${selectedVariant.value === variant.value
-                          ? "bg-yellow border-yellow text-black shadow-lg"
-                          : "border-gray-300 text-gray-700 hover:border-yellow hover:bg-yellow/10"
+                          ? "bg-primary-dark border-yellow text-white shadow-lg"
+                          : "border-gray-300 text-gray-700 "
                         }`}
                     >
                       {variant.name}
@@ -369,7 +369,7 @@ export default function ProductPage() {
                   onClick={orderViaWhatsApp}
                   onMouseEnter={handleOrderButtonEnter}
                   onMouseLeave={handleOrderButtonLeave}
-                  className="flex-1 bg-yellow hover:bg-yellow/90 text-black py-2 px-4 md:py-4 md:px-8 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+                  className="flex-1 bg-primary-dark  text-white py-2 px-4 md:py-4 md:px-8 rounded-xl font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
                 >
                   <svg
                     className="md:w-6 md:h-6 w-4 h-4"
@@ -386,7 +386,7 @@ export default function ProductPage() {
                   onClick={inquireViaWhatsApp}
                   onMouseEnter={handleInquireButtonEnter}
                   onMouseLeave={handleInquireButtonLeave}
-                  className="border-2 border-yellow text-sm md:text-base text-yellow font-semibold py-1.5 px-4 md:py-4 md:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
+                  className="border-2 border-black text-sm md:text-base text-black font-semibold py-1.5 px-4 md:py-4 md:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
                 >
                   <svg
                     className="md:w-6 md:h-6 w-4 h-4"

@@ -17,7 +17,7 @@
   --color-primary: #4d774e;
   --color-primary-light: #25da5c;
   --color-surface: #ffffff;
-  --color-yellow: #f1b24a;
+  --color-yellow: #111e0d66;
   --color-brown: #bb8a52;
 }
 
@@ -111,6 +111,54 @@ html {
 [data-framer-component-type] {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* Button Hover Animations */
+@layer components {
+  /* Base button styles with smooth transitions */
+  button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* Hover scale effect for all buttons */
+  button:hover {
+    transform: translateY(-2px);
+  }
+
+  button:active {
+    transform: translateY(0);
+  }
+
+  /* Primary button hover effects */
+  .btn-primary {
+    @apply bg-yellow text-white font-semibold rounded-xl shadow-md;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary:hover {
+    @apply shadow-xl;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Secondary button hover effects */
+  .btn-secondary {
+    @apply border-2 border-white bg-white text-black font-semibold rounded-xl;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-secondary:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0) scale(0.98);
+  }
 }
 
 /* Reduce motion for users who prefer it */

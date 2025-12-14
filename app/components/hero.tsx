@@ -86,7 +86,7 @@ export const Hero = () => {
           <div ref={containerRef} className="lg:w-1/2 text-center lg:text-left">
             <h1 className="hero-item text-3xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight font-primary opacity-0">
               {heroData.title.main}
-              <span className="">{heroData.title.highlight}</span>
+              <span className="">{heroData.title.highlight}</span><br />
               {heroData.title.suffix}
             </h1>
 
@@ -109,10 +109,10 @@ export const Hero = () => {
                 }}
                 onMouseEnter={handleButton1Enter}
                 onMouseLeave={handleButton1Leave}
-                className="bg-yellow text-black font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:bg-yellow/90 transition-colors duration-300 shadow-lg flex items-center justify-center gap-2 will-change-transform"
+                className="bg-yellow text-white font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl flex items-center justify-center gap-2 will-change-transform active:scale-95"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -128,13 +128,13 @@ export const Hero = () => {
                 }}
                 onMouseEnter={handleButton2Enter}
                 onMouseLeave={handleButton2Leave}
-                className="border-2 border-yellow text-yellow font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:bg-yellow/10 transition-colors duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform"
+                className="group border-2 border-white bg-white text-black font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-xl hover:shadow-xl transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2 will-change-transform active:scale-95"
               >
-                <span className="text-yellow">
+                <span className="text-black">
                   {heroData.buttons.secondary}
                 </span>
                 <svg
-                  className="w-5 h-5"
+                  className="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

@@ -239,7 +239,7 @@ const Header = () => {
       ref={headerRef}
       className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm border-b border-gray-100"
     >
-      <div className="container mx-auto px-4 sm:px-6 py-3">
+      <div className="container mx-auto px-4 sm:px-6 py-2 lg:py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="header-element flex items-center">
@@ -268,10 +268,10 @@ const Header = () => {
                     router.push(item.href);
                   }
                 }}
-                className="header-element relative text-gray-700 font-medium hover:text-primary-dark transition-all text-sm group"
+                className="header-element relative text-gray-700 font-medium transition-all duration-300 text-sm group hover:-translate-y-0.5"
               >
                 {item.name}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-light transition-all group-hover:w-full"></span>
+                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-light transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
           </nav>
@@ -338,14 +338,14 @@ const Header = () => {
           {/* Mobile Controls */}
           <div className="flex lg:hidden items-center space-x-2">
             <button
-              className="header-element text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition"
+              className="header-element text-gray-700 p-2 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
               onClick={handleMobileSearchToggle}
             >
               <FiSearch size={20} />
             </button>
 
             <button
-              className="header-element text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition"
+              className="header-element text-gray-700 p-2 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
               onClick={handleMenuToggle}
             >
               {isMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -426,7 +426,7 @@ const Header = () => {
             <button
               key={item.name}
               onClick={() => scrollToSection(item.href.replace("/#", ""))}
-              className="mobile-nav-item py-3 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-50 hover:text-primary-dark transition"
+              className="mobile-nav-item py-3 px-4 rounded-lg text-gray-700 font-medium transition-all duration-300 hover:translate-x-1 active:scale-95"
             >
               {item.name}
             </button>

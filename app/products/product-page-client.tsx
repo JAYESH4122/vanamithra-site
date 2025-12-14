@@ -249,7 +249,7 @@ export default function ProductsPageClient() {
               onClick={() => handleCategoryChange("all")}
               className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${
                 selectedCategory === "all"
-                  ? "bg-yellow text-black shadow-lg"
+                  ? "bg-yellow text-white shadow-lg"
                   : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
               }`}
             >
@@ -258,7 +258,7 @@ export default function ProductsPageClient() {
           </div>
 
           {/* Row 2 — All Categories (but hide "All" on mobile) */}
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3 flex-1 w-full">
             {categories
               .filter((category) => category.id !== "all") // remove "All" from row 2
               .map((category) => (
@@ -268,7 +268,7 @@ export default function ProductsPageClient() {
                   onClick={() => handleCategoryChange(category.id)}
                   className={`category-button px-6 py-3 rounded-xl font-semibold transition-colors duration-300 ${
                     selectedCategory === category.id
-                      ? "bg-yellow text-black shadow-lg"
+                      ? "bg-yellow text-white shadow-lg"
                       : "bg-white text-gray-700 border-2 border-gray-200 hover:border-yellow hover:text-yellow"
                   }`}
                 >
@@ -290,7 +290,7 @@ export default function ProductsPageClient() {
         </div>
 
         {/* Products Grid */}
-        <div className="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        <div className="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 ">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
@@ -298,7 +298,7 @@ export default function ProductsPageClient() {
               className="product-card bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100 group"
             >
               {/* Product Image */}
-              <div className="relative w-full h-56 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden">
+              <div className="relative w-full h-68 bg-white flex items-center justify-center overflow-hidden ">
                 <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
                 <Image src={product.image} alt="" width={300} height={200} />
                 </div>
@@ -365,7 +365,7 @@ export default function ProductsPageClient() {
 
                 {/* View Details Button */}
                 <button
-                  className="w-full mt-4 bg-yellow text-black py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-yellow/90 hover:shadow-md"
+                  className="w-full mt-4 bg-primary-dark text-white py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300  hover:shadow-md"
                   onClick={(e) => {
                     e.stopPropagation();
                     router.push(`/${product.id}`);

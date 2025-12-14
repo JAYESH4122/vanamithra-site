@@ -395,7 +395,7 @@ export const ContactSection = () => {
 
                   <button
                     onClick={sendMessage}
-                    className="w-full h-11 bg-yellow text-black font-semibold rounded-lg hover:bg-yellow/90 hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-yellow focus:ring-offset-2"
+                    className="w-full h-11 bg-primary-dark text-white font-semibold rounded-lg hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 active:scale-95"
                   >
                     {contactFormData.buttonText}
                   </button>

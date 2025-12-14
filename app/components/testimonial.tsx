@@ -250,7 +250,7 @@ export const TestimonialSection = () => {
                   onClick={submitReview}
                   onMouseEnter={handleButtonEnter}
                   onMouseLeave={handleButtonLeave}
-                  className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-yellow text-gray-900 font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden"
+                  className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-primary-dark text-white font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden"
                 >
                   <span className="relative z-10">
                     {reviewFormData.buttonText}

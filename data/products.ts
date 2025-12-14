@@ -17,7 +17,6 @@ export interface Product {
 
 export const categories = [
   { id: "all", name: "All Products" },
-  { id: "medicine", name: "Medicine" },
   { id: "healthcare", name: "Health Care" },
   { id: "beautycare", name: "Beauty Care" },
   { id: "food", name: "Food Products" },
@@ -92,7 +91,7 @@ export const products: Product[] = [
       { name: "1kg", value: "1kg", price: 360 },
     ],
     category: "food",
-    image: "/panineer.jpg",
+    image: "/panineer.PNG",
   },
   {
     id: "4",

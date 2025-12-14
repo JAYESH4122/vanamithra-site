@@ -152,10 +152,10 @@ export const AboutSection = () => {
           <div className="about-left space-y-6 md:space-y-8">
             {/* Mission */}
             <div className="space-y-3 md:space-y-4">
-              <h3 className="text-xl md:text-2xl font-bold text-black">
+              <h3 className="text-xl text-center lg:text-left md:text-2xl font-bold text-black">
                 {aboutData.mission.heading}
               </h3>
-              <p className="text-white text-sm leading-relaxed">
+              <p className="text-white text-center lg:text-left text-sm leading-relaxed">
                 {aboutData.mission.description}
               </p>
             </div>
