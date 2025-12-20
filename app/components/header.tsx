@@ -178,6 +178,20 @@ const Header = () => {
     }
   }, [showMobileSearch]);
 
+  // Close mobile search on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (showMobileSearch) {
+        setShowMobileSearch(false);
+        setSearchQuery("");
+        setIsSearchFocused(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showMobileSearch]);
+
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     setIsSearchFocused(true);

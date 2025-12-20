@@ -9,7 +9,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export const TestimonialSection = () => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [review, setReview] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [statusMessage, setStatusMessage] = useState("");
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   useGSAP(() => {
@@ -107,15 +112,43 @@ export const TestimonialSection = () => {
     );
   }, []);
 
-  const submitReview = () => {
-    if (!review.trim()) return;
+  const submitReview = async () => {
+    if (!name.trim() || !phone.trim() || !review.trim()) {
+      setSubmitStatus("error");
+      setStatusMessage("Please fill in all fields");
+      return;
+    }
 
-    const phone = "917909102100"; // your WhatsApp number
-    const message = encodeURIComponent(
-      `${reviewFormData.whatsappMessage}${review}`
-    );
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
 
-    window.location.href = `https://wa.me/${phone}?text=${message}`;
+    try {
+      const response = await fetch("/api/send-review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, phone, review }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setStatusMessage("Thank you! Your review has been submitted.");
+        setName("");
+        setPhone("");
+        setReview("");
+      } else {
+        setSubmitStatus("error");
+        setStatusMessage(data.message || "Failed to submit review");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+      setStatusMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Button hover animations
@@ -187,8 +220,8 @@ export const TestimonialSection = () => {
                     <svg
                       key={i}
                       className={`w-4 h-4 md:w-5 md:h-5 ${i < testimonial.rating
-                          ? "text-yellow-400"
-                          : "text-gray-300"
+                        ? "text-yellow-400"
+                        : "text-gray-300"
                         }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -232,47 +265,86 @@ export const TestimonialSection = () => {
         <div className="review-form mt-10 md:mt-16 opacity-0">
           <div className="max-w-3xl mx-auto px-4">
             <div className="relative rounded-2xl bg-gradient-to-br from-white to-gray-100 p-4 md:p-6 shadow-[0_8px_25px_-5px_rgba(0,0,0,0.08)] border border-gray-200/60">
-              <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-                {/* Input Field */}
-                <input
-                  type="text"
-                  value={review}
-                  onChange={(e) => {
-                    setReview(e.target.value);
-                  }}
-                  placeholder={reviewFormData.placeholder}
-                  className="flex-1 px-4 md:px-6 py-3 md:py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-yellow focus:outline-none transition-all duration-300 text-gray-700 placeholder-gray-400 text-sm md:text-base shadow-sm"
-                />
+              <div className="flex flex-col gap-4">
+                {/* Name and Phone Row */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your Name"
+                    className="flex-1 px-4 md:px-6 py-3 md:py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-yellow focus:outline-none transition-all duration-300 text-gray-700 placeholder-gray-400 text-sm md:text-base shadow-sm"
+                  />
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Phone Number"
+                    className="flex-1 px-4 md:px-6 py-3 md:py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-yellow focus:outline-none transition-all duration-300 text-gray-700 placeholder-gray-400 text-sm md:text-base shadow-sm"
+                  />
+                </div>
 
-                {/* Submit Button */}
-                <button
-                  ref={submitButtonRef}
-                  onClick={submitReview}
-                  onMouseEnter={handleButtonEnter}
-                  onMouseLeave={handleButtonLeave}
-                  className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-primary-dark text-white font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden"
-                >
-                  <span className="relative z-10">
-                    {reviewFormData.buttonText}
-                  </span>
+                {/* Review Input Row */}
+                <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+                  <textarea
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                    placeholder={reviewFormData.placeholder}
+                    rows={3}
+                    className="flex-1 px-4 md:px-6 py-3 md:py-4 rounded-xl bg-white border-2 border-gray-300 focus:border-yellow focus:outline-none transition-all duration-300 text-gray-700 placeholder-gray-400 text-sm md:text-base shadow-sm resize-none"
+                  />
 
-                  {/* New clean send icon — small on mobile */}
-                  <svg
-                    className="w-4 h-4 md:w-5 md:h-5 relative z-10"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
+                  {/* Submit Button */}
+                  <button
+                    ref={submitButtonRef}
+                    onClick={submitReview}
+                    onMouseEnter={handleButtonEnter}
+                    onMouseLeave={handleButtonLeave}
+                    disabled={isSubmitting}
+                    className="group relative px-5 md:px-7 py-3 md:py-4 rounded-xl bg-primary-dark text-white font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <path d="M22 2L11 13"></path>
-                    <path d="M22 2L15 22l-4-9-9-4 20-7z"></path>
-                  </svg>
+                    <span className="relative z-10">
+                      {isSubmitting ? "Sending..." : reviewFormData.buttonText}
+                    </span>
 
-                  {/* Animated sheen effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 will-change-transform"></div>
-                </button>
+                    {!isSubmitting && (
+                      <svg
+                        className="w-4 h-4 md:w-5 md:h-5 relative z-10"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M22 2L11 13"></path>
+                        <path d="M22 2L15 22l-4-9-9-4 20-7z"></path>
+                      </svg>
+                    )}
+
+                    {isSubmitting && (
+                      <svg className="w-4 h-4 md:w-5 md:h-5 relative z-10 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    )}
+
+                    {/* Animated sheen effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 will-change-transform"></div>
+                  </button>
+                </div>
+
+                {/* Status Message */}
+                {submitStatus !== "idle" && (
+                  <div
+                    className={`text-center py-2 px-4 rounded-lg ${submitStatus === "success"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                      }`}
+                  >
+                    {statusMessage}
+                  </div>
+                )}
               </div>
             </div>
           </div>
